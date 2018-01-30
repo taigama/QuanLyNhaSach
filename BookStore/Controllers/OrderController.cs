@@ -11,7 +11,9 @@ using System.Web.Security;
 
 namespace BookStore.Controllers
 {
-
+    /// <summary>
+    /// Focus on orders management. For online shopping handling, see CartController
+    /// </summary>
     public class OrderController : Controller
     {
         BookStore.Data.BookStoreContext db = new Data.BookStoreContext();
@@ -20,12 +22,18 @@ namespace BookStore.Controllers
             ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
         };
 
+        /// <summary>
+        /// Order/Index => Staff/ListOrder [redirect]
+        /// </summary>
         [HttpGet]
         public ActionResult Index()
         {
             return RedirectToAction("ListOrder", "Staff");
         }
 
+        /// <summary>
+        /// create a new order, redirect to Staff/Cashier for that function [redirect]
+        /// </summary>
         [HttpGet]
         public ActionResult New()
         {
@@ -39,6 +47,9 @@ namespace BookStore.Controllers
 
 
         #region list of orders
+        /// <summary>
+        ///  [json]
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult GetOrders()
@@ -73,6 +84,9 @@ namespace BookStore.Controllers
             return result;
         }
 
+        /// <summary>
+        /// re-create a part of the page, result of the Filtering [partial]
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult FilterOrders(int userId, int state)
@@ -141,6 +155,9 @@ namespace BookStore.Controllers
         #endregion
 
         #region single order
+        /// <summary>
+        /// View order, depend on the current user-role [view]
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult ViewOrder(int? Id)
@@ -194,6 +211,9 @@ namespace BookStore.Controllers
             return View(order);
         }
 
+        /// <summary>
+        ///  [view]
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult ViewOrder(int? Id, OrderStatus? stateCurrent)
@@ -285,6 +305,9 @@ namespace BookStore.Controllers
 
         // /Order/DeleteOrder/6969 / deprecated
         // /Order/ArchiveOrder/6969
+        /// <summary>
+        ///  [json]
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult ArchiveOrder(int Id)
@@ -337,6 +360,9 @@ namespace BookStore.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        ///  [json]
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult GetOrder(int id)
@@ -360,6 +386,9 @@ namespace BookStore.Controllers
             return result;
         }
 
+        /// <summary>
+        ///  [json]
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult DeleteOrderDetail(int id)
@@ -392,23 +421,26 @@ namespace BookStore.Controllers
         }
 
 
-
+        /// <summary>
+        /// When the user press "Create/Add" [json]
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult AddLine(int orderId, int proId, int count)
         {
             ResultWeb result = new ResultWeb();
             Product product = db.Products.Find(proId);
-            if(product == null)
+            if(product == null)// the product you are going to add, not found
             {
                 result.Type = ResultWeb.ResultType.FIELD_INVALID;
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
             
+            // check if the product you are going to add, exist on the current order
             var details = db.OrderDetails.Where(od => od.OrderId == orderId);
 
             OrderDetail line = details.Where(od => od.ProductId == proId).FirstOrDefault();
-            if(line == null)
+            if(line == null)// doesn't exist? create a new details for the product
             {
                 line = new OrderDetail
                 {
@@ -434,7 +466,7 @@ namespace BookStore.Controllers
                     db.SaveChanges();
                 }
             }
-            else
+            else// otherwise
             {
                 line.Quantity += count;
                 if (line.Quantity > product.InStock)
@@ -465,6 +497,9 @@ namespace BookStore.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// When the user commit the "edit" of an order detail [json]
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult UpdateLine(int detailId, int proId, int count)
@@ -670,6 +705,9 @@ namespace BookStore.Controllers
         //    return Json(result, JsonRequestBehavior.AllowGet);
         //}
 
+        /// <summary>
+        /// Complete the current order [json]
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult Complete(int Id)
@@ -719,6 +757,9 @@ namespace BookStore.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// You must count-- products (because you just sell them!)
+        /// </summary>
         private bool SubProduct(Order order)
         {
             foreach (var detail in order.OrderDetails)
@@ -733,6 +774,9 @@ namespace BookStore.Controllers
             return true;
         }
 
+        /// <summary>
+        /// Update the status of the current order (new, packing,...)  [json]
+        /// </summary>
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult UpdateState(int orderId, int state)
         {
@@ -762,6 +806,9 @@ namespace BookStore.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Ready-to-print [view]
+        /// </summary>
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult Export(int? id)
         {
@@ -832,6 +879,9 @@ namespace BookStore.Controllers
             }
         }
 
+        /// <summary>
+        /// Ready-to-print [view] #deprecated
+        /// </summary>
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult PrintPage(int id)
         {

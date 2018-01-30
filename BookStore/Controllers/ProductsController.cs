@@ -9,6 +9,9 @@ using BookStore.Models;
 
 namespace BookStore.Controllers
 {
+    /// <summary>
+    /// A class for showing products
+    /// </summary>
     public class ProductsController : Controller
     {
         BookStoreContext db = new BookStoreContext();
@@ -18,6 +21,9 @@ namespace BookStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// A list products by category [view]
+        /// </summary>
         public ActionResult Category(int? id)
         {
             if (id == null)
@@ -43,6 +49,9 @@ namespace BookStore.Controllers
             return View();
         }
 
+        /// <summary>
+        /// A product [view]
+        /// </summary>
         [HttpGet]
         public ActionResult Single(int? id)
         {
@@ -67,7 +76,9 @@ namespace BookStore.Controllers
             return View(product);
         }
 
-
+        /// <summary>
+        ///  [json]
+        /// </summary>
         [HttpGet]
         public ActionResult DropDownProduct()
         {
@@ -78,7 +89,10 @@ namespace BookStore.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-
+        /// <summary>
+        /// get a product data [json]
+        /// </summary>
+        /// <param name="depth">detail level (data depth included to json)</param>
         [HttpGet]
         public ActionResult GetProduct(int id, int depth)
         {
@@ -100,7 +114,9 @@ namespace BookStore.Controllers
             return result;
         }
 
-
+        /// <summary>
+        /// get list products  [json]
+        /// </summary>
         [HttpGet]
         public ActionResult GetProducts()
         {

@@ -9,11 +9,16 @@ using Newtonsoft.Json;
 
 namespace BookStore.Controllers
 {
+    /// <summary>
+    /// Focus in Handling carts for online orders. Orders that custommer buy directly in the shop, see OrderController
+    /// </summary>
     public class CartController : Controller
     {
         BookStoreContext db = new BookStoreContext();
 
-        // Thanh toán
+        /// <summary>
+        /// Checkout order [view]
+        /// </summary>
         public ActionResult Index()
         {
             //CheckCustomerId();
@@ -21,7 +26,7 @@ namespace BookStore.Controllers
         }
 
         /// <summary>
-        /// Get an order by id
+        /// Get an order by id [json]
         /// </summary>
         [HttpGet]
         public ActionResult GetCart(int? id, int? depth)
@@ -56,7 +61,7 @@ namespace BookStore.Controllers
         #region Customer
 
         /// <summary>
-        /// Get a customer by id
+        /// Get a customer by id [json]
         /// </summary>
         [HttpGet]
         public ActionResult GetCustomer(int? id)
@@ -87,7 +92,9 @@ namespace BookStore.Controllers
             return result;
         }
 
-
+        /// <summary>
+        ///  [json]
+        /// </summary>
         [HttpPost]
         public ActionResult UpdateCurrentCustomer(
             string firstName
@@ -120,7 +127,7 @@ namespace BookStore.Controllers
         #region cart update
 
         /// <summary>
-        /// add product into the cart
+        /// add product into the cart [json]
         /// </summary>
         /// <param name="id">product Id</param>
         [HttpPost]
@@ -204,7 +211,7 @@ namespace BookStore.Controllers
         }
 
         /// <summary>
-        /// minus a product in the cart
+        /// minus a product in the cart [json]
         /// </summary>
         /// <param name="id">product id</param>
         [HttpPost]
@@ -311,7 +318,7 @@ namespace BookStore.Controllers
         }
 
         /// <summary>
-        /// remove a product line in your cart
+        /// remove a product line in your cart [json]
         /// </summary>
         /// <param name="id">the product id</param>
         [HttpPost]
@@ -375,7 +382,7 @@ namespace BookStore.Controllers
 
 
         /// <summary>
-        /// checkout a cart
+        /// checkout a cart [json]
         /// </summary>
         [HttpPost]
         public ActionResult Checkout()

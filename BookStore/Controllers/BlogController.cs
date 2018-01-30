@@ -7,7 +7,9 @@ using System.Web.Mvc;
 
 namespace BookStore.Controllers
 {
-
+    /// <summary>
+    ///  not used
+    /// </summary>
     public class BlogController : Controller
     {
         private BookStoreContext db = new BookStoreContext();

@@ -12,19 +12,29 @@ using System.Web.Security;
 
 namespace BookStore.Controllers
 {
-    
+    /// <summary>
+    /// Homepage | 
+    /// </summary>
     public class HomeController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
 
+        /// <summary>
+        /// Home page [view]
+        /// </summary>
         public ActionResult Index()
         {
+            //The side menu data
             ViewData["Products"] = db.Products.ToList(); 
             ViewData["Categories"] = db.Categories.ToList();
             ViewData["Authors"] = db.Authors.ToList();
+
             return View();
         }
 
+        /// <summary>
+        /// An author page [view]
+        /// </summary>
         [HttpGet]
         public ActionResult Author(int? id)
         {
@@ -49,6 +59,9 @@ namespace BookStore.Controllers
             return View(author);
         }
 
+        /// <summary>
+        /// [json]
+        /// </summary>
         [HttpGet]
         public ActionResult DropDownUser()
         {
@@ -66,7 +79,9 @@ namespace BookStore.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
+        /// <summary>
+        /// Error page for re-direct [view]
+        /// </summary>
         [HttpGet]
         public ActionResult Error(string errorCode, string errorDetail)
         {

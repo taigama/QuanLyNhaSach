@@ -14,6 +14,9 @@ namespace BookStore.Controllers
         BookStoreContext db = new BookStoreContext();
 
         // GET: Search
+        /// <summary>
+        /// A search page [view]
+        /// </summary>
         public ActionResult Index(string key, int? costBegin, int? costEnd)
         {
             IQueryable<Product> products;
@@ -42,7 +45,7 @@ namespace BookStore.Controllers
         }
 
         /// <summary>
-        /// As same as the view above, but this only return json
+        /// search data [json]
         /// </summary>
         [HttpGet]
         public ActionResult Search(

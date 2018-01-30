@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace BookStore.Controllers
 {
+    /// <summary>
+    /// not currently used
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {

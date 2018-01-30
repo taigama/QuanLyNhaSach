@@ -14,6 +14,9 @@ using System.Web.Security;
 
 namespace BookStore.Controllers
 {
+    /// <summary>
+    /// main class for Dashboard handling
+    /// </summary>
     public class StaffController : Controller
     {
         Data.BookStoreContext db = new Data.BookStoreContext();
@@ -23,6 +26,9 @@ namespace BookStore.Controllers
         };
 
         // GET: Staff
+        /// <summary>
+        /// Dashboard [view]
+        /// </summary>
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult Index()
         {
@@ -42,7 +48,10 @@ namespace BookStore.Controllers
         }
 
         #region orders management
-        
+
+        /// <summary>
+        ///  [view]
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult ListOrder()
@@ -76,7 +85,9 @@ namespace BookStore.Controllers
             return View(orders);
         }
 
-       
+        /// <summary>
+        ///  [view]
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult Cashier(int? Id)
@@ -1280,7 +1291,7 @@ namespace BookStore.Controllers
         }
 
 
-
+        // not currently used
         #region statistic
 
         [HttpGet]
