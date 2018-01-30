@@ -1,0 +1,9 @@
+﻿
+@{
+    string errorCode = ViewBag.ErrorCode?? "Lỗi không xác định.";
+    string errorDetail = ViewBag.ErrorDetail ?? "Hệ thống đã gặp lỗi không xác định. Vui lòng thử lại sau.";
+}
+    <hgroup>
+        <h1>@errorCode</h1>
+        <h2>@errorDetail</h2>
+    </hgroup>

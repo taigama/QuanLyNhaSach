@@ -1,0 +1,35 @@
+﻿.table-fixed thead {
+    width: 100%;
+}
+
+.table-fixed tbody {
+    height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+    display: block;
+}
+
+.table-fixed tbody td, .table-fixed thead > tr > th {
+    float: left;
+    border-bottom-width: 0;
+}
+#col-special{
+    text-align:center;
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+/*.form-control{
+    width:80%;
+}*/
+
+.form-control:invalid {
+    border-color: red;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 175, 100, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 175, 100, .6);
+}

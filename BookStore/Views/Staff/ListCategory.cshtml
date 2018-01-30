@@ -1,0 +1,345 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý danh mục";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+@section AddToHead {
+
+    <style>
+        .row-margin {
+            margin-top: 10px;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Breadcrumb-->
+        <nav aria-label="breadcrumb" role="navigation" style="margin-top: 20px">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/Staff/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+            </ol>
+        </nav>
+        <!-- End Breadcrumb-->
+
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+                <i class="fa fa-fw"></i> @ViewBag.Title
+                <button type="button" style="float:right" onclick='ShowModalAdd()' class="btn btn-default btn-xs">Thêm danh mục</button>
+            </div>
+
+            <div class="panel-body" style="margin-top:15px">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover fixedTable" style="margin-bottom:0; background-color:slateblue; color:aliceblue">
+                        <colgroup>
+                            <col class="col-md-1" />
+                            <col class="col-md-2" />
+                            <col class="col-md-4" />
+                            <col class="col-md-3" />
+                            <col class="col-md-2" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã danh mục</th>
+                                <th>Tên danh mục</th>
+                                <th>Loại</th>
+                                <th></th>
+                                <th style="width:16px"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div style="height:300px;overflow: hidden; overflow-y:scroll">
+                        <table class="table table-striped table-bordered table-hover fixedTable">
+                            <colgroup>
+                                <col class="col-md-1" />
+                                <col class="col-md-2" />
+                                <col class="col-md-4" />
+                                <col class="col-md-3" />
+                                <col class="col-md-2" />
+                            </colgroup>
+                            <tbody id="mainTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------------------------------------- MODAL SỬA ------------------------------------------------>
+<div class="modal" id="modalSua">
+    <div class="modal-dialog" role="dialog" style="width:50%">
+        <div class="modal-content">
+            <div class="panel panel-default" style="margin-bottom:0">
+                <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+                    <i class="fa fa-fw"></i> Sửa danh mục
+                </div>
+                <div class="panel-body">
+                    <input type="number" id="maModalSua" hidden />
+                    <div class="row row-margin">
+                        <div class="col-md-6">
+                            <label class="control-label">Tên danh mục</label>
+                            <input id="tenModalSua" type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">Loại</label>
+                            <select id="dlModalSua" data-width="100%" class="selectpicker" data-live-search="true"></select>
+                        </div>
+                    </div>
+                    <div class="row row-margin">
+                        <div class="col-md-12">
+                            <label class="control-label">Mô tả</label>
+                            <textarea id="motaSua" placeholder="Mô tả" name="Product.Description" class="form-control" rows="5" style="resize:none;overflow:hidden"></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px">
+                        <button type="button" onclick="ConfirmModalEdit()" class="btn btn-primary">Xác nhận</button>
+                        <button type="button" onclick="DeclineModalEdit()" class="btn btn-danger">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------- END MODAL SỬA -------------------------------------------->
+
+<!------------------------------------------- MODAL XÓA ------------------------------------------------>
+<div class="modal" id="modalDelete">
+    <div class="modal-dialog" role="dialog" style="width:50%">
+        <div class="modal-content">
+            <div class="panel panel-default" style="margin-bottom:0">
+                <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+                    <i class="fa fa-fw"></i> Xóa danh mục
+                </div>
+                <div class="panel-body">
+                    <input type="number" id="maModalXoa" hidden />
+                    <div class="row row-margin">
+                        <div class="col-md-6">
+                            <label>Thể loại muốn xóa</label>
+                            <input id="theLoaiXoa" type="text" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Thể loại thay thế</label>
+                            <select id="theLoaiThayThe" data-width="100%" class="selectpicker" data-live-search="true"></select>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:20px">
+                        <button type="button" onclick="ConfirmModalDelete()" class="btn btn-primary">Xác nhận</button>
+                        <button type="button" onclick="DeclineModalDelete()" class="btn btn-danger">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------- END MODAL XÓA -------------------------------------------->
+
+<!------------------------------------------- MODAL THEM ------------------------------------------------>
+<div class="modal" id="modalAdd">
+    <div class="modal-dialog" role="dialog" style="width:50%">
+        <div class="modal-content">
+            <div class="panel panel-default" style="margin-bottom:0">
+                <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+                    <i class="fa fa-fw"></i> Thêm danh mục
+                </div>
+                <div class="panel-body">
+                    <div class="row row-margin">
+                        <div class="col-md-6">
+                            <label class="control-label">Tên danh mục</label>
+                            <input id="tenModalThem" type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">Loại</label>
+                            <select id="dlModalThem" data-width="100%" class="selectpicker" data-live-search="true"></select>
+                        </div>
+                    </div>
+                    <div class="row row-margin">
+                        <div class="col-md-12">
+                            <label class="control-label">Mô tả</label>
+                            <textarea id="motaThem" placeholder="Mô tả" name="Product.Description" class="form-control" rows="5" style="resize:none;overflow:hidden"></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px">
+                        <button type="button" onclick="ConfirmModalAdd()" class="btn btn-primary">Xác nhận</button>
+                        <button type="button" onclick="DeclineModalAdd()" class="btn btn-danger">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------- END MODAL XÓA -------------------------------------------->
+
+<script src="~/Assets/js/jquery.js"></script>
+<script src="~/Assets/js/moment.js"></script>
+<script src="~/Scripts/helper.js"></script>
+<script src="~/Scripts/helper-2.js"></script>
+
+<script>
+
+    var mainTable = $('#mainTable');
+    var listTypeName = [];
+
+    $(document).ready(function () {
+        AjaxList('/Staff/GetListType', listTypeName, Initialize);
+    })
+    
+    function Initialize() {
+        PopulateTable();
+        PopulateDropdown('/Staff/GetListType', 'dlModalSua');
+        PopulateDropdown('/Staff/GetListType', 'dlModalThem');
+        RestrictInputText('tenModalThem', 'MẶC ĐỊNH');
+        RestrictInputText('tenModalSua', 'MẶC ĐỊNH');
+    }
+
+    function PopulateTable() {
+        $.ajax({
+            url: '/Staff/GetListCategory',
+            type: 'GET',
+            datatype: 'json',
+            success: function (data) {
+                var row = '';
+                $.each(data, function (i, item) {
+                    row = row +
+                        '<tr>' +
+                        '<td>' + (i + 1) + '</td>' +
+                        '<td>' + item.ID + '</td>' +
+                        '<td id="tenDanhMuc' + item.ID + '">' + item.Name + '</td>' +
+                        '<td id="tenLoai' + item.ID + '">' + listTypeName[item.Type] + '</td>' +
+                        '<td>' + 
+                        '<button class="btn btn-danger btn-xs" style="float:right" onclick="ShowModalDelete(' + item.ID + ')">Xóa</button>' +
+                        '<button class="btn btn-warning btn-xs" style="float:right; margin-right:5px" onclick="ShowModalEdit(' + item.ID + ')">Sửa</button>' +
+                        '</td>' +
+                        '<td style="display:none" id="maLoai' + item.ID + '">' + item.Type + '</td>' +
+                        '<td style="display:none" id="moTa' + item.ID + '">' + CheckNull(item.Description, item.Description, '') + '</td>' +
+                        '</tr>';
+                });
+                mainTable.html(row);
+            }
+        })
+    }
+
+    function ShowModalEdit(id) {
+        $('#maModalSua').val(id);
+        $('#tenModalSua').val($('#tenDanhMuc' + id).html());
+        $('#dlModalSua').val($('#maLoai' + id).html());
+        $('#motaSua').val($('#moTa' + id).html());
+        $('#dlModalSua').selectpicker('refresh');
+        $('#modalSua').modal({ backdrop: 'static', keyboard: false });
+    }
+
+    function ConfirmModalEdit() {
+        var data = {
+            ["ID"]: parseInt($('#maModalSua').val()),
+            ["Name"]: $('#tenModalSua').val(),
+            ["Type"]: $('#dlModalSua').val(),
+            ["Description"]: $('#motaSua').val(),
+        }
+
+        $.ajax({
+            url: '/Staff/EditCategory',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({ model: data }),
+            datatype: 'json',
+            success: function (response) {
+                alert(response)
+                PopulateTable();
+                $('#modalSua').modal('hide');
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function DeclineModalEdit() {
+        $('#modalSua').modal('hide');
+    }
+
+    //-------------------------------- DELETE --------------------------------- //
+
+    var modalDelete = $('#modalDelete');
+    var theLoaiXoa = $('#theLoaiXoa');
+    var theLoaiThayThe = $('#theLoaiThayThe');
+    var maModalXoa = $('#maModalXoa');
+
+    function ShowModalDelete(id) {
+        maModalXoa.val(id);
+        theLoaiXoa.val($('#tenDanhMuc' + id).html());
+        PopulateDropdownWithCallback('/Staff/DropdownListCategory', 'theLoaiThayThe', '', '', function () {
+            $('#modalDelete').modal({ backdrop: 'static', keyboard: false });
+        });
+    }
+
+    function ConfirmModalDelete() {
+
+        $.ajax({
+            url: '/Staff/DeleteCategory',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({
+                oldCategoryID: parseInt(maModalXoa.val()),
+                newCategoryID: parseInt(theLoaiThayThe.val()) }),
+            datatype: 'json',
+            success: function (response) {
+                alert(response)
+                PopulateTable();
+                $('#modalDelete').modal('hide');
+
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function DeclineModalDelete() {
+        $('#modalDelete').modal('hide');
+    }
+
+    // ------------------------------- ADD -------------------------------- //
+
+    function ShowModalAdd(id) {
+        $('#tenModalThem').val("MẶC ĐỊNH");
+        $('#dlModalThem').val(0);
+        $('#motaThem').val("");
+        $('#dlModalThem').selectpicker('refresh');
+        $('#modalAdd').modal({ backdrop: 'static', keyboard: false });
+    }
+
+    function ConfirmModalAdd() {
+        var data = {
+            ["Name"]: $('#tenModalThem').val(),
+            ["Type"]: $('#dlModalThem').val(),
+            ["Description"]: $('#motaThem').val(),
+        };
+
+        $.ajax({
+            url: '/Staff/AddCategory',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({ model: data }),
+            datatype: 'json',
+            success: function (response) {
+                alert(response)
+                PopulateTable();
+                $('#modalAdd').modal('hide');
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function DeclineModalAdd() {
+        $('#modalAdd').modal('hide');
+    }
+
+</script>

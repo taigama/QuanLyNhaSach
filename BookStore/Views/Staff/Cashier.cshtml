@@ -1,0 +1,811 @@
+﻿@{
+    ViewBag.Title = "Thu ngân";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h3>Thu ngân</h3>
+<button class="btn btn-primary"
+        onclick="location.href='@Url.Action("ListOrder", "Staff")/'">
+    Quay lại Quản lý đơn hàng
+</button>
+
+<div class="panel panel-default" style="margin-top:5px;margin-bottom:5px">
+    <div class="panel-body">
+        <div class="row line-data">
+            <div class="col-md-2">
+                Mã đơn hàng:
+            </div>
+            <div class="col-md-2">
+                <b id="orderId">
+                    đang tải...
+                </b>
+            </div>
+            <div class="col-md-3" style="text-align:center">
+                <button class="btn btn-primary btn-xs" onclick="checkoutOrder()">
+                    Hoàn tất
+                </button>
+                <button class="btn btn-success btn-xs" onclick="exportPdf()">
+                    In
+                </button>
+            </div>
+            <div class="col-md-1">
+                Ngày:
+            </div>
+            <div class="col-md-2" id="orderCreatedDate">
+                 đang tải...
+            </div>
+            <div class="col-md-2" style="text-align:center">
+                <button class="btn btn-basic btn-xs" onclick="archiveOrder()">
+                    Huỷ đơn hàng
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row line-data" style="margin-top:10px">
+            <div class="col-md-2">
+                Tổng giá trị đơn hàng:
+            </div>
+            <div class="col-md-2">
+                <b id="orderTotal">
+                    đang tải...
+                </b>
+            </div>
+            <div class="col-md-4" id="error" style="color:blue">
+                Hệ thống đang tải...
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+        <i class="fa fa-file-text fa-fw"></i> Đơn hàng
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="table-responsive">
+            @* ---- table head ----*@
+            <table class="table table-striped table-bordered" style="margin-bottom:0">
+                <thead>
+                    <tr>
+                        <th class="hidden"></th>
+                        <th class="col-md-1">
+                            STT
+                        </th>
+                        <th class="col-md-3">
+                            Sản phẩm
+                        </th>
+                        <th class="col-md-1">
+                            Đơn vị tính
+                        </th>
+                        <th class="col-md-1">
+                            Số lượng
+                        </th>
+                        <th class="col-md-2">
+                            Đơn giá
+                        </th>
+                        <th class="col-md-3">
+                            Thành tiền
+                        </th>
+                        <th class="col-md-1"></th>
+                        <th style="width:15px"></th>
+                    </tr>
+                </thead>
+            </table>
+            @* ---- table body ----*@
+            <div style="height:300px;overflow: hidden; overflow-y:scroll;" id="div_table">
+                <table class="table table-striped table-bordered table-hover" id="table_content">
+                    <tbody id="list"></tbody>
+                </table>
+            </div>
+            @* bottom line*@
+
+            <table id="line_to_add"
+                   class="table table-striped table-bordered"
+                   style="margin-top:15px;margin-bottom:0">
+                <thead>
+                    <tr>
+                        <th class="hidden"></th>
+                        <th id="add_stt" class="col-md-1">
+                            STT
+                        </th>
+                        <th class="col-md-3">
+                            <select id="add_ddl_product"
+                                    name="add_ddl_product"
+                                    class="selectpicker dropup"
+                                    data-live-search="true"
+                                    data-size="10"
+                                    data-width="100%"></select>
+                        </th>
+                        <th id="add_unit" class="col-md-1">
+                            Đơn vị tính
+                        </th>
+                        <th class="col-md-1">
+                            <input id="add_count" value="1" type="number" data-val="true" class="form-control numeric" required />
+                        </th>
+                        <th id="add_price" class="col-md-2" style="text-align:right">
+                            Đơn giá
+                        </th>
+                        <th id="add_total" class="col-md-3" style="text-align:right">
+                            Thành tiền
+                        </th>
+                        <th class="col-md-1">
+                            <button class="btn btn-success" onclick="addLine()">Thêm</button>
+                        </th>
+                        <th style="width:16px"></th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+        <!-- /.table-responsive -->
+    </div>
+    <!-- /.panel-body -->
+</div>
+
+
+<div class="modal fade" id="modal_line">
+    <div class="modal-dialog" role="dialog" style="width:1000px">
+        <div class="modal-content">
+
+            <div class="panel panel-default" style="margin-bottom:0">
+                <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+                    <i class="fa fa-file-text fa-fw"></i> Sửa 1 chi tiết đơn hàng
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="hidden"></th>
+                                    <th class="col-md-1">
+                                        STT
+                                    </th>
+                                    <th class="col-md-3">
+                                        Sản phẩm
+                                    </th>
+                                    <th class="col-md-1">
+                                        Đơn vị tính
+                                    </th>
+                                    <th class="col-md-2">
+                                        Số lượng
+                                    </th>
+                                    <th class="col-md-2">
+                                        Đơn giá
+                                    </th>
+                                    <th class="col-md-3">
+                                        Thành tiền
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="edit_id" class="hidden"></td>
+                                    <td id="edit_index"></td>
+                                    <td>
+                                        <select id="edit_ddl_product"
+                                                name="edit_ddl_product"
+                                                class="selectpicker"
+                                                data-live-search="true"
+                                                data-width="100%"></select>
+                                    </td>
+                                    <td id="edit_unit"></td>
+                                    <td>
+                                        <input type="number" id="edit_count" data-val="true" class="form-control numeric" required />
+                                    </td>
+                                    <td id="edit_price"></td>
+                                    <td id="edit_total"></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr tabindex="2" id="edit_error" style="color:red"></tr>
+                            </tfoot>
+                        </table>
+                        <button id="edit_commit"
+                                class="btn btn-warning pull-right"
+                                onclick="updateLineData()">Cập nhật</button>
+                        <button id="btn_close"
+                                class="btn btn-primary pull-right" style="margin-right:10px"
+                                onclick="$('#modal_line').modal('hide')">Không sửa dòng này nữa</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Assets/js/jquery.js"></script>
+<script src="~/Assets/js/moment.js"></script>
+<script src="~/Scripts/helper.js"></script>
+<script>
+    // ------------- view -----------------
+
+    $.each($(".line-data"), function (i, item) {
+        setChildHeight(item, 34);
+    });
+
+
+    var oldState;
+    var customerId;
+
+    // lúc đầu show web
+    $(document).ready(function () {
+
+        //$('#add_ddl_product').selectpicker({
+        //    dropupAuto: true
+        //});
+
+
+        listOrderDetails();
+
+        populateDropdownProduct();
+
+        // cập nhật data ở dòng edit (modal edit)
+        $("#edit_ddl_product").change(function () {
+            updateEdit();
+        });
+        $("#edit_count").change(function () {
+            updateEdit();
+        });
+
+        // cập nhật data ở dòng add (cuối bảng)
+        $("#add_ddl_product").change(function () {
+            updateAdd();
+        });
+        $("#add_count").change(function () {
+            updateAdd();
+        });
+
+
+
+        $("#error").html("Hệ thống sẵn sàng");
+        $("#error").css({ 'color': 'blue' });
+    })
+    
+    @*// ------------ test Animate ---------------
+    //var element = $('.table');
+    //var last = 0;
+    //function repeatOften(now) {
+    //    if (!last || now - last >= 2 * 500) {
+    //        last = now;
+    //        element.css({ 'background-color': getRandomColor() });
+    //    }
+    //    requestAnimationFrame(repeatOften);
+    //}
+    //requestAnimationFrame(repeatOften);*@
+
+
+
+
+    function listOrderDetails() {
+
+        var firstName = '';
+        var lastName = '';
+
+        $.ajax({// lấy dữ liệu từ link này
+            url: '/Order/GetOrder/' + '@ViewBag.id',
+            type: 'GET',
+            dataType: 'json',// kiểu dữ liệu: json
+            success: function (data) {// lấy dữ liệu thành công
+
+                $("#orderId").html(data.ID);
+                $("#orderCreatedDate").html(formatJsonNetDate(data.CreatedAt));
+
+                
+                oldState = data.Status;
+
+                $("#orderTotal").html(data.TotalAmount.toLocaleString() + " VND");
+
+                if (data.AnonymousUserId != null) {
+                    customerId = data.AnonymousUserId;
+                }
+                else {
+                    customerId = null;
+                }
+                populateLines(data.OrderDetails);
+
+
+                if (customerId != null) {
+                    if (data.AnonymousUser.FirstName)
+                        firstName = data.AnonymousUser.FirstName;
+                    else
+                        firstName = " .";
+                    if (data.AnonymousUser.LastName)
+                        lastName = data.AnonymousUser.LastName;
+                    else
+                        lastName = " .";
+
+                    $("#customer_info").html('Khách: ' + firstName + ' ' + lastName);
+                    $("#customer_info").show();
+
+                    // show data at modal
+                    $("#customer_first_name").html(firstName);
+                    $("#customer_last_name").html(lastName);
+                    $("#customer_phone").html(data.AnonymousUser.PhoneNumber);
+                    $("#customer_address").html(data.AnonymousUser.Address);
+                    $("#customer_email").html(data.AnonymousUser.Email);
+                }
+
+                scrollToBottom();
+            },
+            error: function (err) {// lỗi
+                document.write(err.responseText);
+            }
+        });
+    }
+
+    function scrollToBottom() {
+        var scrollBottom = Math.max($('#table_content').height() - $('#div_table').height() + 20, 0);
+        //$('#div_table').scrollTop(scrollBottom);
+
+        $("#div_table").animate({ scrollTop: scrollBottom }, 500);
+    }
+
+    function populateLines(lines) {
+
+        var rows = '';
+        var nameUser = '';
+        var status = '';
+        var iter = 0;
+        var unit = '';
+        $("#list").html("");
+        $.each(lines, function (i, item) {
+            iter++;
+            rows = generateCellHidden("id_" + i, item.ID);
+            rows += generateCellId(i + 1, 1, "stt_" + i);
+            rows += generateCellHidden("proId_" + i, item.ProductId);
+            rows += generateCell(item.Product.Name, 3);
+
+            switch (item.Product.Unit) {
+                case 0:
+                    unit = 'Cuốn';
+                    break;
+                case 1:
+                    unit = 'Cây';
+                    break;
+                case 2:
+                    unit = "Cái";
+                    break;
+                case 3:
+                    unit = "Lốc";
+                    break;
+                default:
+                    unit = 'Không xác định.';
+            }
+            rows += generateCellId('<div style="text-align:center" id="unit_' + i + '">' + unit + "</div>", 1,"");
+            rows += generateCellId('<div style="text-align:center" id="count_' + i + '">' + item.Quantity + "</div>", 1, "");
+            rows += generateCellId('<div style="float:right">' + item.Product.Price.toLocaleString() + "</div>", 2, "price_" + i);
+            rows += generateCellId('<div style="float:right">' + item.TotalAmount.toLocaleString() + "</div>", 3, "total_" + i);
+
+            if (customerId == null && oldState == 0) {
+                rows += generateCell(
+                    generateButton('Sửa', 'primary', "editLine(" + i + ")")
+                    + ' ' + generateButton('Xoá', 'danger', "deleteLine(" + i + ")")
+                    , 1);
+            }
+            else {
+                rows += generateCell("", 1);
+            }
+
+            rows = '<tr id="line' + i + '">' + rows + '</tr>';
+            $("#list").append(rows);
+        });
+
+        // sửa STT của dòng 'add'
+        $("#add_stt").html(iter+1);
+
+        @*// sửa chỗ 'list' trong html
+        $("#list").html(rows);*@
+    }
+
+    // show a modal to edit the line
+    function editLine(index) {
+        $("#edit_id").html($("#id_" + index).html());
+        $("#edit_index").html($("#stt_" + index).html());
+        $("#edit_unit").html($("#unit_" + index).html());
+
+        $("#edit_ddl_product").val($("#proId_" + index).html());
+        $("#edit_ddl_product").selectpicker('refresh');
+        $("#edit_count").val($("#count_" + index).html());
+        $("#edit_price").html($("#price_" + index).html());
+        $("#edit_total").html($("#total_" + index).html());
+
+        $("#modal_line").modal('show');
+    }
+
+    function populateDropdownProduct() {
+
+        $.ajax({// lấy dữ liệu từ link này
+            url: '/Products/DropDownProduct/',
+            type: 'GET',
+            dataType: 'json',// kiểu dữ liệu: json
+            success: function (data) {// lấy dữ liệu thành công
+                rows = '<option value="">Không chọn</option>';
+                $.each(data, function (i, item) {
+                    rows += '<option value="' + item.Key + '">' + item.Value + '</option>';
+                });
+                // sửa chỗ 'listLuongs' trong html
+                $("#edit_ddl_product").html(rows);
+                $("#edit_ddl_product").selectpicker('refresh');
+
+                $("#add_ddl_product").html(rows);
+                $("#add_ddl_product").selectpicker('refresh');
+
+            },
+            error: function (err) {// lỗi
+                alert(err.responseText);
+            }
+        });
+    }
+
+    function viewCustomer() {
+        $("#modal_cusomter").modal('show');
+    }
+
+
+
+    // ---------------- add ----------------
+    function checkValidAdd() {
+        var logError = '';
+        if (!($("#add_ddl_product").val())) {
+            logError += "Sản phẩm không hợp lệ!";
+        }
+
+        if (!($("#add_count").val())) {
+            logError += " Số lượng không hợp lệ!";
+        }
+        else if (($("#add_count").val()) < 1) {
+            logError += " Số lượng không hợp lệ!";
+        }
+
+        if (logError != '') {
+            $("#error").html(logError);
+            $("#error").css({'color':'red'});
+            return false;
+        }
+
+        $("#error").html("");
+        return true;
+    }
+    // update the view in 'add' field
+    function updateAdd() {
+
+        if (checkValidAdd()) {
+
+            var proId = $("#add_ddl_product").val();
+            var strUnit = '';
+            $.ajax({// lấy dữ liệu từ link này
+                url: '/Products/GetProduct?id=' + proId + '&depth=1',
+                type: 'GET',
+                dataType: 'json',// kiểu dữ liệu: json
+                success: function (data) {// lấy dữ liệu thành công
+
+                    if (data == null) {
+                        alert("Xin lỗi. Sản phẩm này không tồn tại trong hệ thống.");
+                        return;
+                    }
+
+                    switch (data.Unit) {
+                        case 0:
+                            strUnit = 'Cuốn';
+                            break;
+                        case 1:
+                            strUnit = 'Cây';
+                            break;
+                        case 2:
+                            strUnit = "Cái";
+                            break;
+                        case 3:
+                            strUnit = "Lốc";
+                            break;
+                        default:
+                            strUnit = 'Không xác định.';
+                    }
+
+
+                    $("#add_unit").html(strUnit);
+                    $("#add_price").html(data.Price.toLocaleString());
+
+
+                    var count = $("#add_count").val();
+                    $("#add_total").html((data.Price * count).toLocaleString());
+                },
+                error: function (err) {// lỗi
+                    document.write(err.responseText);
+                }
+            });
+        }
+    }
+
+    function addLine() {
+        if (checkValidAdd()) {
+            var proId = $("#add_ddl_product").val();
+            var count = $("#add_count").val();
+
+            $.ajax({
+                url: "/Order/AddLine?orderId=@ViewBag.id&proId=" + proId + "&count=" + count,
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+
+                    listOrderDetails();
+
+                    switch (data.Type) {
+                        case 1: {
+                            $("#error").html("thêm thành công");
+                            $("#error").css({ 'color': 'blue' });
+
+                            $("#add_ddl_product").val("");
+                            $("#add_ddl_product").selectpicker('refresh');
+                            $("#add_count").val(1);
+                        }
+                            break;
+                        case 4: {
+                            $("#error").html("dữ liệu không hợp lệ");
+                            $("#error").css({ 'color': 'red' });
+                        }
+                            break;
+                        case 8: {
+                            $("#error").html("Sản phẩm hết hàng");
+                            $("#error").css({ 'color': 'red' });
+                        }
+                            break;
+                    }
+                },
+                error: function (err) {
+                    alert("Error: " + err.responseText);
+                }
+            });
+        }
+    }
+
+    // -------------- delete ------------------
+
+    // delete order details
+    function deleteLine(index) {
+        var confirmDelete = confirm("Bạn có chắc là muốn xoá");
+        if (confirmDelete) {
+
+            var id = $("#id_" + index).html();
+
+            $.ajax({
+                url: "/Order/DeleteOrderDetail/" + id,
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+
+                    listOrderDetails();
+
+                    switch (data.Type) {
+                        case 3: {
+                            $("#error").html("Đã xoá chi tiết đơn hàng, STT=" + id);
+                            $("#error").css({ 'color': 'blue' });
+                        }
+                            break;
+                        case 4: {
+                            $("#error").html("dữ liệu không hợp lệ");
+                            $("#error").css({ 'color': 'red' });
+                        }
+                            break;
+                    }
+                },
+                error: function (err) {
+                    alert("Error: " + err.responseText);
+                }
+            });
+        }
+    }
+    
+    // delete the entire order
+    function archiveOrder() {
+        var confirmDelete = confirm("Bạn có chắc là muốn huỷ?");
+        if (confirmDelete) {
+            $.ajax({
+                url: "/Order/ArchiveOrder/" + "@ViewBag.id",
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+                    switch (data.Type) {
+                        case 3: {
+                            alert("Bạn đã huỷ thành công");
+
+                            // based on login type
+                            // for admin
+                            window.location.href = "/Staff/ListOrder";
+                            // for cashier
+                            //location.href("/Staff/Cashier");
+                        }
+                            break;
+                        case 4: {
+                            alert("Không hợp lệ");
+                        }
+                            break;
+                    }
+                },
+                error: function (err) {
+                    document.write(err.responseText);
+                }
+            });
+        }
+    }
+
+    // ------------- edit -------------
+    function checkValidEdit() {
+        var logError = '';
+        if (!($("#edit_ddl_product").val())) {
+            logError += "Sản phẩm không hợp lệ!";
+        }
+
+        if (!($("#edit_count").val())) {
+            logError += " Số lượng không hợp lệ!";
+        }
+        else if (($("#edit_count").val()) < 1) {
+            logError += " Số lượng không hợp lệ!";
+        }
+
+        if (logError != '') {
+            $("#edit_error").html(logError);
+            return false;
+        }
+
+        $("#edit_error").html("");
+        return true;
+    }
+
+    // update the view in the modal
+    function updateEdit() {
+
+        if (checkValidEdit()) {
+
+            var proId = $("#edit_ddl_product").val();
+
+            var strUnit = '';
+            $.ajax({// lấy dữ liệu từ link này
+                url: '/Products/GetProduct?id=' + proId + '&depth=1',
+                type: 'GET',
+                dataType: 'json',// kiểu dữ liệu: json
+                success: function (data) {// lấy dữ liệu thành công
+
+                    if (data == null) {
+                        alert("Xin lỗi. Sản phẩm này không tồn tại trong hệ thống.");
+                        return;
+                    }
+
+
+                    switch (data.Unit) {
+                        case 0:
+                            strUnit = 'Cuốn';
+                            break;
+                        case 1:
+                            strUnit = 'Cây';
+                            break;
+                        case 2:
+                            strUnit = "Cái";
+                            break;
+                        case 3:
+                            strUnit = "Lốc";
+                            break;
+                        default:
+                            strUnit = 'Không xác định.';
+                    }
+                    $("#edit_unit").html(strUnit);
+
+
+                    $("#edit_price").html(data.Price.toLocaleString());
+
+
+                    var count = $("#edit_count").val();
+                    $("#edit_total").html((data.Price * count).toLocaleString());
+                },
+                error: function (err) {// lỗi
+                    document.write(err.responseText);
+                }
+            });
+        }
+    }
+
+    function updateLineData() {
+
+        if (checkValidEdit()) {
+            var proId = $("#edit_ddl_product").val();
+            var count = $("#edit_count").val();
+            var detailId = $("#edit_id").html();
+
+            $.ajax({
+                url: "/Order/UpdateLine?detailId=" + detailId + "&proId=" + proId + "&count=" + count,
+                type: "POST",
+                dataType: 'json',
+                success: function (data) {
+
+                    listOrderDetails();
+
+                    $('#modal_line').modal('hide');
+
+                    switch (data.Type) {
+                        case 2: {
+                            $("#error").html("Cập nhật thành công");
+                            $("#error").css({ 'color': 'blue' });
+                        }
+                            break;
+                        case 4: {
+                            $("#error").html("dữ liệu không hợp lệ");
+                            $("#error").css({ 'color': 'red' });
+                        }
+                            break;
+                        case 8: {
+                            $("#error").html("Sản phẩm hết hàng");
+                            $("#error").css({ 'color': 'red' });
+                        }
+                            break;
+                    }
+
+
+                },
+                error: function (err) {
+                    document.write("Error: " + err.responseText);
+                }
+            });
+        }
+
+
+    }
+
+    // ------------------- checkout -----------------------------
+    function exportPdf() {
+        var win = window.open('/Order/Export/@ViewBag.id');
+        win.focus();
+    }
+
+    function checkoutOrder() {
+        $.ajax({
+            url: "/Order/Complete?Id=@ViewBag.id",
+            type: "POST",
+            dataType: 'json',
+            success: function (data) {
+
+
+                switch (data.Type) {
+                    case 0: {
+                        $("#error").html("OK");
+                        $("#error").css({ 'color': 'blue' });
+
+                        window.location.href = "/Staff/Cashier/";
+
+                    }
+                        break;
+                    case 4: {
+                        $("#error").html("dữ liệu không hợp lệ");
+                        $("#error").css({ 'color': 'red' });
+                    }
+                        break;
+                    case 7: {
+                        $("#error").html("bạn không có quyền");
+                        $("#error").css({ 'color': 'red' });
+                    }
+                        break;
+                }
+
+
+            },
+            error: function (err) {
+                document.write("Error: " + err.responseText);
+            }
+        });
+    }
+
+</script>
+
+<style>
+    .form-control:invalid {
+        border-color: red;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 175, 100, .6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(233, 175, 100, .6);
+    }
+</style>

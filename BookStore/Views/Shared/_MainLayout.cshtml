@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Assets/css/price-range.css" rel="stylesheet">
+    <link href="~/Assets/css/main.css" rel="stylesheet">
+    <link href="~/Assets/css/responsive.css" rel="stylesheet">
+</head><!--/head-->
+<body>
+
+    @Html.Partial("Header")
+    <div style="margin-top:110px;">
+        @RenderBody()
+    </div>
+    @Html.Partial("Footer")
+
+    @*<script src="~/Assets/js/jquery.js"></script>*@
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Assets/js/price-range.js"></script>
+    <script src="~/Assets/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+
+</body>
+</html>

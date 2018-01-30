@@ -1,0 +1,72 @@
+﻿@model  IEnumerable<BookStore.Models.Order>
+@using BookStore.Models;
+@using System.Globalization;
+
+@{
+    string nameUser = "";
+    string status = "";
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+@foreach (var item in Model)
+{
+    if (item.AnonymousUserId != null)
+    {
+        nameUser = "k: " + item.AnonymousUser.FirstName + " " + item.AnonymousUser.LastName;
+    }
+    else if (item.User != null)
+    {
+        nameUser = "nv: " + item.User.FirstName + " " + item.User.LastName;
+    }
+    else
+    {
+        nameUser = "Không xác định";
+    }
+
+
+    switch (item.Status)
+    {
+        case OrderStatus.New:
+            status = "Mới";
+            break;
+        case OrderStatus.Packing:
+            status = "Đã đóng gói";
+            break;
+        case OrderStatus.Delivering:
+            status = "Đang giao";
+            break;
+        case OrderStatus.Completed:
+            status = "Hoàn tất";
+            break;
+        case OrderStatus.Pending:
+            status = "Chờ";
+            break;
+        case OrderStatus.Canceled:
+            status = "Huỷ";
+            break;
+    }
+
+    <tr>
+        <td class="col-md-1">@item.ID</td>
+        <td class="col-md-3">@nameUser</td>
+        <td class="col-md-2">@status</td>
+        <td class="col-md-1">@item.CreatedAt.ToString("dd/MM/yyyy")</td>
+        <td class="col-md-1">
+            @if (item.Status == OrderStatus.Completed)
+            {
+                <text>
+                    @item.DeliveryDate.ToString("dd/MM/yyyy")
+                </text>
+            }
+        </td>
+        <td class="col-md-2" style="text-align:end">@item.TotalAmount.ToString("#,0", ci) đ</td>
+        <td class="col-md-2">
+            <button
+                    class="btn btn-info btn-xs"
+                    onclick="location.href = '/Order/ViewOrder?Id=@item.ID'"
+                    >
+                Chi tiết
+            </button>
+        </td>
+    </tr>
+}

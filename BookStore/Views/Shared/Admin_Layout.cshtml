@@ -1,0 +1,144 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html><title>@ViewBag.Title</title>
+<html lang="en">
+<head>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Select CSS -->
+    <link href="~/Assets/css/bootstrap-select.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/Assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <link href="~/Assets/css/toast.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS
+    <link href="~/Assets/css/metisMenu.min.css" rel="stylesheet"> -->
+    <!-- Custom Fonts -->
+    <link href="~/Assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    @RenderSection("AddToHead", false)
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Staff/">Bảng điều khiển</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="/Staff/UserProfile"><i class="fa fa-user fa-fw"></i> Trang cá nhân</a>
+                </li>
+                <li>
+                    <a href="/Staff/LogOff"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                </li>
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <div class="card" style="margin-left: auto;
+                    margin-right: auto;
+                    width: 8em">
+                        @if(ViewBag.User.Avatar!= null)
+                        {
+                            <img class="card-img-top" src="@ViewBag.User.Avatar" alt="Card image cap"
+                                 style="width:100%;height:100%;object-fit:contain"
+                                 >
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="~/Assets/images/staff/avatar.png" alt="Card image cap">
+                        }
+                        <div class="card-body">
+                            <p class="card-text">@(ViewBag.User.LastName +" "+ ViewBag.User.FirstName)</p>
+                        </div>
+                    </div>
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href=@Url.Action("Index", "Staff")><i class="fa fa-home fa-fw"></i> Dashboard</a>
+                        </li>
+                        @if (ViewBag.IsAdmin)
+                        {
+                        <li>
+                            <a href=@Url.Action("ListProduct", "Staff")><i class="fa fa-tasks fa-fw"></i> Quản lý sản phẩm</a>
+                        </li>
+                        }
+                        <li>
+                            <a href=@Url.Action("ListOrder", "Staff")><i class="fa fa-file-text fa-fw"></i> Quản lý hóa đơn</a>
+                        </li>
+                        @if (ViewBag.IsAdmin)
+                        {
+                        <li>
+                            <a href=@Url.Action("ListAuthor", "Staff")><i class="fa fa-fw"></i> Quản lý tác giả</a>
+                        </li>
+                        <li>
+                            <a href=@Url.Action("ListPublisher", "Staff")><i class="fa fa-briefcase fa-fw"></i> Quản lý nhà xuất bản</a>
+                        </li>
+                        <li>
+                            <a href=@Url.Action("ListCategory", "Staff")><i class="fa fa-fw"></i> Quản lý danh mục</a>
+                        </li>
+                        <li>
+                            <a href=@Url.Action("ListImport", "Staff")><i class="fa fa-fw"></i> Quản lý nhập kho</a>
+                        </li>
+                        <li>
+                            <a @*href=@Url.Action("Finance", "Staff")*@ onclick="alert('Chức năng này hiện chưa được hoàn thành')"><i class="fa fa-fw"></i> Thống kê tài chính</a>
+                        </li>
+                        <li>
+                            <a @*href=@Url.Action("Warehouse", "Staff")*@ onclick="alert('Chức năng này hiện chưa được hoàn thành')"><i class="fa fa-fw">⛟</i> Thống kê nhập/xuất kho</a>
+                        </li>
+                        }
+                        @*<li>
+                            <a href="forms.html"><i class="fa fa-book fa-fw"></i> Quản lý blog</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-users fa-fw"></i> Quản lý thành viên</a>
+                        </li>*@
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            @RenderBody()
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/Assets/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Select JavaScript -->
+    <script src="~/Assets/js/bootstrap-select.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Assets/js/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Assets/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
+

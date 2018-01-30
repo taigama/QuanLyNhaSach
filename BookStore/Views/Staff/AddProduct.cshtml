@@ -1,0 +1,479 @@
+﻿@model BookStore.Models.ProductVM
+
+@{
+    ViewBag.Title = "Thêm sản phẩm";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+@section AddToHead {
+    <link href="~/Assets/css/input-image.css" rel="stylesheet" type="text/css">
+    }
+
+<form action="/Staff/AddProduct" method="post" id="myForm" enctype="multipart/form-data">
+    @Html.HiddenFor(model => model.Product.ID)
+    @Html.HiddenFor(model => model.Success, new { id = "Success" } )
+    <input id="avatarImage" type="text" name="Product.AvatarImage" value="" class="inputfile" />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Breadcrumb-->
+                    <nav aria-label="breadcrumb" role="navigation" style="margin-top: 20px">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/Staff/">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/Staff/ListProduct/">Quản lý sản phẩm</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">@ViewBag.Title</li>
+                        </ol>
+                    </nav>
+                    <!-- End Breadcrumb-->
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+                    <i class="fa fa-tasks fa-fw"></i> Thêm sản phẩm
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Tên</label>
+                                <input type="text" id="Product.Name" name="Product.Name" class="form-control" placeholder="Tên sản phẩm">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Tồn kho</label>
+                                <input type="number" id="Product.InStock" name="Product.InStock" value="0" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Đơn vị</label>
+                                @Html.DropDownListFor(model => model.Product.Unit, new SelectList(Model.DropdownUnit, "Key", "Value", Model.Product.Unit), null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @*<div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Giá nhập</label>
+                                <input type="number" step="10000" id="Product.CostPrice" name="Product.CostPrice" class="form-control" placeholder="VND">
+                            </div>
+                        </div>*@
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Cân nặng (gram)</label>
+                                <input type="number" id="Product.Weight" name="Product.Weight" class="form-control" placeholder="gram">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Giá bán</label>
+                                <input type="number" step="10000" id="Product.Price" name="Product.Price" class="form-control" placeholder="VND">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Loại</label>
+                                @Html.DropDownListFor(model => model.ProductType, new SelectList(Model.DropdownType, "Key", "Value", Model.ProductType), null, htmlAttributes: new { id = "dlLoai", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Mục</label>
+                                <select id="dlMuc" name="Product.CategoryId" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Chiều rộng (cm)</label>
+                                <input type="number" id="Product.Width" name="Product.Width" class="form-control" placeholder="cm">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Chiều cao (cm)</label>
+                                <input type="number" id="Product.Height" name="Product.Height" class="form-control" placeholder="cm">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Số trang</label>
+                                <input type="number" id="Product.PageCount" name="Product.PageCount" class="form-control" placeholder="gram">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Loại bìa</label>
+                                @Html.DropDownListFor(model => model.Product.Cover, new SelectList(Model.DropdownCover, "Key", "Value", Model.Product.Cover), null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-horizontal">
+                                <label>Tác giả</label>
+                                <div class="form-group">
+                                    <span class="col-lg-11">
+                                        <input id="inputTacGia" type="text" class="form-control" placeholder="Tác giả" readonly />
+                                    </span>
+                                    <div class="col-lg-1">
+                                        <button type="button" onclick="ShowModalTacGia()" class="btn btn-block">...</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label>Nhà XB/SX</label>
+                                    @Html.DropDownListFor(model => model.Product.PublisherId, new SelectList(Model.DropdownPublisher, "Key", "Value", Model.Product.PublisherId), null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Ngày xuất bản</label>
+                                    <input type="date" id="Product.PublishedTime" name="Product.PublishedTime" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <label>Code</label>
+                                    <input type="text" id="Product.Code" name="Product.Code" placeholder="Code sản phẩm" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <label>Description</label>
+                                    <textarea id="Product.Description" placeholder="Mô tả" name="Product.Description" class="form-control" rows="10" style="resize:none;overflow:hidden"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <div class="row col-lg-12">
+                                        <label>Hình ảnh</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-9">
+                                            <label for="uploadImage" class="form-control mylabel">Chọn hình đại diện</label>
+                                            <input type="file" name="uploadImage" id="uploadImage" class="inputfile" accept=".jpeg, .jpg, .png" />
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" onclick="ClearInputImage()" class="btn btn-warning col-lg-12">Xóa hình</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <div class="container">
+                                        <img id="reviewImage" class="imagefit" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <button id="btnSubmit" type="button" onclick="submitWithValidation()" class="btn btn-primary">Thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div id="snackbar"></div>
+
+    <!------------------------------------------- MODAL TAC GIA ------------------------------------------------>
+    <div class="modal" id="modalTacGia">
+        <div class="modal-dialog" role="dialog" style="width:330px">
+            <div class="modal-content">
+                <div class="panel panel-default" style="margin-bottom:0">
+                    <div class="panel-heading" style="background-color:rgb(1, 85, 180); color:aliceblue">
+                        <i class="fa fa-tasks fa-fw"></i> Thêm tác giả
+                        <button type="button" style="float:right" onclick="AddDropdownTacGia()" class="btn btn-xs btn-default">Thêm</button>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div id="listTacGia"></div>
+                        </div>
+                        <button type="button" onclick="ConfirmModalTacGia()" class="btn btn-primary">Xác nhận</button>
+                        <button type="button" onclick="DeclineModalTacGia()" class="btn btn-danger">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="finalSubmit"></div>
+    </div>
+    <!------------------------------------------- END MODAL TAC GIA -------------------------------------------->
+
+</form>
+
+
+<script src="~/Assets/js/jquery.js"></script>
+<script src="~/Assets/js/moment.js"></script>
+<script src="~/Scripts/helper.js"></script>
+<script src="~/Scripts/helper-2.js"></script>
+
+<script>
+
+    var tacGiaCount = 0;    // Để tạo id riêng biệt cho các tác giả
+    var arrayTacGia = [];   // Lưu giá trị của các tác giả
+    var storeTacGias = [];  // Gía trị của các tác giả hiện tại trong input tác giả
+    var dlType = $('#dlLoai');
+    var dlCategory = $('#dlMuc');
+    var today = new Date();
+
+    $(document).ready(function () {
+
+        //if (checkBoolean($("#Success").val())) {
+        //    showSnackbar("snackbar", "Thêm sản phẩm thành công");
+        //}
+
+        RestrictInputText("Product\\.Name", "Hệ thống");
+        RestricInputNumber("Product\\.Price", 0, Infinity, 0);
+        //RestricInputNumber("Product\\.CostPrice", 0, Infinity, 0);
+        RestricInputNumber("Product\\.InStock", 0, Infinity, 0);
+        RestricInputNumber("Product\\.Width", 0, Infinity, 0);
+        RestricInputNumber("Product\\.Height", 0, Infinity, 0);
+        RestricInputNumber("Product\\.PageCount", 0, Infinity, 0);
+        RestricInputNumber("Product\\.Weight", 0, Infinity, 0);
+        RestrictInputDate("Product\\.PublishedTime", new Date(1970, 0, 1), today);
+
+        GenerateDropdownCategory();
+    })
+
+
+    function GenerateDropdownCategory() {
+
+        // Whenever dlType change value, we re-populate the dlCategory
+        var onChangeFunction = function (typeId) {
+            $.ajax({
+                url: '/Staff/GetCategoryByType?typeId=' + typeId,
+                data: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    var rows = '';
+                    $.each(data, function (i, item) {
+                        rows = rows + '<option value="' + item.Key + '">' + item.Value + '</option>';
+                    });
+                    dlCategory.html(rows);
+                }
+            })
+        }
+
+        // Pass function to change
+        dlType.change(function () {
+            onChangeFunction(parseInt(dlType.val()));
+        });
+
+        // First time apply function, because onchange does not trigger
+        onChangeFunction(parseInt(dlType.val()));
+    }
+
+
+    function submitWithValidation() {
+
+        var error = "";
+        var name = $("#Product\\.Name").val();
+        var price = $("#Product\\.Price").val();
+        var inStock = $("#Product\\.InStock").val();
+
+        if (!name || name == "") {
+            error += "<div>Tên không hợp lệ</div>";
+        }
+        if (!price || (price < 0)) {
+            error += "<div>Giá không hợp lệ</div>";
+        }
+        if (!inStock || inStock < 0) {
+            error += "<div>Tồn kho không hợp lệ</div>";
+        }
+
+        if (error == "") {
+            UploadImage(function () {
+                GenerateForSubmit();
+                alert("Thành công");
+                $("#myForm").submit();
+            });
+        }
+        else {
+            showSnackbar("snackbar", error);
+        }
+    }
+
+
+    $('#uploadImage').change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                selectedImage = e.target.result;
+                $('#reviewImage').attr('src', selectedImage);
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+
+    function UploadImage(callback) {
+        // Checking whether FormData is available in browser  
+
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#uploadImage").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object  
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object  
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object  
+            fileData.append('username', 'Manas');
+
+            $.ajax({
+                url: '/Staff/UploadFiles',
+                type: "POST",
+                contentType: false, // Not to set any content header  
+                processData: false, // Not to process data  
+                data: fileData,
+                success: function (result) {
+                    if (parseInt(result.Type) == 0) {
+                        $('#avatarImage').val(result.StringValue);
+                        callback();
+                    }
+                    else {
+                        showSnackbar("snackbar", 'Lỗi khi upload hình');
+                    }
+                },
+                error: function (err) {
+                    alert("Here" + err.statusText);
+                }
+            });
+        } else {
+            alert("FormData is not supported.");
+        }  
+    }
+
+
+    function ClearInputImage() {
+        ResetFormElement($('#uploadImage'));
+        $('#reviewImage').attr('src', '');
+    }
+
+
+    function ResetFormElement(e) {
+        e.wrap('<form>').closest('form').get(0).reset();
+        e.unwrap();
+
+        //// Prevent form submission
+        //e.stopPropagation();
+        //e.preventDefault();
+    }
+
+    // --------------------------- MODAL AUTHOR --------------------------------- //
+
+    function AddDropdownTacGia(value = -1) {
+        $("#listTacGia").append(GenerateRowTacGia('dropdownTacGia', tacGiaCount, 'AddDropdownTacGia()', 'DeleteTacGia(' + tacGiaCount + ')'));
+        PopulateDropdown('/Staff/DropdownAuthor', 'dropdownTacGia', tacGiaCount, value);
+        arrayTacGia.push("dropdownTacGia" + tacGiaCount);
+        tacGiaCount++;
+    }
+
+    function DeleteTacGia(index) {
+        if (arrayTacGia.length > 0) {
+            $("#rowdropdownTacGia" + index).remove();
+
+            var deleteIndex = arrayTacGia.indexOf('dropdownTacGia' + index);
+            if (deleteIndex != -1) {
+                arrayTacGia.splice(deleteIndex, 1);
+            }
+        }
+    }
+
+    function GenerateForSubmit() {
+        var rows = '';
+        for (i = 0; i < storeTacGias.length; i++) {
+            rows = rows + '<input name="Details[' + i + '].AuthorId" value="' + storeTacGias[i] + '" class="inputFile">'
+        }
+        $("#finalSubmit").html(rows);
+    }
+
+    function GetStoreTacGias() {
+        $.ajax({
+            url: '/Staff/GetStoreAuthor',
+            type: 'GET',
+            datatype: 'json',
+            success: function (data) {
+                return data;
+            },
+            error: function (data) {
+                return data;
+            }
+        });
+    }
+
+    function ConfirmModalTacGia() {
+        $("#modalTacGia").modal('hide');
+
+        var inputTacGiaValue = '';
+        storeTacGias = [];
+
+        for (i = 0; i < arrayTacGia.length; i++) {
+            var flag = true;
+            for (j = 0; j < storeTacGias.length; j++) {
+                if ($('#' + arrayTacGia[i]).val() == storeTacGias[j]) {
+                    flag = false;
+                    break;
+                }
+            }
+
+            if (flag == true) {
+                storeTacGias.push($('#' + arrayTacGia[i]).val());
+                inputTacGiaValue += ' [' + $('#' + arrayTacGia[i]).find(':selected').text() + '] ';
+            }
+        }
+        $('#inputTacGia').val(inputTacGiaValue);
+        ClearArrayTacGia();
+    }
+
+    function DeclineModalTacGia() {
+        $("#modalTacGia").modal('hide');
+
+        ClearArrayTacGia();
+    }
+
+    function ShowModalTacGia() {
+        for (i = 0; i < storeTacGias.length; i++) {
+            AddDropdownTacGia(storeTacGias[i]);
+        }
+        $('#modalTacGia').modal({ backdrop: 'static', keyboard: false });
+    }
+
+    function ClearArrayTacGia() {
+        for (i = 0; i < arrayTacGia.length; i++) {
+            $("#row" + arrayTacGia[i]).remove();
+        }
+        arrayTacGia = [];
+    }
+
+</script>
+
+
+

@@ -1,0 +1,181 @@
+﻿@model BookStore.Models.Order
+@using System.Globalization;
+@{
+    Layout = null;
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body {
+            height: auto;
+            width: 210mm;
+            margin-left: auto;
+            margin-right: auto;
+            background-image: url("/Assets/images/home/map.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            font-family: Tahoma
+        }
+
+        div.solid {
+            border-style: groove;
+            border-color: blue;
+            margin: 5mm;
+            border-radius: 3mm
+        }
+
+        div.solid-bottom {
+            border-bottom-style: groove;
+            border-color: blue;
+        }
+
+        div.text-center {
+            text-align: center;
+        }
+
+        table, th, td {
+            border: 1px dashed darkblue;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hoá đơn thanh toán</title>
+</head>
+<body>
+    <div class="solid">
+        <div class="solid-bottom text-center">
+            <h2 style="margin-top:5px;margin-bottom:5px">@ViewBag.Name</h2>
+            <p style="margin-top:0px;margin-bottom:5px">@ViewBag.Address</p>
+        </div>
+        <div class="text-center">
+            <h4 style="margin-top:5px;margin-bottom:5px">Hoá đơn bán hàng</h4>
+            Ngày @Model.CreatedAt.ToString("dd-MM-yyyy")
+            <br />Mã đơn hàng: @Model.ID
+        </div>
+
+        <table style="margin:5px">
+            <thead>
+                <tr style="height:10mm">
+                    <th style="text-align:center;width:10mm">
+                        STT
+                    </th>
+                    <th style="text-align:center;width:65mm">
+                        Sản phẩm
+                    </th>
+                    <th style="text-align:center;width:20mm">
+                        Đơn vị tính
+                    </th>
+                    <th style="text-align:center;width:15mm">
+                        Số lượng
+                    </th>
+                    <th style="text-align:center;width:40mm">
+                        Đơn giá
+                    </th>
+                    <th style="text-align:center;width:50mm">
+                        Thành tiền
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int iter = 0;}
+                @foreach (var item in Model.OrderDetails)
+                {
+                    iter++;
+                    <tr>
+                        <td style="text-align:center">
+                            @iter
+                        </td>
+                        <td style="padding-left:2mm;padding-right:2mm;word-wrap:break-word">
+                            @item.Product.Name
+                        </td>
+                        <td style="text-align:center">
+                            @item.Product.Unit
+                        </td>
+                        <td style="text-align:center">
+                            @item.Quantity
+                        </td>
+                        <td style="text-align:end;padding-right:2mm">
+                            @(item.Product.Price.ToString("#,0", ci)) đ
+                        </td>
+                        <td style="text-align:end;padding-right:2mm">
+                            @(item.TotalAmount.ToString("#,0", ci)) đ
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <table style="margin:5px;border:hidden;border-collapse:unset">
+            <tr style="height:10mm">
+                <th style="text-align:center;width:110mm;border:hidden">
+                </th>
+                <th style="text-align:end;width:40mm;border:hidden">
+                    Tổng cộng:
+                </th>
+                <th style="text-align:end;width:50mm;border:hidden">
+                    <label style="margin:2mm">
+                        @(Model.TotalAmount.ToString("#,0", ci)) VND
+                    </label>
+                </th>
+            </tr>
+
+            <tr style="height:10mm;vertical-align:top">
+                <td style="text-align:center;width:110mm;border:hidden"></td>
+                <td style="width:0mm;border:hidden"></td>
+                <td style="text-align:end;width:90mm;border:hidden">
+                    <label style="margin:2mm;">
+                        <b>@ViewBag.StrMoney</b>
+                    </label>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="solid-bottom"></div>
+
+        <table style="margin:5px;border:hidden;border-collapse:unset">
+            <tr style="height:50mm;vertical-align:top">
+                <td style="text-align:center;width:90mm;border:hidden">
+                    @if (Model.AnonymousUserId != null)
+                    {<text>
+                            <br />Khách hàng
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <b>
+                                @(Model.AnonymousUser.LastName + " " + Model.AnonymousUser.FirstName)
+                            </b></text>
+                }
+                </td>
+                <td style="width:30mm;border:hidden"></td>
+                <td style="text-align:center;width:90mm;border:hidden">
+                    <br />Người thực hiện
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <b>
+                        @(Model.UserId == null ? "Không xác định" : (Model.User.LastName + " " + Model.User.FirstName))
+                    </b>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+</html>
+
+<script>
+    window.print();
+</script>

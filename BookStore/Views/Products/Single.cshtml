@@ -1,0 +1,363 @@
+﻿@model BookStore.Models.Product
+@using BookStore.Helpers;
+@using System.Globalization;
+
+@{
+    ViewBag.Title = Model.Name + " | Nhà sách AC";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            @Html.Partial("SideMenu")
+
+            <div class="col-lg-9 padding-right">
+                <div class="product-details">
+                    <!--product-details-->
+                    <div class="col-lg-5">
+                        <div id="panel_img" class="view-product">
+                            @if(Model.AvatarImage!= null) { <text>
+                            <img src="@HtmlExtensions.GetImagePath(Model.AvatarImage, this.Context)" alt="" style="height:100%;width:100%;object-fit:contain" onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';"/>
+                            </text>} else{<text>
+                            <img src="~/Assets/images/home/default-image.png" alt="" style="height:100%;width:100%;object-fit:contain" />
+                            </text>}
+                        </div>
+                    </div>
+                    <div id="panel_info" class="col-lg-7">
+                        <div class="product-information">
+                            <!--/product-information-->
+                            <h2>@Model.Name</h2>
+                            @*<p>Web ID: 1089772</p>*@
+                            <div><img src="~/Assets/images/product-details/rating.png" alt="" /></div>
+                            
+                            <span>
+                                <span>@(Model.Price.ToString("#,0.###", ci))</span>
+                                <span> đ</span>
+                            </span>
+                            
+                            <div style="margin-bottom:15px">
+                                <button type="button" onclick='updateCart("add", @Model.ID, event)' class="btn btn-fefault cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Thêm vào giỏ
+                                </button>
+                            </div>
+                            
+                            <p><b>Tình trạng tồn kho:</b> @HtmlExtensions.CheckStockState(Model.InStock)</p>
+                            <p><b>Trạng thái sản phẩm:</b> Mới</p>
+                            <p><b>Cân nặng:</b> @Model.Weight gram</p>
+                            @if (Model.Category.Type == BookStore.Models.ProductType.Sach)
+                            {
+                                <p><b>Kích thước:</b> @Model.Width x @Model.Height cm</p>
+                                <p><b>Số trang:</b> @Model.PageCount</p>
+                            }
+                            <p><b>
+                                @if(Model.Category.Type == BookStore.Models.ProductType.Sach)
+                                { 
+                                    <text>Nhà xuất bản: </text>
+                                }
+                                else
+                                {
+                                    <text>Nhà sản xuất: </text>
+                                }
+                                </b> @Model.Publisher.Name</p>
+                            <a href="" onclick="alert('Tính năng này sẽ được cập nhật sớm')"><img src="~/Assets/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+                        </div><!--/product-information-->
+                    </div>
+                </div><!--/product-details-->
+
+                <div class="category-tab shop-details-tab">
+                    <!--category-tab-->
+                    <div class="col-lg-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#details" data-toggle="tab">Mô tả</a></li>
+                            @if (Model.Category.Type == BookStore.Models.ProductType.Sach)
+                            {
+                                <li><a href="#companyprofile" data-toggle="tab">Thông tin nhà xuất bản</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="#companyprofile" data-toggle="tab">Thông tin nhà sản xuất</a></li>
+                            }
+                            @if(Model.Category.Type == BookStore.Models.ProductType.Sach)
+                            {
+                                <li><a href="#author" data-toggle="tab">Tác giả</a></li>
+                            }
+
+                            <li><a href="#related" data-toggle="tab">Liên quan</a></li>
+                            <li><a href="#reviews" data-toggle="tab">Đánh giá (5)</a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="details">
+                            <div class="col-lg-12">
+                                <p>
+                                    @Model.Description
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="companyprofile">
+                            <div class="col-lg-12">
+                                <p>
+                                    @if(!string.IsNullOrEmpty(Model.Publisher.Code))
+                                    { 
+                                        <text>Trang web: </text><a href="//@Model.Publisher.Code" target="_blank" rel="external">@Model.Publisher.Code</a><br />
+                                    }
+                                    @if(!string.IsNullOrEmpty(Model.Publisher.Email))
+                                    { 
+                                        <text>Email: </text><a href="mailto:@Model.Publisher.Email">@Model.Publisher.Email</a><br />
+                                    }
+                                    <br />@Model.Publisher.Description
+                                </p>
+                            </div>
+                        </div>
+
+                        @if(Model.Category.Type == BookStore.Models.ProductType.Sach)
+                            {
+                        <div class="tab-pane fade" id="author">
+                            <div class="col-lg-12">
+                                <p>
+                                    @if(Model.ProductDetails != null)
+                                    {
+                                        bool isFirst = true;
+                                        foreach(var relation in Model.ProductDetails)
+                                        {
+                                            if(isFirst)
+                                            {
+                                                isFirst = false;
+                                            }
+                                            else
+                                            {
+                                                <text>, </text>
+                                            }
+                                    <a href="/Home/Author?id=@relation.AuthorId">@relation.Author.Name</a>
+                                        }
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                            }
+
+                        <div class="tab-pane fade" id="related">
+                            <div class="col-lg-3">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="~/Assets/images/home/gallery1.jpg" alt="" />
+                                            <h2>$56</h2>
+                                            <p>Easy Polo Black Edition</p>
+                                            <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="~/Assets/images/home/gallery2.jpg" alt="" />
+                                            <h2>$56</h2>
+                                            <p>Easy Polo Black Edition</p>
+                                            <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="~/Assets/images/home/gallery3.jpg" alt="" />
+                                            <h2>$56</h2>
+                                            <p>Easy Polo Black Edition</p>
+                                            <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="~/Assets/images/home/gallery4.jpg" alt="" />
+                                            <h2>$56</h2>
+                                            <p>Easy Polo Black Edition</p>
+                                            <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="reviews">
+                            <div class="col-lg-12">
+                                <div>
+                                    <ul>
+                                        <li><a href=""><i class="fa fa-user"></i>AnPNT</a></li>
+                                        <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+                                        <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2017</a></li>
+                                    </ul>
+                                    <p>
+                                        Quyen sach nay that hay!!!!
+                                    </p>
+                                    <hr style="border-top: 2px solid #e79dfd" />
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li><a href=""><i class="fa fa-user"></i>AnPNT</a></li>
+                                        <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+                                        <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2017</a></li>
+                                    </ul>
+                                    <p>
+                                        Quyen sach nay that hay!!!!
+                                    </p>
+                                    <hr style="border-top: 2px solid #e79dfd"/>
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li><a href=""><i class="fa fa-user"></i>AnPNT</a></li>
+                                        <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+                                        <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2017</a></li>
+                                    </ul>
+                                    <p>
+                                        Quyen sach nay that hay!!!!
+                                    </p>
+                                    <hr style="border-top: 2px solid #e79dfd" />
+                                </div>
+                                <p><b>Write Your Review</b></p>
+
+                                <form action="#">
+                                    <span>
+                                        <input type="text" placeholder="Your Name" />
+                                        <input type="email" placeholder="Email Address" />
+                                    </span>
+                                    <textarea name=""></textarea>
+                                    <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
+                                    <button type="button" class="btn btn-default pull-right">
+                                        Submit
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!--/category-tab-->
+
+                <div class="recommended_items">
+                    <!--recommended_items-->
+                    <h2 class="title text-center">recommended items</h2>
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Assets/images/home/recommend1.jpg" alt="" />
+                                                <h2>$56</h2>
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Assets/images/home/recommend2.jpg" alt="" />
+                                                <h2>$56</h2>
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Assets/images/home/recommend3.jpg" alt="" />
+                                                <h2>$56</h2>
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Assets/images/home/recommend1.jpg" alt="" />
+                                                <h2>$56</h2>
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Assets/images/home/recommend2.jpg" alt="" />
+                                                <h2>$56</h2>
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Assets/images/home/recommend3.jpg" alt="" />
+                                                <h2>$56</h2>
+                                                <p>Easy Polo Black Edition</p>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div><!--/recommended_items-->
+
+            </div>
+        </div>
+    </div>
+
+    @*<script src="~/Assets/js/jquery.js"></script>
+    <script src="~/Assets/js/moment.js"></script>
+    <script src="~/Scripts/helper.js"></script>
+    <script src="~/Scripts/helper.js"></script>*@
+
+    <script>
+        $(document).ready(function () {
+            var infoHeight = $("#panel_info").height();
+            $("#panel_img").height(infoHeight);
+        });
+
+        function onSearch() {
+            if ($("#search_box").val())
+                window.location = '/Search/Index?key=' + $("#search_box").val();
+            else
+                alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
+        }
+    </script>
+</section>
+
+

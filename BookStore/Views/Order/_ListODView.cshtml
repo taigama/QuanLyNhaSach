@@ -1,0 +1,36 @@
+﻿@model  IEnumerable<BookStore.Models.OrderDetail>
+@using BookStore.Models;
+@using System.Globalization;
+
+@{
+    string unit = "";
+    int iter = 0;
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+@foreach (var item in Model)
+{
+    switch (item.Product.Unit)
+    {
+        case UnitType.Cuốn:
+            unit = "Cuốn";
+            break;
+        case UnitType.Cây:
+            unit = "Cây";
+            break;
+        case UnitType.Cái:
+            unit = "Cái";
+            break;
+        case UnitType.Lốc:
+            unit = "Lốc";
+            break;
+    }
+    <tr>
+        <td class="col-md-1">@(++iter)</td>
+        <td class="col-md-3">@item.Product.Name</td>
+        <td class="col-md-1">@unit</td>
+        <td class="col-md-1">@item.Quantity</td>
+        <td class="col-md-3" style="text-align:end">@item.Product.Price.ToString("#,0", ci) đ</td>
+        <td class="col-md-3" style="text-align:end">@item.TotalAmount.ToString("#,0", ci) đ</td>
+    </tr>
+}
