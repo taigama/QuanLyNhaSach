@@ -1,12 +1,18 @@
 # QuanLyNhaSach - website
-đây là project của nhóm các sinh viên trường Đại học Công nghệ Thông tin - Đại học Quốc gia thành phố Hồ Chí Minh
+_____________
+Đại học Quốc gia thành phố Hồ Chí Minh
+-----------------
+Trường Đại học Công nghệ Thông tin
+-----------------
+Công nghệ .NET, nhóm 5
+- Đây là project của nhóm các sinh viên 
 
 ## Công nghệ sử dụng:
 - ASP.NET MVC5
 - Entity Framework 6.2 (Code first)
 
 ## Website:
-- http://bookstoreuit.azurewebsites.net/
+- http://quanlynhasach.azurewebsites.net/
 
 ## Account
 - admin : daylapass
