@@ -6,9 +6,11 @@ using System.Web.Mvc;
 
 namespace BookStore.Controllers
 {
+    /// <summary>
+    /// contain short-writing methods
+    /// </summary>
     public class BaseController : Controller
     {
-
         /// <summary>
         /// for short-writing
         /// </summary>
