@@ -154,6 +154,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Models\AuthorVM.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\ImportDetail.cs" />
+    <Compile Include="Models\JResult.cs" />
     <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Order.cs" />
@@ -320,6 +322,7 @@
     <Content Include="Assets\font-awesome\scss\_spinning.scss" />
     <Content Include="Assets\font-awesome\scss\_stacked.scss" />
     <Content Include="Assets\font-awesome\scss\_variables.scss" />
+    <Content Include="ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\quanlynhasach - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\taigama-bookstore - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -397,6 +400,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\images\cart\" />
     <Folder Include="UploadFiles\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

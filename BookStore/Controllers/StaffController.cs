@@ -17,7 +17,7 @@ namespace BookStore.Controllers
     /// <summary>
     /// main class for Dashboard handling
     /// </summary>
-    public class StaffController : Controller
+    public class StaffController : BaseController
     {
         Data.BookStoreContext db = new Data.BookStoreContext();
         JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
@@ -241,14 +241,7 @@ namespace BookStore.Controllers
         {
             if(!User.IsInRole("Admin"))
             {
-                return Json(
-                    new
-                    {
-                        success = false
-                        ,
-                        text = "Bạn không có quyền sử dụng chức năng này!"
-                    }
-                    , JsonRequestBehavior.AllowGet);
+                return JResponse(true, "Bạn không có quyền sử dụng chức năng này!");
             }
 
             foreach (var cate in db.Categories)
@@ -261,14 +254,7 @@ namespace BookStore.Controllers
             }
             db.SaveChanges();
 
-            return Json(
-                new
-                {
-                    success = true
-                ,
-                    text = "Cập nhật số lượng loại sản phẩm thành công!"
-                }
-            , JsonRequestBehavior.AllowGet);
+            return JResponse(true, "Cập nhật số lượng loại sản phẩm thành công!");
         }
 
         [HttpGet]

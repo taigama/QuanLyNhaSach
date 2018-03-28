@@ -43,6 +43,22 @@ namespace BookStore.Data
     /// </summary>
     public class JsonNetResult : JsonResult
     {
+        public static JsonNetResult ParseJson(object data, int depth = 1
+            , ReferenceLoopHandling referenceLoopHandling = ReferenceLoopHandling.Ignore)
+        {
+            var result = new JsonNetResult
+            {
+                Data = data,
+                JsonRequestBehavior = System.Web.Mvc.JsonRequestBehavior.AllowGet,
+                Settings = {
+            ReferenceLoopHandling = referenceLoopHandling,
+            MaxDepth = depth// product, productdetail, author
+                }
+            };
+            return result;
+        }
+
+
         public JsonNetResult()
         {
             Settings = new JsonSerializerSettings
