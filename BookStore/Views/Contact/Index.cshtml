@@ -75,6 +75,7 @@
 <script type="text/javascript" src="~/Assets/js/gmaps.js"></script>
 
 <script type="text/javascript">
+    // Google Maps
     function initMap() {
         var uluru = { lat: 10.870228, lng: 106.803718 };
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -87,6 +88,7 @@
         });
     }
 
+    // navigate sang trang tìm kiếm
     function onSearch() {
         if ($("#search_box").val())
             window.location = '/Search/Index?key=' + $("#search_box").val();

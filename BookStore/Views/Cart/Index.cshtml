@@ -83,6 +83,7 @@
 <script type="text/javascript" src="~/Assets/js/gmaps.js"></script>
 
 <script type="text/javascript">
+    // init cái Google Maps
     function initMap() {
         var uluru = { lat: 10, lng: 106};
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -101,10 +102,24 @@
     
 
     $(document).ready(function () {
+        // hàm này ở header, gọi để populate cart ở nửa page bên trái
         getCart("main");
-        populateCheckoutInfo();
-    })
 
+        // populate dữ liệu khách hàng, trong trường hợp khách hàng đã nhập thông tin trước đó rồi
+        populateCheckoutInfo();
+    })// p/s: giỏ hàng và khách hàng được xử lý hoàn toàn theo cookie
+    // tức là khách hàng "Anonymous" không cần đăng nhập, chỉ cần mở web browser lên
+    // miễn là còn dùng cùng browser, cùng 1 máy, và không xoá cookie thì cookie sẽ còn mãi
+    // => ta thêm hàng vào giỏ hàng, tắt máy đi rồi mở lại, hàng vẫn nằm ở giỏ
+    // => người dùng không cần phải đăng nhập lại
+
+    // có 1 số trang xử lý theo session
+        //, cái này khác cookie ở chỗ là mở tab khác là session khác
+        //, hoặc tắt browser đi mở lại thì sẽ có 1 session mới
+    // web nhà xuất bản dh quốc gia, không dùng cookie.
+        // Đối với khách không cần đăng nhập, mỗi lần mua lại phải nhập lại thông tin
+
+    // populate dữ liệu khách hàng, trong trường hợp thông tin khách hàng đã nằm trong hệ thống
     function populateCheckoutInfo() {
 
         $.ajax({
@@ -143,7 +158,7 @@
     }
 
     
-
+    // mua hàng
     function checkout() {
         updateCustomer();
 
@@ -154,7 +169,7 @@
             success: function (response) {
                 if (response.success == true) {
                     alert(response.text);
-                    window.location = '/Home/';
+                    window.location = '/Home/';// mua hàng thành công => về trang chủ
                 }
                 else {
                     alert(response.text);
@@ -166,7 +181,7 @@
         }); 
     }
 
-
+    // cập nhật thông tin khách hàng vào hệ thống
     function updateCustomer() {
 
         var firstName = $('#first_name').val();
@@ -195,6 +210,8 @@
         }); 
     }
 
+    // ------------------------------------------------------------------------
+    // bind các event thêm, bớt, bỏ sản phẩm trong giỏ hàng
     $(".cart-body").on("click", "tr>td>div>.cart_quantity_up", function (event) {
         event.preventDefault();
         var productID = $(this).parent().children('p').text();
@@ -213,6 +230,7 @@
         updateCart("delete", productID, event)
     });
 
+    // hàm tìm kiếm, navigate sang trang tìm kiếm
     function onSearch() {
         if ($("#search_box").val())
             window.location = '/Search/Index?key=' + $("#search_box").val();
@@ -221,6 +239,7 @@
     }
 
 </script>
+@* --- load bản đồ --- *@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfT4iQDERkZtWZC0YjWCUFh4pM6nJVHkM&callback=initMap">
 </script>

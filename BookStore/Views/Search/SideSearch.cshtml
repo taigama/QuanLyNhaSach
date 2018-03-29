@@ -84,6 +84,7 @@
 <script src="~/Assets/js/bootstrap-select.min.js"></script>
 <script src="~/Scripts/helper.js"></script>
 <script>
+    // bind event search theo giá tiền
     $("#ex2").slider({}).on("slideStop", function (e) {
         onSearch()
     });
@@ -92,10 +93,12 @@
         @*//listAuthors();
         //listCategories();*@
 
-
+        // bind event search theo tác giả
         $("#ddl_author").change(function () {
             onSearch();
         });
+
+        // bind event search theo danh mục
         $("#ddl_category").change(function () {
             onSearch();
         });
@@ -148,6 +151,8 @@
     //alert($("input:radio[name='gender']:checked").val() + ' ' +
     //    $("input:radio[name='nogender']:checked").val());
     //}*@
+
+    // bind event search theo danh mục (mấy cái mục bên dưới dropdown-box)
     $("#list-category").on("click", "li>a", function (event) {
         event.preventDefault();
 
@@ -158,6 +163,7 @@
         onSearch();
     });
 
+    // bind event search theo tác giả (mấy cái mục bên dưới dropdown-box)
     $("#list-author").on("click", "li>a", function (event) {
         event.preventDefault();
 

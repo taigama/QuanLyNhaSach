@@ -25,7 +25,8 @@ namespace BookStore.Controllers
         /// A list products by category [view]
         /// </summary>
         public ActionResult Category(int? id)
-        {
+        {// trang xem danh sách các sản phẩm theo danh mục
+
             if (id == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -42,8 +43,11 @@ namespace BookStore.Controllers
                 });
             }
 
+            // dữ liệu cho trang
             ViewData["CategoryName"] = category.Name;
             ViewData["Products"] = category.Products.ToList();
+
+            // dữ liệu cho side menu
             ViewData["Categories"] = db.Categories.ToList();
             ViewData["Authors"] = db.Authors.ToList();
             return View();
@@ -54,7 +58,8 @@ namespace BookStore.Controllers
         /// </summary>
         [HttpGet]
         public ActionResult Single(int? id)
-        {
+        {// trang xem 1 sản phẩm
+
             if(id == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -71,8 +76,11 @@ namespace BookStore.Controllers
                 });
             }
 
+            // dữ liệu cho side menu
             ViewData["Categories"] = db.Categories.ToList();
             ViewData["Authors"] = db.Authors.ToList();
+
+            // dữ liệu cho trang
             return View(product);
         }
 
@@ -81,7 +89,7 @@ namespace BookStore.Controllers
         /// </summary>
         [HttpGet]
         public ActionResult DropDownProduct()
-        {
+        {// tạo danh sách key/value tên sản phẩm (dùng trong dropdownlist)
             var dict = db.Products.ToDictionary(pro => pro.ID, pro => pro.Name);
 
             var list = dict.ToList();
@@ -95,7 +103,8 @@ namespace BookStore.Controllers
         /// <param name="depth">detail level (data depth included to json)</param>
         [HttpGet]
         public ActionResult GetProduct(int id, int depth)
-        {
+        {// trả về thông tin 1 sản phẩm bằng json
+
             var productYour = db.Products.Find(id);
             if (productYour == null)
             {

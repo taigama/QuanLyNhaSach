@@ -67,12 +67,15 @@
 
 
 <script>
+    // gọi SearchController::Search()
     function onSearch() {
+        // lấy giá trị để truyền vào parameter
         var text = $('#search_box').val();
         var author = $('#ddl_author').val();
         var category = $('#ddl_category').val();
         var costBegin = $('#ex2').val().split(',')[0];
         var costEnd = $('#ex2').val().split(',')[1]; //$('#cost_end').val()
+
         $.ajax({// lấy dữ liệu từ link này
             url: '/Search/Search/',
             type: 'GET',
@@ -91,6 +94,7 @@
                 }
 
                 //var items = '';
+                // đổ dữ liệu ra page
                 $('#search_result').html("");
                 $.each(data, function (i, item) {
                     $('#search_result').append(genItem(item));
@@ -110,6 +114,8 @@
         });
 
     }
+
+    // tạo ra 1 item kết quả search (1 item cuốn sách)
     function genItem(item) {
         var content =
             '<div class="col-lg-3">\

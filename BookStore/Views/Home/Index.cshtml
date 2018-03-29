@@ -108,6 +108,7 @@
         showPopUp();
     })
 
+    // tạo cookie với tên cname, giá trị cvalue, và thời gian hết hạn exdays
     function setCookie(cname, cvalue, exdays) {
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -130,20 +131,26 @@
         return "";
     }
 
+    // hiển thị popup với nội dung: đọc alert() bên dưới đê
     function showPopUp() {
         var cookie = getCookie("first_view");
+        // nếu không có cookie này => hiển thị popup & tạo cookie
         if (!cookie) {
             alert("Đây là website đồ án môn học. Bạn có thể sử dụng các tính năng của website này, nhưng mọi hàng hoá ở đây chỉ là ảo.\n\nBản quyền thuộc trường Đại học Công nghệ thông tin - Đại học Quốc gia thành phố Hồ Chí Minh.");
+
+            // tạo cookie này với thời gian sống là 1 ngày (mỗi ngày hiện 1 lần)
             setCookie("first_view", 1, 1);
         }
     }
 
+    // nút "Thêm vào giỏ" của các item sản phẩm
     $("#feature-items").on("click", ".add-to-cart", function (event) {
         event.preventDefault();
         var selected_product = $(this).children('p').text();
         updateCart("add", selected_product, event)
     });
 
+    // onSearch được gọi từ searchbox trên header
     function onSearch() {
         if ($("#search_box").val())
             window.location = '/Search/Index?key=' + $("#search_box").val();

@@ -25,9 +25,11 @@ namespace BookStore.Controllers
         public ActionResult Index()
         {
             //The side menu data
-            ViewData["Products"] = db.Products.ToList(); 
             ViewData["Categories"] = db.Categories.ToList();
             ViewData["Authors"] = db.Authors.ToList();
+
+            // main page data
+            ViewData["Products"] = db.Products.ToList();
 
             return View();
         }
@@ -54,8 +56,11 @@ namespace BookStore.Controllers
                 });
             }
 
+            //The side menu data
             ViewData["Categories"] = db.Categories.ToList();
             ViewData["Authors"] = db.Authors.ToList();
+
+            // main page data
             return View(author);
         }
 
@@ -64,7 +69,9 @@ namespace BookStore.Controllers
         /// </summary>
         [HttpGet]
         public ActionResult DropDownUser()
-        {
+        {// tạo dữ liệu key/value để đổ vào dropdownlist
+
+
             var dictUser = db.Users.ToDictionary(us => us.ID, us => us.FirstName);
 
             List<KeyValuePair<int, string>> result = new List<KeyValuePair<int, string>>
@@ -84,7 +91,8 @@ namespace BookStore.Controllers
         /// </summary>
         [HttpGet]
         public ActionResult Error(string errorCode, string errorDetail)
-        {
+        {// trang khác redirect qua đây
+
             ViewBag.ErrorCode = errorCode;
             ViewBag.ErrorDetail = errorDetail;
             return View();

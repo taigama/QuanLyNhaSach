@@ -15,7 +15,7 @@
 
             <div class="col-lg-9 padding-right" style="margin-top:10px">
                 <div class="product-details">
-                    <!--product-details-->
+                    <!--author-details-->
                     <div class="col-lg-5">
                         <div id="panel_img" class="view-product">
                             @if(Model.Image != null) { <text>
@@ -27,7 +27,7 @@
                     </div>
                     <div id="panel_info" class="col-lg-7">
                         <div class="product-information">
-                            <!--/product-information-->
+                            <!--/author-information-->
                             <h2>@Model.Name</h2>
                             @*<p>Web ID: 1089772</p>*@
                             <div><img src="~/Assets/images/product-details/rating.png" alt="" /></div>
@@ -39,9 +39,9 @@
                             <p><b>Mô tả:</b></p>
                             <p> @Model.Description </p>
                             <a href="" onclick="alert('Tính năng này sẽ được cập nhật sớm')"><img src="~/Assets/images/product-details/share.png" class="share img-responsive" alt="" /></a>
-                        </div><!--/product-information-->
+                        </div><!--/author-information-->
                     </div>
-                </div><!--/product-details-->
+                </div><!--/author-details-->
 
                 @if((Model.Books != null) && (Model.Books.Count>0))
                 {// liệt kê sách của tác giả này
@@ -146,10 +146,12 @@
 
     <script>
         $(document).ready(function () {
+            // cheat để cho cái hình tác giả hiển thị đẹp
             var infoHeight = $("#panel_info").height();
             $("#panel_img").height(infoHeight);
         });
 
+        // search từ searchbox trên header
         function onSearch() {
             if ($("#search_box").val())
                 window.location = '/Search/Index?key=' + $("#search_box").val();

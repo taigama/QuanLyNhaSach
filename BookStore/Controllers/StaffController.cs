@@ -32,17 +32,23 @@ namespace BookStore.Controllers
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult Index()
         {
+            // trang dashboard có hiển thị mấy cái số lượng này
             ViewBag.CountProduct = db.Products.Count();
             ViewBag.CountOrder = db.Orders.Count();
+
+
             if (User.IsInRole("Admin"))
             {
+                // dùng trong hiển thị Admin_Layout
                 ViewBag.IsAdmin = true;
             }
             else
             {
+                // có 1 sự phân biệt đối xử không hề nhẹ giữa admin và nhân viên quèn
                 ViewBag.IsAdmin = false;
             }
 
+            // thông tin người dùng (nhân viên) cũng cần trong layout, và 1 số trang trong /Staff/
             ViewBag.User = db.Users.Where(u => u.Username == User.Identity.Name).FirstOrDefault();
             return View();
         }
@@ -59,6 +65,7 @@ namespace BookStore.Controllers
             Models.User user = db.Users.Where(u => u.Username == User.Identity.Name).FirstOrDefault();
             ViewBag.User = user;
             List<Order> orders;
+            // cách hiển thị danh sách hoá đơn, cũng phân biệt đối xử
             if(User.IsInRole("Admin"))
             {
                 ViewBag.IsAdmin = true;
@@ -91,7 +98,7 @@ namespace BookStore.Controllers
         [HttpGet]
         [Authorize(Roles = "Admin,ThuNgan")]
         public ActionResult Cashier(int? Id)
-        {
+        {// trang thu ngân
             if (User.IsInRole("Admin"))
             {
                 ViewBag.IsAdmin = true;
@@ -141,6 +148,9 @@ namespace BookStore.Controllers
                     }
                 }
 
+                // cookie đơn hàng hiện tại, nhằm giúp nhân viên tiếp tục đơn hàng nếu lỡ bấm F5
+                    //, hay mất mạng tạm thời, hay cúp điện.
+                    //, dĩ nhiên phải có cả điện lẫn mạng khi thao tác thanh toán rồi
                 Response.Cookies["order_id"].Value = order.ID.ToString();
                 Response.Cookies["order_id"].Expires = DateTime.Now.AddDays(3);
                 ViewBag.id = Id;

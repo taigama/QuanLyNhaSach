@@ -14,6 +14,7 @@ namespace BookStore.Controllers
         // GET: Contact
         public ActionResult Index()
         {
+            // không có side menu => không cần dữ liệu cho side menu
             return View();
         }
     }

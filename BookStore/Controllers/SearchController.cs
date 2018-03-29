@@ -18,7 +18,8 @@ namespace BookStore.Controllers
         /// A search page [view]
         /// </summary>
         public ActionResult Index(string key, int? costBegin, int? costEnd)
-        {
+        {// từ trang khác, chuyển trang qua Search
+
             IQueryable<Product> products;
             if (!string.IsNullOrEmpty(key))
             {
@@ -38,9 +39,14 @@ namespace BookStore.Controllers
                 products = products.Where(p => p.CostPrice <= costEnd);
             }
 
+            // keyword bỏ vào search box (cho người dùng biết họ đã nhập cái gì)
             ViewData["key"] = key;
+
+            // dữ liệu đổ vào Side search
             ViewData["Categories"] = db.Categories.ToList();
             ViewData["Authors"] = db.Authors.ToList();
+
+            // sản phẩm của kết quả search từ trang khác
             return View(products.ToList());
         }
 
@@ -52,7 +58,9 @@ namespace BookStore.Controllers
             string key
             , int? authorId, int? categoryId
             , int? costBegin, int? costEnd)
-        {
+        {// search từ trang search, gọi lệnh search cùng các filter parameter
+
+
             if(costBegin!= null)
             {
                 costBegin *= 1000;
@@ -96,7 +104,7 @@ namespace BookStore.Controllers
                 }
                 catch (Exception)
                 {
-                    return Json("Azure không cho: products = tmp.AsQueryable()", JsonRequestBehavior.AllowGet);
+                    return Json("lỗi không xác định", JsonRequestBehavior.AllowGet);
                 }
             }
 
@@ -121,6 +129,7 @@ namespace BookStore.Controllers
                     return Json(new List<Product>(), JsonRequestBehavior.AllowGet);
             }
 
+            // trả về json dữ liệu sau khi filter
             var result = new JsonNetResult
             {
                 Data = products.ToList(),

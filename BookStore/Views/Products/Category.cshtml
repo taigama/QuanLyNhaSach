@@ -72,13 +72,14 @@
 <script src="~/Scripts/helper.js" type="text/javascript"></script>
 <script>
     
-
+    // click "Thêm vào giỏ"
     $("#category-items").on("click", ".add-to-cart", function (event) {
         event.preventDefault();
         var selected_product = $(this).children('p').text();
         updateCart("add", selected_product, event)
     });
 
+    // ô tìm kiếm ở header
     function onSearch() {
         if ($("#search_box").val())
             window.location = '/Search/Index?key=' + $("#search_box").val();

@@ -68,7 +68,7 @@
                         <input id="search_box" type="search" placeholder="Tìm kiếm"
                                onkeypress="onKeypressSearch(event)" 
                                @if(!string.IsNullOrEmpty(ViewData["key"] as string))
-                               {
+                               {// nếu có key thì hiển thị ra đây
                                <text>
                                value="@(ViewData["key"] as string)"                               
                                </text>
@@ -114,7 +114,8 @@
     $(document).ready(function () {
         getCart("preview");
     })
-    
+
+    // đổ dữ liệu ra CartView, phải di chuột qua phần Cart của Header mới thấy
     function getCart(viewType) {
         $.ajax({
             url: '/Cart/GetCart',
@@ -130,9 +131,12 @@
         })
     }
 
+    // populate các dòng của cart
     function populateOrderDetails(data, viewType) {
         var rows = '';
         var iurl;
+
+        // loại view gắn trên cart của header
         if (viewType == "preview") {
             $.each(data, function (i, item) {
                 
@@ -169,6 +173,8 @@
             });
             $(".cart-body-prv").html(rows);
         }
+
+        // loại view hiển thị ở trang Cart (click vào "cart" của header để navigate qua trang cart)
         else if (viewType == "main") {
             $.each(data, function (i, item) {
                 if (item.Product.AvatarImage) {
@@ -207,25 +213,30 @@
         }
 
     }
+
+    // bind event nút "+" trên cart
     $(".cart-body-prv").on("click", "tr>td>div>.cart_quantity_up", function (event) {
         event.preventDefault();
         var productID = $(this).parent().children('p').text();
         updateCart("add", productID, event)
     });
 
+    // bind event nút "-" trên cart
     $(".cart-body-prv").on("click", "tr>td>div>.cart_quantity_down", function (event) {
         event.preventDefault();
         var productID = $(this).parent().children('p').text();
         updateCart("minus", productID, event)
     });
 
+    // bind event nút "x" trên cart
     $(".cart-body-prv").on("click", "tr>td>.cart_quantity_delete", function (event) {
         event.preventDefault();
         var productID = $(this).parent().children('p').text();
         updateCart("delete", productID, event)
     });
 
-
+    // mỗi khi thêm, bớt hoặc xoá sản phẩm trong cart,
+    // thông tin này được cập nhật vào Cart(của khách hàng) trên hệ thống ngay lập tức
     function updateCart(action, productID, event) {
         event.preventDefault();
         var actionurl = ''
@@ -272,6 +283,10 @@
         }
 
     });*@
+
+    // 1 số browser hỗ trợ html keyword 'onsearch' cho searchbox, nhưng 1 số browser thì không
+        // nên ta không sử dụng 'onsearch' mà dùng onkeypressed, và bắt phím 'enter' thủ công
+    // được gọi từ search_box
     function onKeypressSearch(e) {
         var keynum;
 
@@ -281,7 +296,9 @@
             keynum = e.which;
         }
 
+        // phím enter
         if (keynum == 13) {
+            // hàm này nằm ở page (e.g. Index, Author, etc.)
             onSearch();
         }
     }
