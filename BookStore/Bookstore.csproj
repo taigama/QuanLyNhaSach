@@ -161,6 +161,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\Search1Controller.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -201,12 +202,14 @@
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\font-awesome.min.css" />
     <Content Include="Assets\css\input-image.css" />
+    <Content Include="Assets\css\jquery-ui1.css" />
     <Content Include="Assets\css\main.css" />
     <Content Include="Assets\css\prettyPhoto.css" />
     <Content Include="Assets\css\price-range.css" />
     <Content Include="Assets\css\responsive.css" />
     <Content Include="Assets\css\sb-admin-2.min.css" />
     <Content Include="Assets\css\scrolltable.css" />
+    <Content Include="Assets\css\style.css" />
     <Content Include="Assets\css\toast.css" />
     <Content Include="Assets\font-awesome\css\font-awesome.css" />
     <Content Include="Assets\font-awesome\css\font-awesome.min.css" />
@@ -548,6 +551,11 @@
     <Content Include="Views\Staff\ListImport.cshtml" />
     <Content Include="Views\Staff\AddImport.cshtml" />
     <Content Include="Views\Staff\Finance.cshtml" />
+    <Content Include="Views\Search1\Index.cshtml" />
+    <Content Include="Views\Search1\SideSearch.cshtml" />
+    <Content Include="Views\Shared\Header1.cshtml" />
+    <Content Include="Views\Shared\Footer1.cshtml" />
+    <Content Include="Views\Shared\_MainLayout1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

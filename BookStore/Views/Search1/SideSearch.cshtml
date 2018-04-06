@@ -1,0 +1,177 @@
+﻿@{ 
+    IEnumerable<BookStore.Models.Category> Categories =
+        (ViewData["Categories"] as IList<BookStore.Models.Category>).OrderByDescending(cate=>cate.NumberOfProducts).Take(10);
+    IEnumerable<BookStore.Models.Author> Authors =
+        (ViewData["Authors"] as IList<BookStore.Models.Author>).OrderByDescending(a => a.NumberOfBooks).Take(10);
+}
+
+<div class="col-lg-3">
+    <div class="left-sidebar">
+
+        <!-- author -->
+        <h2 style="margin-top:20px;margin-bottom:10px">Tác giả</h2>
+        <select id="ddl_author" name="ddl_author"
+                class="selectpicker" data-live-search="true"
+                data-width="100%" data-size="5">
+            <option value="">Toàn bộ</option>
+            @foreach (var item in Authors)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+        </select>
+        <div class="brands-name" style="height:100%">
+            <div id="list-author">
+                <ul class="nav nav-pills nav-stacked">
+                    @foreach (var item in Authors)
+                    {
+                        <li>
+                            <a href="#">
+                                <span class="pull-right">(@item.NumberOfBooks)</span>
+                                <b>@item.Name</b>
+                                <p hidden>@item.ID</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- category -->
+        <h2 style="margin-top:20px;margin-bottom:10px">Danh mục</h2>
+        <select id="ddl_category" name="ddl_category"
+                class="selectpicker" data-live-search="true"
+                data-width="100%" data-size="5">
+            <option value="">Toàn bộ</option>
+            @foreach (var item in Categories)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+        </select>
+        <div class="brands-name" style="height:100%">
+            <div id="list-category">
+                <ul class="nav nav-pills nav-stacked">
+                    @foreach (var item in Categories)
+                    {
+                        <li>
+                            <a href="#">
+                                <span class="pull-right">(@item.NumberOfProducts)</span>
+                                <b>@item.Name</b>
+                                <p hidden>@item.ID</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="price-range">
+            <h2 style="margin-top:20px;margin-bottom:5px">Tầm giá</h2>
+            <div class="text-center">
+                <input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="2000" data-slider-step="10" data-slider-value="[0,2000]" />
+                <br /><b class="pull-left"> 0 VND</b> <b class="pull-right">2000 k</b>
+            </div>
+        </div><!--/price-range-->
+    </div><!--/price-range-->
+</div>
+
+
+<link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Assets/css/bootstrap-select.min.css" rel="stylesheet">
+
+@*<script src="~/Assets/js/jquery.js" type="text/javascript"></script>*@
+<script src="~/Assets/js/price-range.js" type="text/javascript"></script>
+<script src="~/Assets/js/bootstrap-select.min.js"></script>
+<script src="~/Scripts/helper.js"></script>
+<script>
+    // bind event search theo giá tiền
+    $("#ex2").slider({}).on("slideStop", function (e) {
+        onSearch()
+    });
+    // lúc đầu show web
+    $(document).ready(function () {
+        @*//listAuthors();
+        //listCategories();*@
+
+        // bind event search theo tác giả
+        $("#ddl_author").change(function () {
+            onSearch();
+        });
+
+        // bind event search theo danh mục
+        $("#ddl_category").change(function () {
+            onSearch();
+        });
+        //bindSlider();
+    })
+
+    @*function listAuthors() {
+        $.ajax({
+            url: '/Products/DropdownAuthor',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                populateStdDropdown(data, "ddl_author");
+            },
+            error: function (err) {
+                alert(err.responseJSON);
+                document.write(err.responseText);
+            }
+        })
+    }
+
+
+    function listCategories() {
+        $.ajax({
+            url: '/Products/DropdownCategory',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                populateStdDropdown(data, "ddl_category");
+            },
+            error: function (err) {
+                alert(err.responseJSON);
+                document.write(err.responseText);
+            }
+        })
+    }
+
+    //function bindSlider() {
+    //    var originalVal;
+    //    $('.slider-track').on('slideStart', function (ev) {
+    //        originalVal = $('#sl2').data('slider').getValue();
+    //    });
+    //    $('.slider-track').on('slideStop', function (ev) {
+    //        var newVal = $('#sl2').data('slider').getValue();
+    //        if (originalVal != newVal) {
+    //            alert('Value Changed!');
+    //        }
+    //    });
+    // get value of radios
+    //alert($("input:radio[name='gender']:checked").val() + ' ' +
+    //    $("input:radio[name='nogender']:checked").val());
+    //}*@
+
+    // bind event search theo danh mục (mấy cái mục bên dưới dropdown-box)
+    $("#list-category").on("click", "li>a", function (event) {
+        event.preventDefault();
+
+        var selected_cate = $(this).children('p').text();
+        $('#ddl_category').val(selected_cate);
+        $('#ddl_category').selectpicker('refresh');
+
+        onSearch();
+    });
+
+    // bind event search theo tác giả (mấy cái mục bên dưới dropdown-box)
+    $("#list-author").on("click", "li>a", function (event) {
+        event.preventDefault();
+
+        var selected_author = $(this).children('p').text();
+        $('#ddl_author').val(selected_author);
+        $('#ddl_author').selectpicker('refresh');
+
+        onSearch();
+    });
+
+</script>

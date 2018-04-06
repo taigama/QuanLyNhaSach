@@ -1,0 +1,175 @@
+﻿@model IEnumerable<BookStore.Models.Product>
+@using System.Globalization;
+@{
+    ViewBag.Title = "Tìm kiếm sản phẩm | Nhà sách AC";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            @*@Html.Partial("SideSearch")*@
+            <div id="search_result" class="col-lg-9 padding-right">
+                <div class="col-md-3 product-men">
+                    <div class="product-chr-info chr">
+                        <div class="thumbnail">
+                            <a href="single_product.html">
+                                <img src="images/lib8.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="caption">
+                            <h4>be creative</h4>
+                            <p>Clayton Barton</p>
+                            <div class="matrlf-mid">
+                                <ul class="price-list">
+                                    <li>
+                                        $200.00
+                                    </li>
+                                </ul>
+
+                                <div class="clearfix"> </div>
+                            </div>
+                            <form action="#" method="post">
+                                <input type="hidden" name="cmd" value="_cart">
+                                <input type="hidden" name="add" value="1">
+                                <input type="hidden" name="chr_item" value="Book1">
+                                <input type="hidden" name="amount" value="100.00">
+                                <button type="submit" class="chr-cart pchr-cart">
+                                    Add to cart
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                </button>
+                                <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @foreach (var item in Model)
+    {
+            <div class="col-lg-3">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center" style="height:230px">
+                            @if (string.IsNullOrEmpty(item.AvatarImage))
+                {
+                    <img style="height:150px;width:100%;object-fit:contain"
+                         src="/Assets/images/home/default-image.png" />
+    }
+    else
+    {
+            <img style="height:150px;width:100%;object-fit:contain"
+                 src="@Url.Content(item.AvatarImage)"
+                 onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+}
+                            <h2>@(item.Price.ToString("0,0.###", ci)) đ</h2>
+                            <p class="shorten-name"><b>@item.Name</b></p>
+                        </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                <h2>@(item.Price.ToString("0,0.###", ci)) đ</h2>
+                                <p><a href="/Products/Single?id=@item.ID">@item.Name</a></p>
+                                <a href="#" class="btn btn-default add-to-cart" onclick="updateCart('add',@item.ID, event)">
+                                    <p hidden>@item.ID</p>
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Thêm vào giỏ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+}
+            </div>
+        </div>
+    </div>
+</section>
+<link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Assets/css/price-range.css" rel="stylesheet">
+<script src="~/Assets/js/price-range.js" type="text/javascript"></script>
+@*<script src="~/Assets/js/jquery-3.1.1.min.js" type="text/javascript"></script>*@
+
+
+<script>
+    // gọi SearchController::Search()
+    function onSearch() {
+        // lấy giá trị để truyền vào parameter
+        var text = $('#search_box').val();
+        var author = $('#ddl_author').val();
+        var category = $('#ddl_category').val();
+        var costBegin = $('#ex2').val().split(',')[0];
+        var costEnd = $('#ex2').val().split(',')[1]; //$('#cost_end').val()
+
+        $.ajax({// lấy dữ liệu từ link này
+            url: '/Search/Search/',
+            type: 'GET',
+            dataType: 'json',// kiểu dữ liệu: json
+            data: {
+                "key": text,
+                "authorId": author,
+                "categoryId": category,
+                "costBegin": costBegin,
+                "costEnd": costEnd,
+            },
+            success: function (data) {// lấy dữ liệu thành công
+                if (data == null) {
+                    alert('Không tìm thấy');
+                    return;
+                }
+
+                //var items = '';
+                // đổ dữ liệu ra page
+                $('#search_result').html("");
+                $.each(data, function (i, item) {
+                    $('#search_result').append(genItem(item));
+                    //items += ;
+                });
+
+                //$('#search_result').html(items);
+            },
+            error: function (err) {// lỗi
+                if (err.responseText)
+                    alert(err.responseText);
+                else {
+                    $('#search_result').html('');
+                    alert('Không tìm thấy kết quả');
+                }
+            }
+        });
+
+    }
+
+    // tạo ra 1 item kết quả search (1 item cuốn sách)
+    function genItem(item) {
+        var content =
+            '<div class="col-lg-3">\
+                <div class="product-image-wrapper">\
+                    <div class="single-products">\
+                        <div class="productinfo text-center" style="height:230px">'
+
+        if (!item.AvatarImage)
+            content += '<img style="height:150px;width:100%;object-fit:contain" src="/Assets/images/home/default-image.png" alt="Không có hình" />'
+        else
+            content += '<img style="height:150px;width:100%;object-fit:contain" onerror="' + "if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" + '" src="' + item.AvatarImage.replace("~", "") + '" />'
+
+        content +=
+            '<h2>' + (item.Price).toLocaleString() + ' đ</h2>\
+                            <p><b>' + item.Name + '</b></p>\
+                        </div>'
+            +
+            '<div class="product-overlay">\
+                            <div class="overlay-content">\
+                                <h2>' + (item.Price).toLocaleString() + ' đ</h2>\
+                                <p><a href="/Products/Single?id='+ item.ID + '">' + item.Name + '</a></p>\
+                                <a href="#" class="btn btn-default add-to-cart" onclick="updateCart(' + "'add'," + item.ID + ', event)">\
+                                    <i class="fa fa-shopping-cart"></i>\
+                                    Thêm vào giỏ\
+                                </a>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>'
+        return content;
+    };
+
+</script>
