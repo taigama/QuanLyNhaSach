@@ -172,6 +172,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlExtensions.cs" />
+    <Compile Include="Helpers\SimilarSearch.cs" />
     <Compile Include="Models\AnonymousUser.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\AuthorVM.cs" />
@@ -565,6 +566,7 @@
     <Content Include="Views\Search1\SideSearch.cshtml" />
     <Content Include="Views\Shared\Header1.cshtml" />
     <Content Include="Views\Shared\_MainLayout1.cshtml" />
+    <Content Include="Views\Search1\ItemPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

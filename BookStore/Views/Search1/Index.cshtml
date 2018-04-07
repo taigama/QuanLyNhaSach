@@ -1,67 +1,19 @@
 ﻿@model IEnumerable<BookStore.Models.Product>
-@using System.Globalization;
+
 @{
     ViewBag.Title = "Tìm kiếm sản phẩm | Nhà sách AC";
     Layout = "~/Views/Shared/_MainLayout1.cshtml";
-    CultureInfo ci = new CultureInfo("vi-VN");
+    
 }
 
 <section>
     <div class="container" style="margin-top:150px">
         <div class="row">
            @* @Html.Partial("SideSearch")*@
+            
             <div id="search_result" class="left-ads-display col-md-9">
-
-                @foreach (var item in Model)
-                 {
-            <div class="col-md-3 product-men" style="margin-bottom:20px">
-                <div class="product-chr-info chr">
-                    <div class="thumbnail">
-                            @if (string.IsNullOrEmpty(item.AvatarImage))
-                            {
-                                <img style="height:150px;width:100%;object-fit:contain"
-                                src="/Assets/images/home/default-image.png" />
-                            }
-                            else
-                            {
-                                <img style="height:150px;width:100%;object-fit:contain"
-                                     src="@Url.Content(item.AvatarImage)"
-                                     onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
-                            }
-                       
-                    </div>
-                    <div class="caption">
-                        <div class="title-caption">
-                            <h4 style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"><b>@item.Name</b></h4>
-                            <span class="tooltiptext">@item.Name</span>
-                        </div>
-                        
-                        <div class="matrlf-mid">
-                            <ul class="price-list">
-                                <li>
-                                    @(item.Price.ToString("0,0.###", ci)) đ
-                                </li>
-                            </ul>
-
-                            <div class="clearfix"> </div>
-                        </div>
-                        <form action="#" method="post">
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="add" value="1">
-                            <input type="hidden" name="chr_item" value="Book1">
-                            <input type="hidden" name="amount" value="100.00">
-                            <a href="#" class="chr-cart" style="padding-top: 10px; padding-bottom:10px" onclick="updateCart('add',@item.ID, event)">
-                                <p hidden>@item.ID</p>
-                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                Thêm vào giỏ
-                            </a>
-                       
-                            <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-}
+                @Html.Partial("ItemPartial")
+               
             </div>
         </div>
     </div>
@@ -85,7 +37,7 @@
         $.ajax({// lấy dữ liệu từ link này
             url: '/Search1/Search/',
             type: 'GET',
-            dataType: 'json',// kiểu dữ liệu: json
+            dataType: 'text',// kiểu dữ liệu: json
             data: {
                 "key": text,
                 "authorId": author,
@@ -98,16 +50,11 @@
                     alert('Không tìm thấy');
                     return;
                 }
-
-                //var items = '';
+                
                 // đổ dữ liệu ra page
                 $('#search_result').html("");
-                $.each(data, function (i, item) {
-                    $('#search_result').append(genItem(item));
-                    //items += ;
-                });
-
-                //$('#search_result').html(items);
+                $('#search_result').append(data);
+                
             },
             error: function (err) {// lỗi
                 if (err.responseText)
@@ -118,41 +65,5 @@
                 }
             }
         });
-
     }
-
-    // tạo ra 1 item kết quả search (1 item cuốn sách)
-    function genItem(item) {
-        var content =
-            '<div class="col-lg-3">\
-                <div class="product-image-wrapper">\
-                    <div class="single-products">\
-                        <div class="productinfo text-center" style="height:230px">'
-
-        if (!item.AvatarImage)
-            content += '<img style="height:150px;width:100%;object-fit:contain" src="/Assets/images/home/default-image.png" alt="Không có hình" />'
-        else
-            content += '<img style="height:150px;width:100%;object-fit:contain" onerror="' + "if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" + '" src="' + item.AvatarImage.replace("~", "") + '" />'
-
-        content +=
-            '<h2>' + (item.Price).toLocaleString() + ' đ</h2>\
-                            <p><b>' + item.Name + '</b></p>\
-                        </div>'
-            +
-            '<div class="product-overlay">\
-                            <div class="overlay-content">\
-                                <h2>' + (item.Price).toLocaleString() + ' đ</h2>\
-                                <p><a href="/Products/Single?id='+ item.ID + '">' + item.Name + '</a></p>\
-                                <a href="#" class="btn btn-default add-to-cart" onclick="updateCart(' + "'add'," + item.ID + ', event)">\
-                                    <i class="fa fa-shopping-cart"></i>\
-                                    Thêm vào giỏ\
-                                </a>\
-                            </div>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>'
-        return content;
-    };
-
 </script>
