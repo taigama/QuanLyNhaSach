@@ -5,11 +5,10 @@
         (ViewData["Authors"] as IList<BookStore.Models.Author>).OrderByDescending(a => a.NumberOfBooks).Take(10);
 }
 
-<div class="col-lg-3">
+<div class="col-lg-3" style="background-color: #eee">
     <div class="left-sidebar">
-
         <!-- author -->
-        <h2 style="margin-top:20px;margin-bottom:10px">Tác giả</h2>
+        <h3 class="shopf-sear-headits-sear-head" @*style="margin-top:20px;margin-bottom:10px;text-align:center;color:#ee4f4f"*@>Tác giả</h3>
         <select id="ddl_author" name="ddl_author"
                 class="selectpicker" data-live-search="true"
                 data-width="100%" data-size="5">
@@ -38,7 +37,7 @@
         </div>
 
         <!-- category -->
-        <h2 style="margin-top:20px;margin-bottom:10px">Danh mục</h2>
+        <h3 class="shopf-sear-headits-sear-head" @*style="margin-top:20px;margin-bottom:10px;text-align:center;color:#ee4f4f"*@>Danh mục</h3>
         <select id="ddl_category" name="ddl_category"
                 class="selectpicker" data-live-search="true"
                 data-width="100%" data-size="5">
@@ -64,9 +63,22 @@
                 </ul>
             </div>
         </div>
+    <!--price range start-->
+        <div class="range">
+            <h3 class="shopf-sear-headits-sear-head">
+                <span>Tầm giá</span>
+            </h3>
+            <ul class="dropdown-menu6">
+                <li>
 
+                    <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 98.0889%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 98.0889%;"></a></div>
+                    <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
+                </li>
+            </ul>
+        </div>
+    <!--price range end-->
         <div class="price-range">
-            <h2 style="margin-top:20px;margin-bottom:5px">Tầm giá</h2>
+            <h2 style="margin-top:20px;margin-bottom:5px;color:#34c663">Tầm giá</h2>
             <div class="text-center">
                 <input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="2000" data-slider-step="10" data-slider-value="[0,2000]" />
                 <br /><b class="pull-left"> 0 VND</b> <b class="pull-right">2000 k</b>
@@ -76,18 +88,18 @@
 </div>
 
 
-<link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Assets/css/bootstrap.css" rel="stylesheet">
 <link href="~/Assets/css/bootstrap-select.min.css" rel="stylesheet">
-
-@*<script src="~/Assets/js/jquery.js" type="text/javascript"></script>*@
-<script src="~/Assets/js/price-range.js" type="text/javascript"></script>
-<script src="~/Assets/js/bootstrap-select.min.js"></script>
+<script src="~/Assets/js/jquery.js" type="text/javascript"></script>
+@*<script src="~/Assets/js/price-range.js" type="text/javascript"></script>*@
+@*<script src="~/Assets/js/bootstrap-select.min.js"></script>*@
 <script src="~/Scripts/helper.js"></script>
+@*<script src="~/Assets/js/jquery-ui.js"></script>*@
 <script>
     // bind event search theo giá tiền
-    $("#ex2").slider({}).on("slideStop", function (e) {
-        onSearch()
-    });
+    //$("#ex2").slider({}).on("slideStop", function (e) {
+    //    onSearch()
+    //});
     // lúc đầu show web
     $(document).ready(function () {
         @*//listAuthors();

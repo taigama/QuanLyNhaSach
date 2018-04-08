@@ -1,17 +1,97 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>_MainLayout1</title>
-</head>
-<body>
-    <div> 
-    </div>
+    @Html.Partial("Header1")
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    @RenderBody()
+
+    <!-- //home -->
+    <!-- js -->
+    <!-- Common js -->
+
+    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
+    <!--// Common js -->
+    <!-- cart-js -->
+    <script src="~/Assets/js/minicart.js"></script>
+    <script>
+        chr.render();
+
+        chr.cart.on('new_checkout', function (evt) {
+            var items, len, i;
+
+            if (this.subtotal() > 0) {
+                items = this.items();
+
+                for (i = 0, len = items.length; i < len; i++) { }
+            }
+        });
+    </script>
+    <!-- //cart-js -->
+    <!-- price range (top products) -->
+    @*<script src="~/Assets/js/jquery-ui.js"></script>*@
+    @*<script>
+        //<![CDATA[
+        $(window).load(function () {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 9000,
+                values: [50, 6000],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+        }); //]]>
+    </script>*@
+    <!-- //price range (top products) -->
+    <!-- dropdown nav -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown nav -->
+    <!--search jQuery-->
+    <script src="~/Assets/js/main1.js"></script>
+    <!--search jQuery-->
+    <!-- Scrolling Nav JavaScript -->
+    <script src="~/Assets/js/scrolling-nav.js"></script>
+    <!-- //fixed-scroll-nav-js -->
+    <!--//scripts-->
+
+    <script src="~/Assets/js/bootstrap.js"></script>
+    <!-- start-smoth-scrolling -->
+    <script src="~/Assets/js/easing.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 1000);
+            });
+        });
+    </script>
+   
+    <!--footer start-->
+    <footer class="cpy-right">
+        <p>
+            © 2018 Chronicle. All rights reserved | Design by
+            <a href="http://w3layouts.com"> W3layouts.</a>
+        </p>
+    </footer>
+    <!--footer end-->
 </body>
+
 </html>

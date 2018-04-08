@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BookStore.Models;
 using BookStore.Data;
 using Newtonsoft.Json;
+using BookStore.Helpers;
 
 namespace BookStore.Controllers
 {
@@ -20,10 +21,15 @@ namespace BookStore.Controllers
         public ActionResult Index(string key, int? costBegin, int? costEnd)
         {// từ trang khác, chuyển trang qua Search
 
-            IQueryable<Product> products;
+            IQueryable<Product> products = null;
+           
             if (!string.IsNullOrEmpty(key))
             {
-                products = db.Products.Where(p => p.Name.Contains(key));
+                //products = db.Products.Where();
+                List<string> nameList = (List<string>)db.Products.Select(n => n.Name).ToList();
+                SimilarSearch similarSearch = new SimilarSearch(key, nameList);
+                nameList = similarSearch.getResult(20);
+                products = db.Products.Where(n => nameList.Any(s=>s == n.Name));
             }
             else
             {
@@ -49,7 +55,7 @@ namespace BookStore.Controllers
             // sản phẩm của kết quả search từ trang khác
             return View(products.ToList());
         }
-
+        
         /// <summary>
         /// search data [json]
         /// </summary>
@@ -59,8 +65,7 @@ namespace BookStore.Controllers
             , int? authorId, int? categoryId
             , int? costBegin, int? costEnd)
         {// search từ trang search, gọi lệnh search cùng các filter parameter
-
-
+        
             if (costBegin != null)
             {
                 costBegin *= 1000;
@@ -72,7 +77,11 @@ namespace BookStore.Controllers
             IQueryable<Product> products;
             if (!string.IsNullOrEmpty(key))
             {
-                products = db.Products.Where(p => p.Name.Contains(key));
+                //products = db.Products.Where(p => p.Name.Contains(key));
+                List<string> nameList = (List<string>)db.Products.Select(n => n.Name).ToList();
+                SimilarSearch similarSearch = new SimilarSearch(key, nameList);
+                nameList = similarSearch.calcSimilarity();
+                products = db.Products.Where(n => nameList.Contains(n.Name));
             }
             else
             {
@@ -96,7 +105,7 @@ namespace BookStore.Controllers
                     }
                 }
                 if (tmp.Count == 0)
-                    return Json(tmp, JsonRequestBehavior.AllowGet);
+                    return PartialView("ItemPartial", tmp);
 
                 try
                 {
@@ -113,35 +122,27 @@ namespace BookStore.Controllers
                 products = products.Where(p => p.CategoryId == categoryId);
 
                 if (products.Count() == 0)
-                    return Json(new List<Product>(), JsonRequestBehavior.AllowGet);
+                    return PartialView("ItemPartial", new List<Product>());
             }
 
             if (costBegin != null)
             {
                 products = products.Where(p => p.Price >= costBegin);
                 if (products.Count() == 0)
-                    return Json(new List<Product>(), JsonRequestBehavior.AllowGet);
+                    return PartialView("ItemPartial", new List<Product>());
             }
             if (costEnd != null)
             {
                 products = products.Where(p => p.Price <= costEnd);
                 if (products.Count() == 0)
-                    return Json(new List<Product>(), JsonRequestBehavior.AllowGet);
+                    return PartialView("ItemPartial", new List<Product>());
             }
 
-            // trả về json dữ liệu sau khi filter
-            var result = new JsonNetResult
-            {
-                Data = products.ToList(),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Settings = {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            MaxDepth = 3// product, productdetail, author
-                }
-            };
-            return result;
+            // trả về list products
+            return PartialView("ItemPartial", products.ToList());
+           
         }
     }
-
-
 }
+
+

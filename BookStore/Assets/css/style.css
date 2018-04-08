@@ -552,11 +552,11 @@ ul.dropdown-menu:hover a.s-menu {
 }
 
 .banner-bg-inner {
-    background: url(../images/banner.jpg) no-repeat 0 -197px;
+    /*background: url(../images/banner.jpg) no-repeat 0 -197px;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-size: cover;
-    min-height: 430px;
+    /*background-size: cover;*/
+    /*min-height: 430px;*/
 }
 
 .banner-text {
