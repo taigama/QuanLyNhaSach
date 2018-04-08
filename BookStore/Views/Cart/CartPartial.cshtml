@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BookStore.Models.OrderDetail>
+@using System.Globalization;
+@{
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+<form method="post" class="sbmincart-empty" action="checkout.html" target="">
+    <button type="button" class="sbmincart-closer" onclick="onClosedCart()">×</button>
+    @if (Model.Count() > 0)
+    {
+        <ul class="cart-info">
+            @foreach (var item in Model)
+            {
+            <li class="sbmincart-item sbmincart-item-changed">
+                <div class="sbmincart-details-name">
+                    <a class="sbmincart-name" href="#">@item.Product.Name</a>
+                    <ul class="sbmincart-attributes"></ul>
+                </div>
+                <div>
+                    <button type="button" class="cart_quantity" onclick="increaseQuantities(@item.Product.ID)">+</button>
+                </div>
+                <div class="sbmincart-details-quantity">
+                    <input class="sbmincart-quantity" data-sbmincart-idx="0" name="quantity_1" type="text" pattern="[0-9]*" readonly="readonly" value=@item.Quantity autocomplete="off">
+                </div>
+                <div>
+                    <button type="button" class="cart_quantity" onclick="decreaseQuantities(@item.Product.ID)" >-</button>
+                </div>
+                <div class="sbmincart-details-price">
+                    <span class="sbmincart-price">@item.Product.Price.ToString("0,0.###", ci) đ</span>
+                </div>
+                <div class="sbmincart-details-remove">
+                    <button type="button" class="sbmincart-remove" data-sbmincart-idx="0" onclick="removeProduct(@item.Product.ID)">×</button>
+                    <p hidden="hidden" class="item_id">@item.Product.ID</p>
+                </div>
+            </li>
+            }
+        </ul>
+        <div class="sbmincart-footer">
+
+            <div class="sbmincart-subtotal" hidden="hidden">Tổng tiền: @ViewBag.Subtotal.ToString("0,0.###", ci) đ</div>
+            <a href="@Url.Action("Index", "Cart")" class="sbmincart-submit" type="submit" data-sbmincart-alt="undefined">Check Out</a>
+        </div>
+    }
+    else
+    {
+
+        <p class="sbmincart-empty-text">Giỏ hàng rỗng</p>
+    }
+</form>

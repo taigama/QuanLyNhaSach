@@ -5,7 +5,9 @@
     IEnumerable<BookStore.Models.Author> Authors =
         (ViewData["Authors"] as IList<BookStore.Models.Author>).OrderByDescending(a => a.NumberOfBooks).Take(10);
 }
+
 <div class="col-lg-3">
+    
     <div class="left-sidebar">
         <h2 style="margin-top:10px;margin-bottom:0px">Tác giả</h2>
         <div class="brands-name">

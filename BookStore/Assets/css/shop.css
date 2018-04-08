@@ -127,7 +127,7 @@ div#my-cart-modal .close:hover,
 	opacity: 1;
 	color: #F60B0E;
 }
-
+/* Modify cart*/
 /*-- //Shopping-Cart-PopUp --*/
 
 #staplesbmincart form {
@@ -153,7 +153,7 @@ div#my-cart-modal .close:hover,
 }
 
 #staplesbmincart {
-	display: none;
+	/*display: none;*/
 	position: fixed;
 	left: 68%;
 	top: 16.9%;
@@ -180,7 +180,7 @@ div#my-cart-modal .close:hover,
 	float: left;
 	width: 100%;
 	margin: 5px 0 20px;
-	padding: 1em;
+	padding: 5px;
 	list-style-type: none;
 	background: #fff;
 	border: 1px solid #ccc;
@@ -189,7 +189,7 @@ div#my-cart-modal .close:hover,
 }
 
 #staplesbmincart .sbmincart-empty ul {
-	display: none;
+	/*display: none;*/
 }
 
 .thumbnail {
@@ -214,7 +214,7 @@ div#my-cart-modal .close:hover,
 	clear: left;
 	padding: 7px 0;
 	min-height: 35px;
-	font-size: 1em;
+	font-size: 13px;
 }
 
 #staplesbmincart .sbmincart-item+.sbmincart-item {
@@ -228,12 +228,15 @@ div#my-cart-modal .close:hover,
 
 #staplesbmincart .sbmincart-details-name {
 	float: left;
-	width: 62%;
+	width: 50%;
 }
-
+#staplesbmincart .cart_quantity{
+    float: left;
+    width: 5%;
+}
 #staplesbmincart .sbmincart-details-quantity {
 	float: left;
-	width: 15%;
+	width: 10%;
 }
 
 #staplesbmincart .sbmincart-details-remove {
@@ -243,7 +246,7 @@ div#my-cart-modal .close:hover,
 
 #staplesbmincart .sbmincart-details-price {
 	float: left;
-	width: 16%;
+	width: 20%;
 	text-align: right;
 }
 
@@ -277,10 +280,12 @@ div#my-cart-modal .close:hover,
 	width: 30px;
 	height: 18px;
 	padding: 2px 4px;
+    margin-left:3px;
+    margin-right:3px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-	font-size: 13px;
+	font-size: 11px;
 	text-align: right;
 	transition: border linear 0.2s, box-shadow linear 0.2s;
 	-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
@@ -300,13 +305,13 @@ div#my-cart-modal .close:hover,
 #staplesbmincart .sbmincart-remove {
 	width: 18px;
 	height: 19px;
-	margin: 2px 0 0;
+	margin-left: 5px;
 	padding: 0;
 	background: #b7b7b7;
 	border: 1px solid #a3a3a3;
 	border-radius: 3px;
 	color: #fff;
-	font-size: 13px;
+	font-size: 11px;
 	opacity: 0.70;
 	cursor: pointer;
 }
@@ -351,11 +356,20 @@ p.sbmincart-empty-text {
 	right: 0;
 	top: 0;
 }
-
+.cart_quantity {
+    width: 15px;
+    height: 18px;
+    background: #b7b7b7;
+    border: 1px solid #a3a3a3;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 11px;
+    opacity: 0.70;
+    cursor: pointer;
+}
 /* Let's get this party started */
-
 #staplesbmincart form ul::-webkit-scrollbar {
-	width: 5px;
+    width: 5px;
 }
 
 /* Track */
@@ -1630,7 +1644,7 @@ ul.single_specific li {
 	}
 	#staplesbmincart .sbmincart-details-name {
 		float: left;
-		width: 51%;
+		width: 30%;
 	}
 	#staplesbmincart .sbmincart-details-remove {
 		float: left;

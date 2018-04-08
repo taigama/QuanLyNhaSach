@@ -6589,8 +6589,14 @@ button.close {
 #list-author li a b:hover{
     color:#333;
 }
+#list-author li a b:active{
+    background-color: white;
+}
 #list-author li:hover .pull-right{
     color: #333;
+}
+.pull-right:hover #list-author li a b{
+    color:#333;
 }
 .pull-right {
     color: #34c663;

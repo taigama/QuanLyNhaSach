@@ -77,51 +77,31 @@
                 <div>
                     <ul class="nav navbar-nav navbar-right cl-effect-15">
                         <li>
-                            <a href="login.html" title="SignIn &amp; SignUp">
+                            <a href="@Url.Action("Login", "Staff")" title="SignIn &amp; SignUp">
                                 <span class="fa fa-user nav-icon" aria-hidden="true"></span>
                             </a>
                         </li>
                         <li>
                             <div class="cart-mainf">
                                 <div class="chrcart chrcart2 cart cart box_1">
-                                    <form action="#" method="post" class="last">
+                                    @*<form action="" method="post" class="last">
                                         <input type="hidden" name="cmd" value="_cart">
                                         <input type="hidden" name="display" value="1">
                                         <button class="top_chr_cart" type="submit" name="submit" value="">
                                             <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                                         </button>
-                                    </form>
+
+                                    </form>*@
+                                    <a href="#" onclick="onClickedCart()">
+                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                    </a>
+
                                 </div>
                             </div>
+
                         </li>
                     </ul>
                 </div>
-                <!-- search-bar -->
-                <div class="search-bar-agileits">
-                    <div class="cd-main-header">
-                        <ul class="cd-header-buttons">
-                            <li>
-                                <a class="cd-search-trigger" href="#cd-search">
-                                    <span></span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- cd-header-buttons -->
-                    @*</div>
-                    <div id="cd-search" class="cd-search">
-                        <form action="#" method="post">
-                            <input name="Search" type="search" placeholder="Type and Hit Enter...">
-                        </form>
-                    </div>
-                </div>*@
-                <!-- //search-bar ends here -->
-                <!-- shopping cart -->
-                
-                <!-- //shopping cart ends here -->
-            </div>
-            <!-- /.navbar-collapse -->
-            <div class="clearfix"></div>
-        </div>
         <!-- /.container -->
     </div>
 </nav>
