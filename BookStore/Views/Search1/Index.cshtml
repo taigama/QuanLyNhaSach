@@ -15,7 +15,7 @@
                     <!--Tìm kiếm chính xác-->
                     <div class="row">
                         <div class="search_box col-lg-3 col-lg-offset-3" style="display:inline-block">
-                            <input id="search_box" type="search" placeholder="Tìm kiếm" onkeypress="onKeypressSearchCorrectly(event)">
+                            <input id="search_box_correct" type="search" placeholder="Tìm kiếm" onkeypress="onKeypressSearchCorrectly(event)">
                         </div>
                     </div>
                     @Html.Partial("SideSearch")
@@ -98,7 +98,7 @@
     function onSearchCorrectly() {
 
         // lấy giá trị để truyền vào parameter
-        var text = $('#search_box').val();
+        var text = $('#search_box_correct').val();
         var author = $('#ddl_author').val();
         var category = $('#ddl_category').val();
         var costBegin = 0;//$('#ex2').val().split(',')[0];
@@ -121,7 +121,7 @@
                     alert('Không tìm thấy');
                     return;
                 }
-                alert(data);
+                //alert(data);
                 // đổ dữ liệu ra page
                 $('#search_result').html("");
                 $('#search_result').append(data);
