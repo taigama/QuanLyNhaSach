@@ -159,6 +159,7 @@
     <Compile Include="Controllers\Cart1Controller.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\Home1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -203,6 +204,7 @@
     <Content Include="Assets\css\bootstrap-select.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\override-navbar.css" />
     <Content Include="Assets\css\checkout.css" />
     <Content Include="Assets\css\font-awesome.min.css" />
     <Content Include="Assets\css\input-image.css" />
@@ -569,6 +571,13 @@
     <Content Include="Views\Search1\ItemPartial.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Search1\Index.cshtml" />
+    <Content Include="Views\Home1\Author.cshtml" />
+    <Content Include="Views\Home1\Index.cshtml" />
+    <Content Include="Views\Home1\ItemPartial.cshtml" />
+    <Content Include="Views\Home1\SideSearch.cshtml" />
+    <Content Include="Views\Shared\Header_Navbar.cshtml" />
+    <Content Include="Views\MyShared\MainLayout.cshtml" />
+    <Content Include="Views\MyShared\Navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

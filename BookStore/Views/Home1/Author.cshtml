@@ -1,0 +1,164 @@
+﻿@model BookStore.Models.Author
+@using BookStore.Helpers;
+@using System.Globalization;
+
+@{
+    ViewBag.Title = Model.Name + " | Nhà sách AC";
+    Layout = "~/Views/MyShared/MainLayout.cshtml";
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+<section>
+    <div class="container">
+        <div class="row">
+            @Html.Partial("SideMenu")
+
+            <div class="col-lg-9 padding-right" style="margin-top:10px">
+                <div class="product-details">
+                    <!--author-details-->
+                    <div class="col-lg-5">
+                        <div id="panel_img" class="view-product">
+                            @if(Model.Image != null) { <text>
+                            <img src="@HtmlExtensions.GetImagePath(Model.Image, this.Context)" alt="" style="height:100%;width:100%;object-fit:contain" onerror="if (this.src != '/Assets/images/staff/avatar.png') this.src = '/Assets/images/staff/avatar.png';"/>
+                            </text>} else{<text>
+                            <img src="/Assets/images/staff/avatar.png" alt="" style="height:100%;width:100%;object-fit:contain" />
+                            </text>}
+                        </div>
+                    </div>
+                    <div id="panel_info" class="col-lg-7">
+                        <div class="product-information">
+                            <!--/author-information-->
+                            <h2>@Model.Name</h2>
+                            @*<p>Web ID: 1089772</p>*@
+                            <div><img src="~/Assets/images/product-details/rating.png" alt="" /></div>
+                            @if (!string.IsNullOrEmpty(Model.Code))
+                            {
+                                <p><b>Trang web: </b></p>
+                                <p><a href="//@Model.Code" target="_blank">@Model.Code</a></p><br />
+                            }
+                            <p><b>Mô tả:</b></p>
+                            <p> @Model.Description </p>
+                            <a href="" onclick="alert('Tính năng này sẽ được cập nhật sớm')"><img src="~/Assets/images/product-details/share.png" class="share img-responsive" alt="" /></a>
+                        </div><!--/author-information-->
+                    </div>
+                </div><!--/author-details-->
+
+                @if((Model.Books != null) && (Model.Books.Count>0))
+                {// liệt kê sách của tác giả này
+
+                <div class="recommended_items">
+                    <!--recommended_items-->
+                    <h2 class="title text-center" style="margin-top:5px">Một số sách</h2>
+                    <div
+                         @if(Model.Books.Count > 3)
+                         {<text>                         
+                             id="books-carousel" class="carousel slide" data-ride="carousel"
+                         </text>}>
+                        <div
+                             @if(Model.Books.Count > 3)
+                             {<text>   
+                             class="carousel-inner"
+                             </text>}>
+                            <div class="item active">
+                                @{BookStore.Models.Product product;}
+                                @for(int i = 0; i < ((Model.Books.Count < 3)? Model.Books.Count:3); i++)
+                                {
+                                    product = Model.Books.ElementAt(i).Product;
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                @if (string.IsNullOrEmpty(product.AvatarImage))
+                                            {
+                                                <img style="height:110px;width:100%;object-fit:contain"
+                                                     src="~/Assets/images/home/default-image.png"
+                                                     />
+                                            }
+                                            else
+                                            {
+                                                <img style="height:110px;width:100%;object-fit:contain"
+                                                     src="@Url.Content(product.AvatarImage)"
+                                                     onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';"/>
+                                            }
+                                                <h2>@(product.Price.ToString("#,0.###", ci)) đ</h2>
+                                                <a href="/Products/Single?id=@product.ID"> <p>@product.Name</p></a>
+                                                <button type="button" class="btn btn-default add-to-cart" onclick='updateCart("add", @product.ID, event)'>
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                                @if(Model.Books.Count > 3) {
+                                    for(int i = 3; i < Model.Books.Count; i += 3) { 
+                            <div class="item">
+                                @for(int j = i; j < ((Model.Books.Count < (i+3))? Model.Books.Count: (i + 3)); j++)
+                                {
+                                    product = Model.Books.ElementAt(j).Product;
+                                <div class="col-lg-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                @if (string.IsNullOrEmpty(product.AvatarImage))
+                                            {
+                                                <img src="~/Assets/images/home/default-image.png"
+                                                     style="height:110px;width:100%;object-fit:contain"/>
+                                            }
+                                            else
+                                            {
+                                                <img src="@Url.Content(product.AvatarImage)"
+                                                     style="height:110px;width:100%;object-fit:contain"/>
+                                            }
+                                                <h2>@(product.Price.ToString("#,0.###", ci)) đ</h2>
+                                                <a href="/Products/Single?id=@product.ID"> <p>@product.Name</p></a>
+                                                <button type="button" class="btn btn-default add-to-cart" onclick='updateCart("add", @product.ID, event)'>
+                                                <i class="fa fa-shopping-cart"></i>Thêm vào giỏ</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+
+                            </div>
+                            }}
+                        </div>
+
+                        @if((Model.Books != null) && (Model.Books.Count > 3)) { 
+                        <a class="left recommended-item-control" href="#books-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#books-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                        }
+                    </div>
+                </div><!--/recommended_items-->
+                }
+            </div>
+        </div>
+    </div>
+
+    @*<script src="~/Assets/js/jquery.js"></script>
+    <script src="~/Assets/js/moment.js"></script>
+    <script src="~/Scripts/helper.js"></script>
+    <script src="~/Scripts/helper.js"></script>*@
+
+    <script>
+        $(document).ready(function () {
+            // cheat để cho cái hình tác giả hiển thị đẹp
+            var infoHeight = $("#panel_info").height();
+            $("#panel_img").height(infoHeight);
+        });
+
+        // search từ searchbox trên header
+        function onSearch() {
+            if ($("#search_box").val())
+                window.location = '/Search/Index?key=' + $("#search_box").val();
+            else
+                alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
+        }
+    </script>
+</section>
+
+

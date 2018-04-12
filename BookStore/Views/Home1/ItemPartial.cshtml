@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BookStore.Models.Product>
+@using System.Globalization;
+@{
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+@foreach (var item in Model)
+{
+    <div class="col-md-3 product-men" style="margin-bottom:20px">
+        <div class="product-chr-info chr">
+            <div class="thumbnail">
+                @if (string.IsNullOrEmpty(item.AvatarImage))
+                {
+                    <img style="height:150px;width:100%;object-fit:contain"
+                         src="/Assets/images/home/default-image.png" />
+                }
+                else
+                {
+                    <img style="height:150px;width:100%;object-fit:contain"
+                         src="@Url.Content(item.AvatarImage)"
+                         onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+                }
+
+            </div>
+            <div class="caption">
+                <div class="title-caption">
+                    <h4 style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"><b>@item.Name</b></h4>
+                    <span class="tooltiptext">@item.Name</span>
+                </div>
+
+                <div class="matrlf-mid">
+                    <ul class="price-list">
+                        <li>
+                            @(item.Price.ToString("0,0.###", ci)) đ
+                        </li>
+                    </ul>
+
+                    <div class="clearfix"> </div>
+                </div>
+                <form action="#" method="post">
+                    <input type="hidden" name="cmd" value="_cart">
+                    <input type="hidden" name="add" value="1">
+                    <input type="hidden" name="chr_item" value="@item.Name">
+                    <input type="hidden" name="amount" value="@item.Price">
+                    <a href="" class="chr-cart" style="color: white;padding-top: 10px; padding-bottom:10px" onclick="updateCart('add',@item.ID, event)">
+                        <p hidden>@item.ID</p>
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        Thêm vào giỏ
+                    </a>
+                    @*<button type="submit" class="chr-cart pchr-cart">
+                        Thêm vào giỏ
+                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                    </button>*@
+                    <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                </form>
+            </div>
+        </div>
+    </div>
+}

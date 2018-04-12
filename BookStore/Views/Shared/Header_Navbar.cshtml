@@ -35,6 +35,15 @@
     <!-- body -->
     <link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
     <!-- //online-fonts -->
+
+    <style>
+        .navbar {
+            background-color: #009ED8 !important;
+        }
+        .navbar-default .navbar-nav > li > a {
+            color: #FFFFFF !important;
+        }
+    </style>
 </head>
 <!-- header -->
 <!-- navbar -->
@@ -48,13 +57,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <h1>
+                @*<h1>
                     <a class="navbar-brand" href="index.html">Chronicle</a>
-                </h1>
+                </h1>*@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse navbar-ex1-collapse nav-on-left collapse" aria-expanded="false" style="height: 40px;">
-                <ul class="nav navbar-nav navbar-left cl-effect-15">
+                <ul class="nav navbar-nav navbar-left">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden active">
                         <a class="page-scroll" href="#page-top"></a>
@@ -64,12 +73,14 @@
                     <li>@Html.ActionLink("Các sản phẩm", "Index", "Search")</li>
                     <li>
                         <input id="search_box" type="search" placeholder="Tìm kiếm"
-                                   onkeypress="onKeypressSearch(event)"
-                                   @if (!string.IsNullOrEmpty(ViewData["key"] as string)) {// nếu có key thì hiển thị ra đây <text>
-                                    <text>
-                                    value ="@(ViewData["key"] as string)"
-                                    </text> 
-                                   } />
+                               onkeypress="onKeypressSearch(event)"
+                               @if (!string.IsNullOrEmpty(ViewData["key"] as string))
+                               {    // nếu có key thì hiển thị ra đây 
+                                   <text> 
+                                   value='@(ViewData["key"] as string)'
+                                   </text>
+                               } 
+                               />
                     </li>
                 </ul>
                 <div>
@@ -83,13 +94,13 @@
                             <div class="cart-mainf">
                                 <div class="chrcart chrcart2 cart cart box_1">
                                     @*<form action="" method="post" class="last">
-                                        <input type="hidden" name="cmd" value="_cart">
-                                        <input type="hidden" name="display" value="1">
-                                        <button class="top_chr_cart" type="submit" name="submit" value="">
-                                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                        </button>
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="display" value="1">
+                                            <button class="top_chr_cart" type="submit" name="submit" value="">
+                                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                            </button>
 
-                                    </form>*@
+                                        </form>*@
                                     <a href="#" onclick="onClickedCart()">
                                         <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                                     </a>
@@ -111,9 +122,9 @@
     function onKeypressSearch(e) {
         var keynum;
 
-        if (window.event) { // IE                    
+        if (window.event) { // IE
             keynum = e.keyCode;
-        } else if (e.which) { // Netscape/Firefox/Opera                   
+        } else if (e.which) { // Netscape/Firefox/Opera
             keynum = e.which;
         }
 

@@ -1,0 +1,67 @@
+﻿<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="main-nav">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Chronicle</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1>
+                    <a class="navbar-brand" href="index.html">UIT</a>
+                </h1>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse navbar-ex1-collapse nav-on-left collapse" aria-expanded="false" style="height: 40px;">
+                <ul class="nav navbar-nav navbar-left" >
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden active">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Liên hệ", "Index", "Contact")</li>
+                    <li>@Html.ActionLink("Các sản phẩm", "Index", "Search")</li>
+                    @*<li>
+                        <input id="search_box" type="search" placeholder="Tìm kiếm"
+                               onkeypress="onKeypressSearch(event)"
+                               @if (!string.IsNullOrEmpty(ViewData["key"] as string)) {    // nếu có key thì hiển thị ra đây 
+                               <text>
+                               value='@(ViewData["key"] as string)'
+                               </text>  
+                               } />
+                    </li>*@
+                </ul>
+                <div>
+                    <ul class="nav navbar-nav navbar-right cl-effect-15">
+                        
+                        <li>
+                            <input id="search_box" type="search" placeholder="Tìm kiếm"
+                                   onkeypress="onKeypressSearch(event)"
+                                    @if (!string.IsNullOrEmpty(ViewData["key"] as string)) {    // nếu có key thì hiển thị ra đây 
+                                    <text>
+                                    value='@(ViewData["key"] as string)'
+                                    </text>  } />
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Login", "Staff")" title="SignIn &amp; SignUp">
+                                <span class="fa fa-user nav-icon" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="cart-mainf">
+                                <div class="chrcart chrcart2 cart cart box_1">
+                                    <a href="#" onclick="onClickedCart()">
+                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+</nav>
+
