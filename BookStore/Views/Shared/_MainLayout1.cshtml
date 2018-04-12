@@ -4,47 +4,50 @@
     @Html.Partial("Header1")
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
     @RenderBody()
-
+    <div id="staplesbmincart" class="minicart" hidden="hidden">
+        @Html.Action("CartPartial", "Cart")
+    </div>
+   
     <!-- //home -->
     <!-- js -->
     <!-- Common js -->
-
-    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
+    @*<script src="~/Assets/js/jquery-3.1.1.min.js"></script>*@
     <!--// Common js -->
     <!-- cart-js -->
-    <script src="~/Assets/js/minicart.js"></script>
-    <script>
-        chr.render();
+    @*<script src="~/Assets/js/minicart.js"></script>*@
+    @*<script>
+            chr.render();
 
-        chr.cart.on('new_checkout', function (evt) {
-            var items, len, i;
+            chr.cart.on('new_checkout', function (evt) {
+                var items, len, i;
 
-            if (this.subtotal() > 0) {
-                items = this.items();
+                if (this.subtotal() > 0) {
+                    items = this.items();
 
-                for (i = 0, len = items.length; i < len; i++) { }
-            }
-        });
-    </script>
+                    for (i = 0, len = items.length; i < len; i++) { }
+                }
+            });
+        </script>*@
+
     <!-- //cart-js -->
     <!-- price range (top products) -->
     @*<script src="~/Assets/js/jquery-ui.js"></script>*@
     @*<script>
-        //<![CDATA[
-        $(window).load(function () {
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: 9000,
-                values: [50, 6000],
-                slide: function (event, ui) {
-                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                }
-            });
-            $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+            //<![CDATA[
+            $(window).load(function () {
+                $("#slider-range").slider({
+                    range: true,
+                    min: 0,
+                    max: 9000,
+                    values: [50, 6000],
+                    slide: function (event, ui) {
+                        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    }
+                });
+                $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
 
-        }); //]]>
-    </script>*@
+            }); //]]>
+        </script>*@
     <!-- //price range (top products) -->
     <!-- dropdown nav -->
     <script>
@@ -71,19 +74,7 @@
     <!--//scripts-->
 
     <script src="~/Assets/js/bootstrap.js"></script>
-    <!-- start-smoth-scrolling -->
-    <script src="~/Assets/js/easing.js"></script>
-    <script>
-        jQuery(document).ready(function ($) {
-            $(".scroll").click(function (event) {
-                event.preventDefault();
-                $('html,body').animate({
-                    scrollTop: $(this.hash).offset().top
-                }, 1000);
-            });
-        });
-    </script>
-   
+
     <!--footer start-->
     <footer class="cpy-right">
         <p>
@@ -95,3 +86,75 @@
 </body>
 
 </html>
+<script>
+    // Mở mini cart 
+    function onClickedCart() {
+        $("#staplesbmincart").show();
+    }
+
+    //Đóng mini cart
+    function onClosedCart() {
+        $("#staplesbmincart").hide();
+    }
+    // bind event nút "x" trên cart
+    function removeProduct(productID) {
+        event.preventDefault();
+        updateCart("delete", productID, event);
+    }
+    // Tăng số lượng sản phẩm
+    function increaseQuantities(productID) {
+        event.preventDefault();
+        updateCart("add", productID, event)
+    }
+    //Giảm số lượng sản phẩm
+    function decreaseQuantities(productID) {
+        event.preventDefault();
+        updateCart("minus", productID, event)
+    }
+  
+    //Thêm sản phẩm vào giỏ
+    function updateCart(action, productID, event) {
+        event.preventDefault();
+        var actionurl = ''
+
+        switch (action) {
+            case "add":
+                actionurl = '/Cart/AddProduct'
+                break;
+            case "minus":
+                actionurl = '/Cart/MinusProduct'
+                break;
+            case "delete":
+                actionurl = '/Cart/DeleteProduct'
+                break;
+        }
+        //reloadCart(productID);
+        $.ajax({
+            url: actionurl,
+            type: 'POST',
+            dataType: 'json',
+            data: { "id": productID },
+            success: function (data) {
+                if (!data.success) {
+                    alert(data.text);
+                }
+                reloadCart();
+            },
+            error: function (err) {
+                document.write(err.responseText);
+            }
+        })
+    }
+    function reloadCart() {
+        $.ajax({
+            url: "/Cart/CartPartial",
+            type: "POST",
+            success: function (data) {
+                $("#staplesbmincart").html("");
+                $("#staplesbmincart").append(data);
+                //alert(data);
+                //$(".cart-info").append(data);
+            }
+        })
+    }
+</script>

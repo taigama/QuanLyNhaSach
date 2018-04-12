@@ -9,11 +9,24 @@
 <section>
     <div class="container" style="margin-top:150px">
         <div class="row">
-           @* @Html.Partial("SideSearch")*@
-            
+            <div class="col-lg-3" style="background-color: #eee">
+                <div class="left-sidebar">
+                    <h3 class="shopf-sear-headits-sear-head">Tìm kiếm chính xác</h3>
+                    <!--Tìm kiếm chính xác-->
+                    <div class="row">
+                        <div class="search_box col-lg-3 col-lg-offset-3" style="display:inline-block">
+                            <input id="search_box_correct" type="search" placeholder="Tìm kiếm" onkeypress="onKeypressSearchCorrectly(event)">
+                        </div>
+                    </div>
+                    @Html.Partial("SideSearch")
+
+                </div><!--/price-range-->
+            </div>
+           
+
             <div id="search_result" class="left-ads-display col-md-9">
                 @Html.Partial("ItemPartial")
-               
+
             </div>
         </div>
     </div>
@@ -55,6 +68,64 @@
                 $('#search_result').html("");
                 $('#search_result').append(data);
                 
+            },
+            error: function (err) {// lỗi
+                if (err.responseText)
+                    alert(err.responseText);
+                else {
+                    $('#search_result').html('');
+                    alert('Không tìm thấy kết quả');
+                }
+            }
+        });
+    }
+
+    function onKeypressSearchCorrectly(e) {
+        var keynum;
+        if (window.event) { // IE
+            keynum = e.keyCode;
+        } else if (e.which) { // Netscape/Firefox/Opera
+            keynum = e.which;
+        }
+
+        // phím enter
+        if (keynum == 13) {
+            // hàm này nằm ở page (e.g. Index, Author, etc.)
+            onSearchCorrectly();
+        }
+    }
+    // gọi SearchController::Search()
+    function onSearchCorrectly() {
+
+        // lấy giá trị để truyền vào parameter
+        var text = $('#search_box_correct').val();
+        var author = $('#ddl_author').val();
+        var category = $('#ddl_category').val();
+        var costBegin = 0;//$('#ex2').val().split(',')[0];
+        var costEnd = 2000000; //$('#ex2').val().split(',')[1]; //$('#cost_end').val()
+
+        $.ajax({// lấy dữ liệu từ link này
+            url: '/Search1/SearchCorrectly/',
+            type: 'GET',
+            dataType: 'text',// kiểu dữ liệu: json
+            data: {
+                "key": text,
+                "authorId": author,
+                "categoryId": category,
+                "costBegin": costBegin,
+                "costEnd": costEnd,
+            },
+            success: function (data) {// lấy dữ liệu thành công
+
+                if (data == null) {
+                    alert('Không tìm thấy');
+                    return;
+                }
+                //alert(data);
+                // đổ dữ liệu ra page
+                $('#search_result').html("");
+                $('#search_result').append(data);
+
             },
             error: function (err) {// lỗi
                 if (err.responseText)

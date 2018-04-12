@@ -24,7 +24,14 @@ namespace BookStore.Controllers
             //CheckCustomerId();
             return View();
         }
-
+        public ActionResult CartPartial()
+        {
+            Order cart = CheckOrderId();
+            var details = cart.OrderDetails;
+            ViewBag.Subtotal = cart.TotalAmount;
+            return PartialView(details.ToList());
+        }
+        
         /// <summary>
         /// Get an order by id [json]
         /// </summary>
@@ -163,8 +170,7 @@ namespace BookStore.Controllers
                     //result.Type = ResultWeb.ResultType.OUT_OF_STOCK;
                     return Json(new
                     {
-                        success = false
-                ,
+                        success = false ,
                         text = "Sản phẩm không đủ hàng"
                     }, JsonRequestBehavior.AllowGet);
                 }
@@ -194,14 +200,13 @@ namespace BookStore.Controllers
                     Quantity = 1,
                     TotalAmount = yourProduct.Price
                 };
+                
                 db.OrderDetails.Add(yourDetail);
                 db.SaveChanges();
-                
             }
-
             RecalculateOrderCost(cart);
-
-            //result.Type = ResultWeb.ResultType.OK;
+            //return PartialView("CartPartial", details.ToList());
+            result.Type = ResultWeb.ResultType.OK;
             return Json(new
             {
                 success = true

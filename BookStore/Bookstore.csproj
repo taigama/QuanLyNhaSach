@@ -156,6 +156,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\Cart1Controller.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -562,11 +563,12 @@
     <Content Include="Views\Staff\ListImport.cshtml" />
     <Content Include="Views\Staff\AddImport.cshtml" />
     <Content Include="Views\Staff\Finance.cshtml" />
-    <Content Include="Views\Search1\Index.cshtml" />
     <Content Include="Views\Search1\SideSearch.cshtml" />
     <Content Include="Views\Shared\Header1.cshtml" />
     <Content Include="Views\Shared\_MainLayout1.cshtml" />
     <Content Include="Views\Search1\ItemPartial.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Search1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
