@@ -28,6 +28,11 @@ namespace BookStore.Controllers
         {
             Order cart = CheckOrderId();
             var details = cart.OrderDetails;
+            if(details == null)
+            {
+                details = new List<OrderDetail>();
+            }
+
             ViewBag.Subtotal = cart.TotalAmount;
             return PartialView(details.ToList());
         }
