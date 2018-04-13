@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-lg-3" style="background-color: #eee">
                 <div class="left-sidebar">
-                    @Html.Partial("SideSearch")
+                    @Html.Partial("SideMenu")
                 </div>
             </div>
             
@@ -65,9 +65,10 @@
                                 }
 
                             </div>
+                            <hr style="margin:0px;border-color:#DDD" />
                             <div class="caption">
                                 <div class="title-caption">
-                                    <h4 style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"><b>@item.Name</b></h4>
+                                    <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@item.Name</b></h4>
                                     <span class="tooltiptext">@item.Name</span>
                                 </div>
 
@@ -85,7 +86,7 @@
                                     <input type="hidden" name="add" value="1">
                                     <input type="hidden" name="chr_item" value="@item.Name">
                                     <input type="hidden" name="amount" value="@item.Price">
-                                    <a href="" class="chr-cart" style="color: white;padding-top: 10px; padding-bottom:10px" onclick="updateCart('add',@item.ID, event)">
+                                    <a href="" class="chr-cart" onclick="updateCart('add',@item.ID, event)">
                                         <p hidden>@item.ID</p>
                                         <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                         Thêm vào giỏ

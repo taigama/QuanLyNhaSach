@@ -28,8 +28,8 @@
     <!-- font-awesome icons -->
     <link href="~/Assets/font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- override navbar -->
-
-    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/css/side-style.css" rel="stylesheet" />
+    @*<link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">*@
     <link href="~/Assets/css/override-navbar.css" rel="stylesheet" media="all">
 
     <!-- //Custom Theme files -->
@@ -65,6 +65,8 @@
     <script src="~/Assets/js/scrolling-nav.js"></script>
     <script src="~/Assets/js/bootstrap.js"></script>
 
+    <script src="~/Assets/js/jquery.autoellipsis-1.0.10.min.js"></script>
+
     <!--footer start-->
     <footer class="cpy-right">
         <p>
@@ -86,6 +88,8 @@
                     $(this).toggleClass('open')
                 }
             );
+
+            $('.product-chr-info .caption h4').ellipsis();
         });
     </script>
 

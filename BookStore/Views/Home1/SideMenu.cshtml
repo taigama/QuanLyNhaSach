@@ -15,7 +15,7 @@
             @foreach (var item in Authors)
             {
                 <li>
-                    <a href="#">
+                    <a href="/Home/Author/@item.ID">
                         <span class="pull-right">(@item.NumberOfBooks)</span>
                         <b>@item.Name</b>
                         <p hidden>@item.ID</p>
@@ -35,7 +35,7 @@
             @foreach (var item in Categories)
             {
                 <li>
-                    <a href="#">
+                    <a href="/Products/Category/@item.ID">
                         <span class="pull-right">(@item.NumberOfProducts)</span>
                         <b>@item.Name</b>
                         <p hidden>@item.ID</p>
@@ -74,28 +74,4 @@
         });
         //bindSlider();
     })
-
-
-
-    // bind event search theo danh mục (mấy cái mục bên dưới dropdown-box)
-    $("#list-category").on("click", "li>a", function (event) {
-        event.preventDefault();
-
-        var selected_cate = $(this).children('p').text();
-        $('#ddl_category').val(selected_cate);
-        $('#ddl_category').selectpicker('refresh');
-
-        onSearch();
-    });
-
-    // bind event search theo tác giả (mấy cái mục bên dưới dropdown-box)
-    $("#list-author").on("click", "li>a", function (event) {
-        event.preventDefault();
-
-        var selected_author = $(this).children('p').text();
-        $('#ddl_author').val(selected_author);
-        $('#ddl_author').selectpicker('refresh');
-        onSearch();
-    });
-
 </script>

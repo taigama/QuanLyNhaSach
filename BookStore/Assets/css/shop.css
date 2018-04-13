@@ -432,7 +432,7 @@ p.sbmincart-empty-text {
 }
 
 .product-men {
-	padding: 0 6px;
+	padding: 0 10px;
 }
 
 /*-- Model-Slider --*/
@@ -583,10 +583,13 @@ ul.stars li a:hover {
 }
 
 .product-chr-info {
-	padding: 20px;
-	-webkit-transition: .5s all;
-	-moz-transition: .5s all;
-	transition: .5s all;
+    padding: 10px;
+    -webkit-transition: .3s all;
+    -moz-transition: .3s all;
+    transition: .3s all;
+    border-width: 1px;
+    border-style: solid !important;
+    border-color: #DDD;
 }
 
 .product-chr-info:hover {
@@ -605,18 +608,22 @@ ul.price-list li {
 
 ul.price-list li:first-child {
 	font-weight: 600;
-	color: #34c663;
+	color: #1B95E0;
 }
 
 .product-chr-info .caption h4 {
-	color: #000;
-	/*text-transform: capitalize;*/
-	font-size: 1em;
-	letter-spacing: 0.5px;
-	font-weight: 500;
-	padding: 5px 10px;
-	margin-bottom: 10px;
-	text-align: center;
+    color: #000;
+    /*text-transform: capitalize;*/
+    font-size: 1em;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    padding: 5px 0px;
+    margin-bottom: 2px;
+    text-align: center;
+    height:3.0em;
+    /*text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;*/
 }
 /* Modify*/
 .caption h4:hover{
@@ -1021,6 +1028,8 @@ span.item_price {
 }
 
 .chr-cart {
+    padding-top:2px;
+    padding-bottom:2px;
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -1061,7 +1070,7 @@ span.item_price {
 }
 
 .chr-cart:hover {
-	background: #34c663;
+	background: #1B95E0;
 	color: #000;
 }
 
