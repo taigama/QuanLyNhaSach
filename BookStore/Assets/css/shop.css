@@ -590,6 +590,7 @@ ul.stars li a:hover {
     border-width: 1px;
     border-style: solid !important;
     border-color: #DDD;
+    border-radius: 4px;
 }
 
 .product-chr-info:hover {
@@ -900,13 +901,18 @@ input.checked {
 }
 
 h3.shopf-sear-headits-sear-head {
-	font-size: 16px;
-	color: #000;
-	font-weight: 600;
-	margin-bottom: 12px;
-	text-transform: capitalize;
-	background: #fff;
-	padding: 6px 10px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 600;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    text-transform: capitalize;
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: mintcream;
+    background-color: #e01414;
+    text-align:center;
 }
 
 .fteam_grid_info {

@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Tìm kiếm sản phẩm | Nhà sách AC";
-    Layout = "~/Views/Shared/_MainLayout1.cshtml";
+    Layout = "~/Views/MyShared/MainLayout.cshtml";
     
 }
 
@@ -11,13 +11,10 @@
         <div class="row">
             <div class="col-lg-3" style="background-color: #eee">
                 <div class="left-sidebar">
-                    <h3 class="shopf-sear-headits-sear-head">Tìm kiếm chính xác</h3>
-                    <!--Tìm kiếm chính xác-->
-                    <div class="row">
-                        <div class="search_box col-lg-3 col-lg-offset-3" style="display:inline-block">
-                            <input id="search_box_correct" type="search" placeholder="Tìm kiếm" onkeypress="onKeypressSearchCorrectly(event)">
-                        </div>
-                    </div>
+                    <label class="check-container" for="is_correctly">
+                        Tìm chính xác <input class="pull-right" id="is_correctly" type="checkbox" />
+                    </label>
+                    
                     @Html.Partial("SideSearch")
 
                 </div><!--/price-range-->
@@ -47,8 +44,17 @@
         var costBegin = 0;//$('#ex2').val().split(',')[0];
         var costEnd = 2000000; //$('#ex2').val().split(',')[1]; //$('#cost_end').val()
 
+
+        var strUrl = "";
+        if (document.getElementById('is_correctly').checked) {
+            strUrl = "/Search1/SearchCorrectly/";
+        }
+        else {
+            strUrl = "/Search1/Search/";
+        }
+
         $.ajax({// lấy dữ liệu từ link này
-            url: '/Search1/Search/',
+            url: strUrl,
             type: 'GET',
             dataType: 'text',// kiểu dữ liệu: json
             data: {
@@ -80,7 +86,7 @@
         });
     }
 
-    function onKeypressSearchCorrectly(e) {
+    @*function onKeypressSearchCorrectly(e) {
         var keynum;
         if (window.event) { // IE
             keynum = e.keyCode;
@@ -136,5 +142,5 @@
                 }
             }
         });
-    }
+    }*@
 </script>

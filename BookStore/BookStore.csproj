@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9090668C-82EA-4988-AA2D-0F8379A1F401}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BookStore</RootNamespace>
+    <AssemblyName>BookStore</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\Cart1Controller.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\Home1Controller.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\Search1Controller.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Data\BookStoreContext.cs" />
+    <Compile Include="Data\BookStoreInitializer.cs" />
+    <Compile Include="Data\Helper.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\HtmlExtensions.cs" />
+    <Compile Include="Helpers\SimilarSearch.cs" />
+    <Compile Include="Models\AnonymousUser.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\AuthorVM.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\ImportDetail.cs" />
+    <Compile Include="Models\JResult.cs" />
+    <Compile Include="Models\ProductImage.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductDetail.cs" />
+    <Compile Include="Models\ProductImport.cs" />
+    <Compile Include="Models\ProductVM.cs" />
+    <Compile Include="Models\Publisher.cs" />
+    <Compile Include="Models\PublisherVM.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ResultWeb.cs" />
+    <Compile Include="Models\_Enum.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\css\animate.css" />
+    <Content Include="Assets\css\bootstrap-select.min.css" />
+    <Content Include="Assets\css\bootstrap.css" />
+    <Content Include="Assets\css\override-navbar.css" />
+    <Content Include="Assets\css\checkout.css" />
+    <Content Include="Assets\css\font-awesome.min.css" />
+    <Content Include="Assets\css\input-image.css" />
+    <Content Include="Assets\css\jquery-ui1.css" />
+    <Content Include="Assets\css\main.css" />
+    <Content Include="Assets\css\prettyPhoto.css" />
+    <Content Include="Assets\css\price-range.css" />
+    <Content Include="Assets\css\responsive.css" />
+    <Content Include="Assets\css\sb-admin-2.min.css" />
+    <Content Include="Assets\css\scrolltable.css" />
+    <Content Include="Assets\css\shop.css" />
+    <Content Include="Assets\css\side-style.css" />
+    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\css\toast.css" />
+    <Content Include="Assets\font-awesome\css\font-awesome.css" />
+    <Content Include="Assets\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\fonts\FontAwesome.otf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\images\404\404.png" />
+    <Content Include="Assets\images\blog\blog-one.jpg" />
+    <Content Include="Assets\images\blog\blog-three.jpg" />
+    <Content Include="Assets\images\blog\blog-two.jpg" />
+    <Content Include="Assets\images\blog\socials.png" />
+    <Content Include="Assets\images\home\bg_border.png" />
+    <Content Include="Assets\images\home\default-image.png" />
+    <Content Include="Assets\images\home\gallery1.jpg" />
+    <Content Include="Assets\images\home\gallery2.jpg" />
+    <Content Include="Assets\images\home\gallery3.jpg" />
+    <Content Include="Assets\images\home\gallery4.jpg" />
+    <Content Include="Assets\images\home\logo.jpg" />
+    <Content Include="Assets\images\home\logo.png" />
+    <Content Include="Assets\images\home\map.png" />
+    <Content Include="Assets\images\home\new.png" />
+    <Content Include="Assets\images\home\recommend1.jpg" />
+    <Content Include="Assets\images\home\recommend2.jpg" />
+    <Content Include="Assets\images\home\recommend3.jpg" />
+    <Content Include="Assets\images\home\sale.png" />
+    <Content Include="Assets\images\home\searchicon.png" />
+    <Content Include="Assets\images\home\shipping.jpg" />
+    <Content Include="Assets\images\home\slider1.png" />
+    <Content Include="Assets\images\home\slider2.jpg" />
+    <Content Include="Assets\images\home\slider3.jpg" />
+    <Content Include="Assets\images\product-details\cam_nang_cua_nguoi.jpg" />
+    <Content Include="Assets\images\product-details\e3khdeda.u3059.d20170605.t093650.426505.jpg" />
+    <Content Include="Assets\images\product-details\img139_13.jpg" />
+    <Content Include="Assets\images\product-details\img523_10.jpg" />
+    <Content Include="Assets\images\product-details\img894_9.jpg" />
+    <Content Include="Assets\images\product-details\nang_prym.jpg" />
+    <Content Include="Assets\images\product-details\new.jpg" />
+    <Content Include="Assets\images\product-details\product1.jpg" />
+    <Content Include="Assets\images\product-details\product2.jpg" />
+    <Content Include="Assets\images\product-details\product4.jpg" />
+    <Content Include="Assets\images\product-details\quan-go-do-len_1.jpg" />
+    <Content Include="Assets\images\product-details\rating.png" />
+    <Content Include="Assets\images\product-details\share.png" />
+    <Content Include="Assets\images\product-details\sherlock-holme-1.u4939.d20170630.t113348.643376.jpg" />
+    <Content Include="Assets\images\product-details\toi_thay_hoa_vang.jpg" />
+    <Content Include="Assets\images\shop\product12.jpg" />
+    <Content Include="Assets\images\staff\avatar.png" />
+    <Content Include="Assets\js\bootstrap-select.min.js" />
+    <Content Include="Assets\js\bootstrap.js" />
+    <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\contact.js" />
+    <Content Include="Assets\js\easing.js" />
+    <Content Include="Assets\js\gmaps.js" />
+    <Content Include="Assets\js\html5shiv.js" />
+    <Content Include="Assets\js\jquery-3.1.1.min.js" />
+    <Content Include="Assets\js\jquery-ui.js" />
+    <Content Include="Assets\js\jquery.autoellipsis-1.0.10.min.js" />
+    <Content Include="Assets\js\jquery.js" />
+    <Content Include="Assets\js\jquery.prettyPhoto.js" />
+    <Content Include="Assets\js\jquery.scrollUp.min.js" />
+    <Content Include="Assets\js\main.js" />
+    <Content Include="Assets\js\main1.js" />
+    <Content Include="Assets\js\metisMenu.min.js" />
+    <Content Include="Assets\js\minicart.js" />
+    <Content Include="Assets\js\moment.js" />
+    <Content Include="Assets\js\moment.min.js" />
+    <Content Include="Assets\js\move-top.js" />
+    <Content Include="Assets\js\price-range.js" />
+    <Content Include="Assets\js\sb-admin-2.js" />
+    <Content Include="Assets\js\scrolling-nav.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Assets\font-awesome\less\animated.less" />
+    <Content Include="Assets\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Assets\font-awesome\less\core.less" />
+    <Content Include="Assets\font-awesome\less\extras.less" />
+    <Content Include="Assets\font-awesome\less\fixed-width.less" />
+    <Content Include="Assets\font-awesome\less\font-awesome.less" />
+    <Content Include="Assets\font-awesome\less\icons.less" />
+    <Content Include="Assets\font-awesome\less\larger.less" />
+    <Content Include="Assets\font-awesome\less\list.less" />
+    <Content Include="Assets\font-awesome\less\mixins.less" />
+    <Content Include="Assets\font-awesome\less\path.less" />
+    <Content Include="Assets\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Assets\font-awesome\less\screen-reader.less" />
+    <Content Include="Assets\font-awesome\less\spinning.less" />
+    <Content Include="Assets\font-awesome\less\stacked.less" />
+    <Content Include="Assets\font-awesome\less\variables.less" />
+    <Content Include="Assets\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Assets\font-awesome\scss\_animated.scss" />
+    <Content Include="Assets\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Assets\font-awesome\scss\_core.scss" />
+    <Content Include="Assets\font-awesome\scss\_extras.scss" />
+    <Content Include="Assets\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Assets\font-awesome\scss\_icons.scss" />
+    <Content Include="Assets\font-awesome\scss\_larger.scss" />
+    <Content Include="Assets\font-awesome\scss\_list.scss" />
+    <Content Include="Assets\font-awesome\scss\_mixins.scss" />
+    <Content Include="Assets\font-awesome\scss\_path.scss" />
+    <Content Include="Assets\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Assets\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Assets\font-awesome\scss\_spinning.scss" />
+    <Content Include="Assets\font-awesome\scss\_stacked.scss" />
+    <Content Include="Assets\font-awesome\scss\_variables.scss" />
+    <Content Include="ConnectionStrings.config" />
+    <None Include="Properties\PublishProfiles\quanlynhasach - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\taigama-bookstore - Web Deploy.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\canvasjs.min.js" />
+    <Content Include="Scripts\helper-2.js" />
+    <Content Include="Scripts\helper.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.canvasjs.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="UploadFiles\00R26ID3Z012877330534cc13f3db7519.204x290.w.b.jpg" />
+    <Content Include="UploadFiles\0GE5QWC5NZimg990.gif" />
+    <Content Include="UploadFiles\0J3NY8K11Limg764.gif" />
+    <Content Include="UploadFiles\0U1WPSCC5Limg659.gif" />
+    <Content Include="UploadFiles\11ATY0DAJY10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\14MJU9JP0J7-cannes.jpg" />
+    <Content Include="UploadFiles\18M9GPZO5Vtoi_thay_hoa_vang.jpg" />
+    <Content Include="UploadFiles\1FZBGAML7DJKROWLINGPR_S01_00057_V4.jpg" />
+    <Content Include="UploadFiles\1VUAY40QQRimg976.u335.d20161212.t123014.937796.jpg" />
+    <Content Include="UploadFiles\2TO4EIYJ2Xmaxresdefault.jpg" />
+    <Content Include="UploadFiles\2WSEIW2R3751385-starcraft-ii-heart-of-the-swarm.png" />
+    <Content Include="UploadFiles\31YKAF4QND10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\35PIWCXTN72219571180662_s_01.d20171005.t190853.153514.jpg" />
+    <Content Include="UploadFiles\36Y1VJ8FS2471df99e25d8525fabf490accc351032.jpg" />
+    <Content Include="UploadFiles\3EHCZ1P9XDimg139_13.jpg" />
+    <Content Include="UploadFiles\3TWYT15F9L23murakami1_span-jumbo.jpg" />
+    <Content Include="UploadFiles\49JMVUD5J6Robert_Louis_Stevenson_Knox_Series.jpg" />
+    <Content Include="UploadFiles\4CKPW5G7GX7703521666849-%281%29.u2683.d20160829.t094627.292915.jpg" />
+    <Content Include="UploadFiles\4QN5TL7RHU93645c398e9480f5f6bdc49a1e4ca48c.jpg" />
+    <Content Include="UploadFiles\4XQ4C4GNIDIMG_20171109_0405.gif" />
+    <Content Include="UploadFiles\4Y7QCA4A7Yimg135.gif" />
+    <Content Include="UploadFiles\5MHALJLAFChinh-6.u4939.d20171009.t095448.393699.jpg" />
+    <Content Include="UploadFiles\5Z80ONVZ6Q7120-24tn--3-.u73.d20170215.t085225.58370.jpg" />
+    <Content Include="UploadFiles\5ZUGH0U7ZHimg741.gif" />
+    <Content Include="UploadFiles\6QCLLJ30CV10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\6QLNJZ7822illustrator.jpg" />
+    <Content Include="UploadFiles\7Q4QN42GQ3toi_thay_hoa_vang.jpg" />
+    <Content Include="UploadFiles\80KS7GMWV49a85b15e3b34375cdbd716f8c3d21a1f.jpg" />
+    <Content Include="UploadFiles\8362JKP6J9eval.jpg" />
+    <Content Include="UploadFiles\8SF2L54DW9IMG_20170802_0024.gif" />
+    <Content Include="UploadFiles\95CZUO7TTVCho_SatThu.jpg" />
+    <Content Include="UploadFiles\95WNRZ1HC2hình vuông.jpg" />
+    <Content Include="UploadFiles\9GEOIQV0IVhình vuông.jpg" />
+    <Content Include="UploadFiles\9MP4YWUTARIMG_20171109_0116.gif" />
+    <Content Include="UploadFiles\9PXVZMUDJN2219571180662_s_01.d20171005.t190853.153514.jpg" />
+    <Content Include="UploadFiles\9Z3H8MVCQ7StarCraft2_C2_WE_10.jpg" />
+    <Content Include="UploadFiles\AEXF6TQKACimg759.gif" />
+    <Content Include="UploadFiles\AEZTTK0JNNnguyendu.jpg" />
+    <Content Include="UploadFiles\AOGR8JURN3593ff776-6091-46b9-b85c-7ae447d86995vutrongphung %281%29.jpg" />
+    <Content Include="UploadFiles\AP8XA13F2Ocd-bao-an-be-yeu.204x289.w.b.jpg" />
+    <Content Include="UploadFiles\AQ53Z1NHDT10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\AX6JV06X4Qte1baa3i-xue1bb91ng.jpg" />
+    <Content Include="UploadFiles\AYYT212J54450px-Ernest_Hemingway_1923_passport_photo.jpg" />
+    <Content Include="UploadFiles\B21KRQC1NA12-014.u2683.d20161107.t090956.448792.jpg" />
+    <Content Include="UploadFiles\B56G3UL4AMquan-go-do-len_1.jpg" />
+    <Content Include="UploadFiles\BUZFSO8C26MangaPage.png" />
+    <Content Include="UploadFiles\BXIZM4MQ0VDale-Carnegie-GQ-12May14_rex_b.jpg" />
+    <Content Include="UploadFiles\C6FOJYI2XVoriginal2.925204.1.jpg" />
+    <Content Include="UploadFiles\CDY2JX7B9Ynhung-co-em-gai.jpg" />
+    <Content Include="UploadFiles\CVC02HCD9BNguyen-nhat-anh-2016-ra-mat-sach.jpg" />
+    <Content Include="UploadFiles\CY12GTB0NR10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\D192N53XYO154148_41BEpC9p12L.jpg" />
+    <Content Include="UploadFiles\D1ZDMK58A1img523_10.jpg" />
+    <Content Include="UploadFiles\D29N7MF9YLimg026.gif" />
+    <Content Include="UploadFiles\D7U0VIY424product4.jpg" />
+    <Content Include="UploadFiles\D9PZ3MK5PJproduct1.jpg" />
+    <Content Include="UploadFiles\DG86T7935GVictor_Hugo_by_Brock.jpg" />
+    <Content Include="UploadFiles\DGD3B4KSJ5bo-10-dia-trang-cd-r-maxell-1498553850-268742-f22a16e07120ed750b05365aece70f6d-webp-zoom.jpg" />
+    <Content Include="UploadFiles\DKND94JO0Qimg786.gif" />
+    <Content Include="UploadFiles\DLNG9JYZI312-005.u2683.d20161107.t093947.347179.jpg" />
+    <Content Include="UploadFiles\DMYI9CMDOW15994912_10202704031879149_2756536494430192326_o.jpg" />
+    <Content Include="UploadFiles\DNFXF1CEFI2478625420790_s_01.d20171009.t172750.498632.jpg" />
+    <Content Include="UploadFiles\E2KE3CJE6Dbo_compa_f719.jpg" />
+    <Content Include="UploadFiles\E8004MEYJF8935095622689.jpg" />
+    <Content Include="UploadFiles\EM7MUUQSGP54bce4f234862ce9446341043a0dabde.jpg" />
+    <Content Include="UploadFiles\EZLXJZK5UY15994912_10202704031879149_2756536494430192326_o.jpg" />
+    <Content Include="UploadFiles\F3WP5KF1V9IMG072.gif" />
+    <Content Include="UploadFiles\F6ZH2VA1ONimages.jpg" />
+    <Content Include="UploadFiles\F787JSFK9Rimg631.gif" />
+    <Content Include="UploadFiles\F9H6T63UKA6cfdc6c0edbccb232380a81b28773d4a.jpg" />
+    <Content Include="UploadFiles\FI1B379AZR10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\FM0LTOHF0Ftuoi-tre-dang-gia-bao-nhieu-u547-d20161012-t113832-888179.u3059.d20170616.t095744.390222.jpg" />
+    <Content Include="UploadFiles\G3A2O489NEer196e-16000vnd.jpg" />
+    <Content Include="UploadFiles\GESV7Z8151billgates lich su dang.jpg" />
+    <Content Include="UploadFiles\GFLONXTLX610861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\H726YAFSSHphu_thuy.jpg" />
+    <Content Include="UploadFiles\HNFKP734CMbo-----sa--ch-gia--o-khoa---sa--ch-ba--i-ta----p-lo----p-4-2.u5131.d20170624.t150459.761903.jpg" />
+    <Content Include="UploadFiles\HVPRHRUMPVcombo.u2566.d20170315.t091425.237955.jpg" />
+    <Content Include="UploadFiles\IT62EHVL2Clop 9.u547.d20160423.t210114.jpg" />
+    <Content Include="UploadFiles\JA5DWBFXTXgiay-photo-excel-a5-70_1.jpg" />
+    <Content Include="UploadFiles\JN06K67BCIimg_7907.u5869.d20171025.t164654.57551.jpg" />
+    <Content Include="UploadFiles\KDH5VYIEVDnang_prym.jpg" />
+    <Content Include="UploadFiles\KNH6ORN0H6333px-Ilya_Efimovich_Repin_%281844-1930%29_-_Portrait_of_Leo_Tolstoy_%281887%29.jpg" />
+    <Content Include="UploadFiles\KSZ91M2EDVchuyen-co-tich-danh-cho-nguoi-lon_1.jpg" />
+    <Content Include="UploadFiles\L3FDNLH8FNimg592.gif" />
+    <Content Include="UploadFiles\LAT2E6VHX03d_sherlock_holmes_285k_x280x340x2.u2487.d20161006.t140606.796156.jpg" />
+    <Content Include="UploadFiles\LDV7NIGIA7img358.gif" />
+    <Content Include="UploadFiles\LH5J8UOHBVoxford dictionary3.jpg" />
+    <Content Include="UploadFiles\LPHGBY5XMPrez_768_huy-can-copy.jpg" />
+    <Content Include="UploadFiles\M0PNU8N4UUimg592.u3059.d20170616.t101749.921069.jpg" />
+    <Content Include="UploadFiles\MAA0WEL3GP10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\MD5HNOHPJ02263950848520-001.u4083.d20161229.t154511.602839.jpg" />
+    <Content Include="UploadFiles\ME9BZX1DKUimg420.gif" />
+    <Content Include="UploadFiles\MH1S9CPEVWnna-ban-co-nam-cho-ngoi.jpg" />
+    <Content Include="UploadFiles\MPHN0CNFNQdsc_0001.u634.d20160427.t153018.jpg" />
+    <Content Include="UploadFiles\MV61YTAOGWblack_infinity_-_i_350px_.jpg" />
+    <Content Include="UploadFiles\MXA4GDC0W3image_13539.jpg" />
+    <Content Include="UploadFiles\MY0PIBC2ICto-minh-duc---nguoi-lang-man--bia-truoc-.u4083.d20161215.t144757.738822.jpg" />
+    <Content Include="UploadFiles\MY8JYQYWST10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\N2HJBI0HOUvnduJD_TYrIrUDl9fyOqRw.1503720312.jpg" />
+    <Content Include="UploadFiles\N3M0KXREBIcon-chut-gi-de-nho.jpg" />
+    <Content Include="UploadFiles\NA238WKY50img941.gif" />
+    <Content Include="UploadFiles\NKKM6VCJ5E12_Rosie Nguyen.JPG" />
+    <Content Include="UploadFiles\O2TTEYNGFY10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\OE7XA1H2GQhình vuông.jpg" />
+    <Content Include="UploadFiles\OFIOJUXDZGsherlock-holme-1.u4939.d20170630.t113348.643376.jpg" />
+    <Content Include="UploadFiles\OVD9CXF85Cimg828.gif" />
+    <Content Include="UploadFiles\P2I896XENJbut_chi_hb.jpg" />
+    <Content Include="UploadFiles\P81J5TZ17Qco-gai-den-tu-hom-qua_bia-moi_ban-thuong.u5131.d20170607.t100057.355539.jpg" />
+    <Content Include="UploadFiles\PM2YI8HAITsong-doi-hanh-phuc.jpg" />
+    <Content Include="UploadFiles\PMG6DMGGL9rung-nauy_2_2_1.jpg" />
+    <Content Include="UploadFiles\PY7RXW6W9MIMG_20170913_0066.gif" />
+    <Content Include="UploadFiles\QA850R3A7Bcombo.u2566.d20170315.t091425.237955.jpg" />
+    <Content Include="UploadFiles\QATO7MPNKV250px-Shakespeare.jpg" />
+    <Content Include="UploadFiles\QVBUK4VW2V54bce4f234862ce9446341043a0dabde.jpg" />
+    <Content Include="UploadFiles\QYA3KKT9MMimg365.gif" />
+    <Content Include="UploadFiles\R2TC4F9PYG10861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\RACVARTX6Xduc-tuan---goc-troi-rieng--2-bia-.u4083.d20161215.t142922.110009.jpg" />
+    <Content Include="UploadFiles\RBLIIH6UVApc-6600--demo-.u634.d20161128.t115345.211352.jpg" />
+    <Content Include="UploadFiles\RG5MZI67SEIMG_20171123_0001.gif" />
+    <Content Include="UploadFiles\RNRYRP9DSJnha-lanh-dao-khong-chuc-danh-70k-a.jpg" />
+    <Content Include="UploadFiles\S24BNTONMBproduct2.jpg" />
+    <Content Include="UploadFiles\S2BWWS3FCXimg894_9.jpg" />
+    <Content Include="UploadFiles\S2IEOPWZWEimg098.gif" />
+    <Content Include="UploadFiles\S7Q954M5WB54bce4f234862ce9446341043a0dabde.jpg" />
+    <Content Include="UploadFiles\SFKKNJH4YZTony-Buoi-Sang.jpg" />
+    <Content Include="UploadFiles\SK84PW061110861022_368280103361183_4374824865836843117_o.jpg" />
+    <Content Include="UploadFiles\T6UJL6F9OEer196e-16000vnd.jpg" />
+    <Content Include="UploadFiles\TA1RQKL81Xcam_nang_cua_nguoi.jpg" />
+    <Content Include="UploadFiles\TBSF490KJV11-thuathungbien.u5567.d20170906.t144942.65735.jpg" />
+    <Content Include="UploadFiles\TKRHJ1KABRz_18_radiertipp_1.jpg" />
+    <Content Include="UploadFiles\TPN26VVPU0quang-cao-bai-van-hoc-01.u3059.d20170426.t121527.129251.jpg" />
+    <Content Include="UploadFiles\TWLJIN9AV0dsc_8799.u634.d20160403.t211507.jpg" />
+    <Content Include="UploadFiles\U4YLYUHZ5Tc036d9a5b53448bd751e5e83fc185859.jpg" />
+    <Content Include="UploadFiles\U7JIT0WXY2img489.u4972.d20170405.t173359.789884.jpg" />
+    <Content Include="UploadFiles\USDFS155U42474811238316_s_01.d20171009.t172612.763804.jpg" />
+    <Content Include="UploadFiles\WEAYDDFRQWnang_prym.jpg" />
+    <Content Include="UploadFiles\WJ4QEGVA93hans-christian-andersen.jpg" />
+    <Content Include="UploadFiles\WOEOZJW8V3thien_yet.u2751.d20170623.t145649.498817.jpg" />
+    <Content Include="UploadFiles\WYDLE58K5D8932000405627-001.u4083.d20161209.t152703.802813.jpg" />
+    <Content Include="UploadFiles\X4U2EYMSDS7100-12cb.u2769.d20170213.t095540.315878.jpg" />
+    <Content Include="UploadFiles\X8S5MSFAZHquan-go-do-len_1.jpg" />
+    <Content Include="UploadFiles\XFTNET2W1Ebehind the scenes.jpg" />
+    <Content Include="UploadFiles\XUZKYOSSN7e3khdeda.u3059.d20170605.t093650.426505.jpg" />
+    <Content Include="UploadFiles\XWRERREU8OPaulo-Coelho.jpg" />
+    <Content Include="UploadFiles\Y3Z7HME1TMimg094.gif" />
+    <Content Include="UploadFiles\Y4T4O8MRPYmulti.jpg" />
+    <Content Include="UploadFiles\Y6ZK5X7K9CIMG_20171129_0389.gif" />
+    <Content Include="UploadFiles\YSU3YSXD7Hdouble-a-3.u634.d20160606.t144302.png" />
+    <Content Include="UploadFiles\YUV28G0QSZnna.jpg" />
+    <Content Include="UploadFiles\Z5J1HTXCEFsua.jpg" />
+    <Content Include="UploadFiles\ZGIEX3MZ4DRay_Bradbury_%281975%29_-cropped-.jpg" />
+    <Content Include="UploadFiles\ZVH2T3V5D2ditimlesong20161.u84.d20161125.t134037.152104.jpg" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\SideMenu.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Staff\Login.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Staff\ListOrder.cshtml" />
+    <Content Include="Views\Shared\Admin_Layout.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Staff\Cashier.cshtml" />
+    <Content Include="Views\Staff\ListProduct.cshtml" />
+    <Content Include="Views\Staff\AddProduct.cshtml" />
+    <Content Include="Views\Staff\EditProduct.cshtml" />
+    <Content Include="Views\Staff\ListPublisher.cshtml" />
+    <Content Include="Views\Staff\AddPublisher.cshtml" />
+    <Content Include="Views\Staff\EditPublisher.cshtml" />
+    <Content Include="Views\Staff\ListAuthor.cshtml" />
+    <Content Include="Views\Staff\AddAuthor.cshtml" />
+    <Content Include="Views\Staff\EditAuthor.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Staff\UserProfile.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Search\SideSearch.cshtml" />
+    <Content Include="Views\Products\Single.cshtml" />
+    <Content Include="Views\Order\PrintPage.cshtml" />
+    <Content Include="Views\Products\Category.cshtml" />
+    <Content Include="Views\Home\Author.cshtml" />
+    <Content Include="Views\Shared\_Empty.cshtml" />
+    <Content Include="Views\Order\Export.cshtml" />
+    <Content Include="Views\Staff\_ListOrder.cshtml" />
+    <Content Include="Views\Order\_ListOrder.cshtml" />
+    <Content Include="Views\Order\_ListODView.cshtml" />
+    <Content Include="Views\Order\ViewOrder.cshtml" />
+    <Content Include="Views\Staff\ListCategory.cshtml" />
+    <Content Include="Views\Staff\ListImport.cshtml" />
+    <Content Include="Views\Staff\AddImport.cshtml" />
+    <Content Include="Views\Staff\Finance.cshtml" />
+    <Content Include="Views\Search1\SideSearch.cshtml" />
+    <Content Include="Views\Shared\Header1.cshtml" />
+    <Content Include="Views\Shared\_MainLayout1.cshtml" />
+    <Content Include="Views\Shared\ItemPartial.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Search1\Index.cshtml" />
+    <Content Include="Views\Home1\Index.cshtml" />
+    <Content Include="Views\Home1\SideMenu.cshtml" />
+    <Content Include="Views\Shared\Header_Navbar.cshtml" />
+    <Content Include="Views\MyShared\MainLayout.cshtml" />
+    <Content Include="Views\MyShared\Navbar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Assets\images\cart\" />
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51196</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51196/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -8,7 +8,7 @@
 
 
 <!-- author -->
-<h3 class="shopf-sear-headits-sear-head" style="margin-top:20px;margin-bottom:10px;text-align:center;color:#ee4f4f">Tác giả</h3>
+<h3 class="shopf-sear-headits-sear-head">Tác giả</h3>
 <div class="brands-name" style="height:100%;">
     <div id="list-author">
         <ul class="nav nav-pills nav-stacked">
@@ -28,7 +28,7 @@
 </div>
 
 <!-- category -->
-<h3 class="shopf-sear-headits-sear-head" style="margin-top:20px;margin-bottom:10px;text-align:center;color:#ee4f4f">Danh mục</h3>
+<h3 class="shopf-sear-headits-sear-head">Danh mục</h3>
 <div class="brands-name" style="height:100%">
     <div id="list-category">
         <ul class="nav nav-pills nav-stacked">
@@ -54,24 +54,8 @@
 <script src="~/Scripts/helper.js"></script>
 @*<script src="~/Assets/js/jquery-ui.js"></script>*@
 <script>
-    // bind event search theo giá tiền
-    //$("#ex2").slider({}).on("slideStop", function (e) {
-    //    onSearch()
-    //});
-    // lúc đầu show web
-    $(document).ready(function () {
-        @*//listAuthors();
-        //listCategories();*@
-
-        // bind event search theo tác giả
-        $("#ddl_author").change(function () {
-            onSearch();
-        });
-
-        // bind event search theo danh mục
-        $("#ddl_category").change(function () {
-            onSearch();
-        });
-        //bindSlider();
-    })
+    
+    function onSearch() {
+        window.location = "/Search1/Index?key=" + $('#search_box').val();
+    }
 </script>

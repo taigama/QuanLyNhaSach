@@ -478,14 +478,26 @@ h5.sec-title {
 }
 
 .dropdown-menu {
-    border-radius: 0px;
+    border-radius: 4px;
     min-width: 150px;
     padding: 0;
-}
-
-.dropdown-menu {
     background: #1B95E0;
 }
+
+.dropdown-menu .bs-searchbox {
+    padding:4px;
+}
+
+.dropdown-menu .bs-searchbox input {
+    border-radius:4px;
+    padding:6px;
+    height:36px;
+}
+
+.dropdown-menu .inner li a {
+    border-radius:4px;
+}
+
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
@@ -499,7 +511,7 @@ h5.sec-title {
     font-weight: 400;
     letter-spacing: 1px;
     font-size: 13px;
-    text-transform: uppercase;
+    text-transform: none;
     color: #fff;
 }
 
@@ -3628,4 +3640,11 @@ button#btn-signup {
     border-color: #189EFF;
     margin-top: 7.5px;
     padding: 5px;
+}
+
+.check-container {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin-top:5px;
+    width:100%;
 }
