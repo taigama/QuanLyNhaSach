@@ -1,8 +1,10 @@
 ﻿@{
     IEnumerable<BookStore.Models.Category> Categories =
-        (ViewData["Categories"] as IList<BookStore.Models.Category>).OrderByDescending(cate => cate.NumberOfProducts).Take(10);
+        (ViewData["Categories"] as IList<BookStore.Models.Category>).OrderByDescending(cate => cate.NumberOfProducts).ToList();
+    IEnumerable<BookStore.Models.Category> miniCategories = Categories.Take(5);
     IEnumerable<BookStore.Models.Author> Authors =
-        (ViewData["Authors"] as IList<BookStore.Models.Author>).OrderByDescending(a => a.NumberOfBooks).Take(10);
+        (ViewData["Authors"] as IList<BookStore.Models.Author>).OrderByDescending(aut => aut.NumberOfBooks).ToList();
+    IEnumerable<BookStore.Models.Author> miniAuthors = Authors.Take(5);
 }
 
 
@@ -21,7 +23,7 @@
 <div class="brands-name" style="height:100%">
     <div id="list-author">
         <ul class="nav nav-pills nav-stacked">
-            @foreach (var item in Authors)
+            @foreach (var item in miniAuthors)
             {
                 <li>
                     <a href="#">
@@ -50,7 +52,7 @@
 <div class="brands-name" style="height:100%">
     <div id="list-category">
         <ul class="nav nav-pills nav-stacked">
-            @foreach (var item in Categories)
+            @foreach (var item in miniCategories)
             {
                 <li>
                     <a href="#">

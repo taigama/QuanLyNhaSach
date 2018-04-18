@@ -1,14 +1,14 @@
 ﻿@{
     IEnumerable<BookStore.Models.Category> Categories =
-        (ViewData["Categories"] as IList<BookStore.Models.Category>).OrderByDescending(cate => cate.NumberOfProducts).Take(10);
+        (ViewData["Categories"] as IList<BookStore.Models.Category>);
     IEnumerable<BookStore.Models.Author> Authors =
-        (ViewData["Authors"] as IList<BookStore.Models.Author>).OrderByDescending(a => a.NumberOfBooks).Take(10);
+        (ViewData["Authors"] as IList<BookStore.Models.Author>);
 }
 
 
 
 <!-- author -->
-<h3 class="shopf-sear-headits-sear-head">Tác giả</h3>
+<h3 class="shopf-sear-headits-sear-head">top Tác giả</h3>
 <div class="brands-name" style="height:100%;">
     <div id="list-author">
         <ul class="nav nav-pills nav-stacked">
@@ -28,7 +28,7 @@
 </div>
 
 <!-- category -->
-<h3 class="shopf-sear-headits-sear-head">Danh mục</h3>
+<h3 class="shopf-sear-headits-sear-head">top Danh mục</h3>
 <div class="brands-name" style="height:100%">
     <div id="list-category">
         <ul class="nav nav-pills nav-stacked">
