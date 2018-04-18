@@ -1645,14 +1645,20 @@ a.thumbnail.active {
     outline: 0;
     opacity: .9;
 }
-
+.carousel-control {
+    opacity: 1;
+}
 .carousel-control.right {
-    right: 47%;
+    /*right: 47%;*/
+    background-image: none;
+    background-color: #ee4f4f;
     top: 44%;
 }
 
 .carousel-control.left {
-    left: 47%;
+    /*left: 47%;*/
+    background-image: none;
+    background-color: #ee4f4f;
     top: 44%;
 }
 
@@ -3647,4 +3653,12 @@ button#btn-signup {
     padding: 10px 15px;
     margin-top:5px;
     width:100%;
+}
+
+.some-books{
+    display:block;
+}
+
+.product-details{
+    display:block;
 }

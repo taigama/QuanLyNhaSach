@@ -54,8 +54,11 @@
 <script src="~/Scripts/helper.js"></script>
 @*<script src="~/Assets/js/jquery-ui.js"></script>*@
 <script>
-    
+    // search từ searchbox trên header
     function onSearch() {
-        window.location = "/Search1/Index?key=" + $('#search_box').val();
+        if ($("#search_box").val())
+            window.location = '/Search/Index?key=' + $("#search_box").val();
+        else
+            alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
     }
 </script>

@@ -1634,7 +1634,7 @@ a.thumbnail.active {
     opacity: .9;
 }
 
-.carousel-control.right {
+/*.carousel-control.right {
     right: 47%;
     top: 44%;
 }
@@ -1642,7 +1642,7 @@ a.thumbnail.active {
 .carousel-control.left {
     left: 47%;
     top: 44%;
-}
+}*/
 
 a.right.carousel-control.test-right-control {
     left: 52%;
