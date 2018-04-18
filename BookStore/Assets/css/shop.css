@@ -1052,11 +1052,11 @@ span.item_price {
     text-decoration: none;
     text-transform: capitalize;
     outline: none;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
+    transition: 0.0s all;
+    /*-webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
+    -ms-transition: 0.5s all;*/
 }
 
 .chr-cart i {
@@ -1068,16 +1068,16 @@ span.item_price {
 	line-height: 27px;
 	color: #000;
 	border-radius: 50%;
-	transition: 0.5s all;
-	-webkit-transition: 0.5s all;
+	transition: 0.0s all;
+	/*-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
 	-o-transition: 0.5s all;
-	-ms-transition: 0.5s all;
+	-ms-transition: 0.5s all;*/
 }
 
 .chr-cart:hover {
 	background: #1B95E0;
-	color: #000;
+	color: #FFF;
 }
 
 .chr-cart:hover i {

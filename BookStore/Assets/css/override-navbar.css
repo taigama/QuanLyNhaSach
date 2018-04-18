@@ -11,11 +11,11 @@ body {
 }
 
     body a {
-        transition: 0.5s all;
-        -webkit-transition: 0.5s all;
+        transition: 0.0s all;
+        /*-webkit-transition: 0.5s all;
         -moz-transition: 0.5s all;
         -o-transition: 0.5s all;
-        -ms-transition: 0.5s all;
+        -ms-transition: 0.5s all;*/
         text-decoration: none;
         outline: none;
     }
@@ -412,9 +412,9 @@ nav.navbar.navbar-default.navbar-fixed-top {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1px;
-    -webkit-transition: .5s all;
-    -moz-transition: .5s all;
-    transition: .5s all;
+    -webkit-transition: .0s all;
+    -moz-transition: .0s all;
+    transition: .0s all;
     text-shadow: none;
     padding: 15px 17px;
 }
@@ -436,12 +436,16 @@ li.first-nav {
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-    color: #5F5F5F;
+    background-color: #1b84e0;
+    color: #fff;
+    border-radius: 4px;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    color: #5F5F5F;
+    background-color: #1b84e0;
+    color: #fff;
+    border-radius: 4px;
 }
 
 .navbar-right {
@@ -3661,4 +3665,13 @@ button#btn-signup {
 
 .product-details{
     display:block;
+}
+
+.chr-cart:focus {
+    color: #eee;
+}
+
+.navbar-header:hover {
+    background-color: #1b84e0;
+    border-radius:4px;
 }
