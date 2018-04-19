@@ -569,6 +569,8 @@
     <Content Include="Views\MyShared\MainLayout.cshtml" />
     <Content Include="Views\MyShared\Navbar.cshtml" />
     <Content Include="Views\Home\Author.cshtml" />
+    <Content Include="Views\Contact\Index - Copy.cshtml" />
+    <Content Include="Views\Cart\Index - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
