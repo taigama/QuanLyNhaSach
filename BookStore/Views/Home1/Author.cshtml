@@ -175,49 +175,53 @@
                                         product = Model.Books.ElementAt(i).Product;
                                         <div class="col-md-3 product-men">
                                             <div class="product-chr-info chr">
-                                                <div class="thumbnail">
-                                                    @if (string.IsNullOrEmpty(product.AvatarImage))
-                                                    {
-                                                        <img style="height:150px;width:100%;object-fit:contain"
-                                                             src="/Assets/images/home/default-image.png" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <img style="height:150px;width:100%;object-fit:contain"
-                                                             src="@Url.Content(product.AvatarImage)"
-                                                             onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
-                                                    }
+                                                <a href="/Products/Single/@product.ID">
+                                                    <div class="thumbnail">
+                                                        @if (string.IsNullOrEmpty(product.AvatarImage))
+                                                        {
+                                                            <img style="height:150px;width:100%;object-fit:contain"
+                                                                 src="/Assets/images/home/default-image.png" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img style="height:150px;width:100%;object-fit:contain"
+                                                                 src="@Url.Content(product.AvatarImage)"
+                                                                 onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+                                                        }
 
-                                                </div>
+                                                    </div>
+                                                </a>
                                                 <hr style="margin:0px;border-color:#DDD" />
-                                                <div class="caption">
-                                                    <div class="title-caption">
-                                                        <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
-                                                        <span class="tooltiptext">@product.Name</span>
-                                                    </div>
+                                                <a href="/Products/Single/@product.ID">
+                                                    <div class="caption">
+                                                        <div class="title-caption">
+                                                            <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
+                                                            <span class="tooltiptext">@product.Name</span>
+                                                        </div>
 
-                                                    <div class="matrlf-mid">
-                                                        <ul class="price-list">
-                                                            <li>
-                                                                @(product.Price.ToString("0,0.###", ci)) đ
-                                                            </li>
-                                                        </ul>
+                                                        <div class="matrlf-mid">
+                                                            <ul class="price-list">
+                                                                <li>
+                                                                    @(product.Price.ToString("0,0.###", ci)) đ
+                                                                </li>
+                                                            </ul>
 
-                                                        <div class="clearfix"> </div>
+                                                            <div class="clearfix"> </div>
+                                                        </div>
+                                                        <form action="#" method="post">
+                                                            <input type="hidden" name="cmd" value="_cart">
+                                                            <input type="hidden" name="add" value="1">
+                                                            <input type="hidden" name="chr_item" value="@product.Name">
+                                                            <input type="hidden" name="amount" value="@product.Price">
+                                                            <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
+                                                                <p hidden>@product.ID</p>
+                                                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                Thêm vào giỏ
+                                                            </a>
+                                                            <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                                        </form>
                                                     </div>
-                                                    <form action="#" method="post">
-                                                        <input type="hidden" name="cmd" value="_cart">
-                                                        <input type="hidden" name="add" value="1">
-                                                        <input type="hidden" name="chr_item" value="@product.Name">
-                                                        <input type="hidden" name="amount" value="@product.Price">
-                                                        <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
-                                                            <p hidden>@product.ID</p>
-                                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                                            Thêm vào giỏ
-                                                        </a>
-                                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                                                    </form>
-                                                </div>
+                                                </a>
                                             </div>
                                         </div>
                                     }
@@ -232,49 +236,53 @@
                                                 product = Model.Books.ElementAt(j).Product;
                                                 <div class="col-md-3 product-men">
                                                     <div class="product-chr-info chr">
-                                                        <div class="thumbnail">
-                                                            @if (string.IsNullOrEmpty(product.AvatarImage))
-                                                            {
-                                                                <img style="height:150px;width:100%;object-fit:contain"
-                                                                     src="/Assets/images/home/default-image.png" />
-                                                            }
-                                                            else
-                                                            {
-                                                                <img style="height:150px;width:100%;object-fit:contain"
-                                                                     src="@Url.Content(product.AvatarImage)"
-                                                                     onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
-                                                            }
+                                                        <a href="/Products/Single/@product.ID">
+                                                            <div class="thumbnail">
+                                                                @if (string.IsNullOrEmpty(product.AvatarImage))
+                                                                {
+                                                                    <img style="height:150px;width:100%;object-fit:contain"
+                                                                         src="/Assets/images/home/default-image.png" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img style="height:150px;width:100%;object-fit:contain"
+                                                                         src="@Url.Content(product.AvatarImage)"
+                                                                         onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+                                                                }
 
-                                                        </div>
+                                                            </div>
+                                                        </a>
                                                         <hr style="margin:0px;border-color:#DDD" />
-                                                        <div class="caption">
-                                                            <div class="title-caption">
-                                                                <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
-                                                                <span class="tooltiptext">@product.Name</span>
-                                                            </div>
+                                                        <a href="/Products/Single/@product.ID">
+                                                            <div class="caption">
+                                                                <div class="title-caption">
+                                                                    <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
+                                                                    <span class="tooltiptext">@product.Name</span>
+                                                                </div>
 
-                                                            <div class="matrlf-mid">
-                                                                <ul class="price-list">
-                                                                    <li>
-                                                                        @(product.Price.ToString("0,0.###", ci)) đ
-                                                                    </li>
-                                                                </ul>
+                                                                <div class="matrlf-mid">
+                                                                    <ul class="price-list">
+                                                                        <li>
+                                                                            @(product.Price.ToString("0,0.###", ci)) đ
+                                                                        </li>
+                                                                    </ul>
 
-                                                                <div class="clearfix"> </div>
+                                                                    <div class="clearfix"> </div>
+                                                                </div>
+                                                                <form action="#" method="post">
+                                                                    <input type="hidden" name="cmd" value="_cart">
+                                                                    <input type="hidden" name="add" value="1">
+                                                                    <input type="hidden" name="chr_item" value="@product.Name">
+                                                                    <input type="hidden" name="amount" value="@product.Price">
+                                                                    <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
+                                                                        <p hidden>@product.ID</p>
+                                                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                        Thêm vào giỏ
+                                                                    </a>
+                                                                    <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                                                </form>
                                                             </div>
-                                                            <form action="#" method="post">
-                                                                <input type="hidden" name="cmd" value="_cart">
-                                                                <input type="hidden" name="add" value="1">
-                                                                <input type="hidden" name="chr_item" value="@product.Name">
-                                                                <input type="hidden" name="amount" value="@product.Price">
-                                                                <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
-                                                                    <p hidden>@product.ID</p>
-                                                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                                                    Thêm vào giỏ
-                                                                </a>
-                                                                <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                                                            </form>
-                                                        </div>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             }

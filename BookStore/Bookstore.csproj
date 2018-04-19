@@ -528,7 +528,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
-    <Content Include="Views\Shared\SideMenu.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -574,7 +573,7 @@
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Search1\Index.cshtml" />
     <Content Include="Views\Home1\Index.cshtml" />
-    <Content Include="Views\Home1\SideMenu.cshtml" />
+    <Content Include="Views\Shared\SideMenu.cshtml" />
     <Content Include="Views\Shared\Header_Navbar.bak.cshtml" />
     <Content Include="Views\MyShared\MainLayout.cshtml" />
     <Content Include="Views\MyShared\Navbar.cshtml" />

@@ -37,7 +37,7 @@
     </div>
 </section>
 
-<section style="margin-top:100px">
+<section style="margin-top:32px">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 side-menu-holder">
@@ -51,49 +51,53 @@
                 {
                     <div class="col-md-3 product-men" style="margin-bottom:20px">
                         <div class="product-chr-info chr">
-                            <div class="thumbnail">
-                                @if (string.IsNullOrEmpty(item.AvatarImage))
-                                {
-                                    <img style="height:150px;width:100%;object-fit:contain"
-                                         src="/Assets/images/home/default-image.png" />
-                                }
-                                else
-                                {
-                                    <img style="height:150px;width:100%;object-fit:contain"
-                                         src="@Url.Content(item.AvatarImage)"
-                                         onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
-                                }
+                            <a href="/Products/Single/@item.ID">
+                                <div class="thumbnail">
+                                    @if (string.IsNullOrEmpty(item.AvatarImage))
+                                    {
+                                        <img style="height:150px;width:100%;object-fit:contain"
+                                             src="/Assets/images/home/default-image.png" />
+                                    }
+                                    else
+                                    {
+                                        <img style="height:150px;width:100%;object-fit:contain"
+                                             src="@Url.Content(item.AvatarImage)"
+                                             onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+                                    }
 
-                            </div>
+                                </div>
+                            </a>
                             <hr style="margin:0px;border-color:#DDD" />
-                            <div class="caption">
-                                <div class="title-caption">
-                                    <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@item.Name</b></h4>
-                                    <span class="tooltiptext">@item.Name</span>
-                                </div>
+                            <a href="/Products/Single/@item.ID">
+                                <div class="caption">
+                                    <div class="title-caption">
+                                        <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@item.Name</b></h4>
+                                        <span class="tooltiptext">@item.Name</span>
+                                    </div>
 
-                                <div class="matrlf-mid">
-                                    <ul class="price-list">
-                                        <li>
-                                            @(item.Price.ToString("0,0.###", ci)) đ
-                                        </li>
-                                    </ul>
+                                    <div class="matrlf-mid">
+                                        <ul class="price-list">
+                                            <li>
+                                                @(item.Price.ToString("0,0.###", ci)) đ
+                                            </li>
+                                        </ul>
 
-                                    <div class="clearfix"> </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <form action="#" method="post">
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="add" value="1">
+                                        <input type="hidden" name="chr_item" value="@item.Name">
+                                        <input type="hidden" name="amount" value="@item.Price">
+                                        <a href="" class="chr-cart" onclick="updateCart('add',@item.ID, event)">
+                                            <p hidden>@item.ID</p>
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            Thêm vào giỏ
+                                        </a>
+                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                    </form>
                                 </div>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="chr_item" value="@item.Name">
-                                    <input type="hidden" name="amount" value="@item.Price">
-                                    <a href="" class="chr-cart" onclick="updateCart('add',@item.ID, event)">
-                                        <p hidden>@item.ID</p>
-                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                        Thêm vào giỏ
-                                    </a>
-                                    <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                                </form>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 }
