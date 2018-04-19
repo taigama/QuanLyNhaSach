@@ -159,11 +159,9 @@
     <Compile Include="Controllers\Cart1Controller.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
-    <Compile Include="Controllers\Home1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\Search1Controller.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -525,7 +523,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
@@ -548,14 +545,11 @@
     <Content Include="Views\Staff\ListAuthor.cshtml" />
     <Content Include="Views\Staff\AddAuthor.cshtml" />
     <Content Include="Views\Staff\EditAuthor.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Staff\UserProfile.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Search\SideSearch.cshtml" />
     <Content Include="Views\Products\Single.cshtml" />
     <Content Include="Views\Order\PrintPage.cshtml" />
     <Content Include="Views\Products\Category.cshtml" />
-    <Content Include="Views\Home\Author.cshtml" />
     <Content Include="Views\Shared\_Empty.cshtml" />
     <Content Include="Views\Order\Export.cshtml" />
     <Content Include="Views\Staff\_ListOrder.cshtml" />
@@ -566,18 +560,15 @@
     <Content Include="Views\Staff\ListImport.cshtml" />
     <Content Include="Views\Staff\AddImport.cshtml" />
     <Content Include="Views\Staff\Finance.cshtml" />
-    <Content Include="Views\Search1\SideSearch.cshtml" />
-    <Content Include="Views\Shared\Header1.bak.cshtml" />
-    <Content Include="Views\Shared\_MainLayout1.bak.cshtml" />
+    <Content Include="Views\Search\SideSearch.cshtml" />
     <Content Include="Views\Shared\ItemPartial.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
-    <Content Include="Views\Search1\Index.cshtml" />
-    <Content Include="Views\Home1\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\SideMenu.cshtml" />
-    <Content Include="Views\Shared\Header_Navbar.bak.cshtml" />
     <Content Include="Views\MyShared\MainLayout.cshtml" />
     <Content Include="Views\MyShared\Navbar.cshtml" />
-    <Content Include="Views\Home1\Author.cshtml" />
+    <Content Include="Views\Home\Author.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
