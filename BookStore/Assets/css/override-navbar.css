@@ -1660,14 +1660,12 @@ a.thumbnail.active {
     opacity: 1;
 }
 .carousel-control.right {
-    /*right: 47%;*/
     background-image: none;
     background-color: #ee4f4f;
     top: 44%;
 }
 
 .carousel-control.left {
-    /*left: 47%;*/
     background-image: none;
     background-color: #ee4f4f;
     top: 44%;
@@ -2582,15 +2580,6 @@ button#btn-signup {
         min-height: 398px;
     }
 
-    .carousel-control.left {
-        left: 45%;
-        top: 46.6%;
-    }
-
-    .carousel-control.right {
-        right: 47%;
-        top: 46.6%;
-    }
 
     .footer-nav {
         text-align: right;
@@ -2777,11 +2766,11 @@ button#btn-signup {
             background: #FFF;
         }
 
-    .navbar-fixed-top .navbar-collapse,
+    /*.navbar-fixed-top .navbar-collapse,
     .navbar-fixed-bottom .navbar-collapse {
         padding: 20px;
         max-height: 460px;
-    }
+    }*/
 
     .navbar-default .navbar-brand {
         padding-left: 1em;
@@ -2924,10 +2913,6 @@ button#btn-signup {
 
     .subscribe-form {
         width: 81%;
-    }
-
-    .carousel-control.right {
-        right: 45%;
     }
 
     .list-inline > li {

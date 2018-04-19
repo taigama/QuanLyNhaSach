@@ -173,7 +173,7 @@
                             @for (int i = 0; i < ((Model.Books.Count < 4) ? Model.Books.Count : 4); i++)
                 {
                     product = Model.Books.ElementAt(i).Product;
-                    <div class="col-md-3 product-men" style="margin-bottom:20px">
+                    <div class="col-md-3 product-men">
                         <div class="product-chr-info chr">
                             <div class="thumbnail">
                                 @if (string.IsNullOrEmpty(product.AvatarImage))
@@ -230,7 +230,7 @@
                         @for (int j = i; j < ((Model.Books.Count < (i + 4)) ? Model.Books.Count : (i + 4)); j++)
             {
                 product = Model.Books.ElementAt(j).Product;
-                <div class="col-md-3 product-men" style="margin-bottom:20px">
+                <div class="col-md-3 product-men">
                     <div class="product-chr-info chr">
                         <div class="thumbnail">
                             @if (string.IsNullOrEmpty(product.AvatarImage))

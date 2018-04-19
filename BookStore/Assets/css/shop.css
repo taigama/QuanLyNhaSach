@@ -432,7 +432,8 @@ p.sbmincart-empty-text {
 }
 
 .product-men {
-	padding: 0 10px;
+    padding: 0 10px;
+    min-height: 0;
 }
 
 /*-- Model-Slider --*/
@@ -1568,7 +1569,7 @@ ul.single_specific li {
 		margin: 0;
 	}
 	.product-chr-info {
-		width: 23.5%;
+		width: 23%;
 		margin: 0.5em;
 		float: left;
 		padding: 15px;
@@ -1588,15 +1589,16 @@ ul.single_specific li {
 }
 
 @media(max-width:900px) {
-	.product-chr-info {
-		width: 23%;
-	}
+    .product-chr-info {
+        width: 22.5%;
+    }
+    .chr-cart{
+        font-size:0.9em;
+    }
+
 }
 
 @media(max-width:800px) {
-	.product-chr-info {
-		width: 31.5%;
-	}
 	.single_page h6 {
 		font-size: 1.2em;
 		margin: 1em 0;
@@ -1611,13 +1613,16 @@ ul.single_specific li {
 	}
 }
 
-@media(max-width:768px) {
-	.product-chr-info {
-		width: 31%;
-	}
-}
-
 @media(max-width:736px) {
+    .chr-cart {
+        font-size: 0.8em;
+    }
+    .chr-cart i {
+        font-size: 1em;
+        width:unset;
+        background-color:unset;
+        color:#FFF;
+    }
 	#staplesbmincart {
 		left: 52%;
 		top: 16.9%;
@@ -1636,12 +1641,12 @@ ul.single_specific li {
 }
 
 @media(max-width:640px) {
-	.product-chr-info {
-		padding: 15px;
-		width: 46%;
-		margin: 0.5em;
-		float: left;
-	}
+    .product-chr-info {
+        padding: 15px;
+        width: 22.5%;
+        margin: 0.5em;
+        float: left;
+    }
 	#staplesbmincart .sbmincart-submit {
 		font-size: 0.7em;
 	}
@@ -1681,7 +1686,7 @@ ul.single_specific li {
 	}
 	.product-chr-info {
 		padding: 15px;
-		width: 46%;
+		width: 22%;
 		margin: 0.5em;
 		float: left;
 	}
@@ -1691,6 +1696,15 @@ ul.single_specific li {
 }
 
 @media(max-width:568px) {
+    .chr-cart {
+        font-size: 0.7em;
+    }
+    .chr-cart i {
+        font-size: 0.9em;
+        width:unset;
+        background-color:unset;
+        color:#FFF;
+    }
 	#staplesbmincart {
 		left: 44.5%;
 		top: 29.9%;
@@ -1825,6 +1839,15 @@ ul.single_specific li {
 }
 
 @media(max-width:320px) {
+    .chr-cart {
+        font-size: 0.8em;
+    }
+    .chr-cart i {
+        font-size: 0.9em;
+        width:unset;
+        background-color:unset;
+        color:#FFF;
+    }
 	#staplesbmincart {
 		left: 2%;
 		width: 290px;
