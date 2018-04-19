@@ -100,11 +100,11 @@ button.top_chr_cart {
 }
 
 i.fa.fa-cart-arrow-down {
-    width: 41px;
-    height: 41px;
+    width: unset;
+    height: unset;
     color: #fff;
     font-size: 2em;
-    line-height: 42px;
+    line-height: 16px;
 }
 
 span.nav-icon {
@@ -363,7 +363,14 @@ span.nav-icon {
     }
 
 .cart-mainf {
+    padding:15px 8px 15px 5px;
     float: right;
+}
+
+.cart-mainf:hover {
+    background-color: #1b84e0;
+    color: #fff; 
+    border-radius: 4px;
 }
 
 /*-- //search --*/
@@ -2550,10 +2557,10 @@ button#btn-signup {
             right: 0px;
         }
 
-    i.fa.fa-cart-arrow-down {
+    /*i.fa.fa-cart-arrow-down {
         width: 33px;
         height: 40px;
-    }
+    }*/
 
     .banner-text p:before {
         left: 29.4%;
@@ -3679,4 +3686,10 @@ button#btn-signup {
 .desc {
     color: #555;
     white-space: pre-wrap;
+}
+
+.side-menu{
+    background-color:#eee;
+    padding-top:10px;
+    margin-bottom:25px;
 }
