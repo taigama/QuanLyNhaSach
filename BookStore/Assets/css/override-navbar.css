@@ -3659,10 +3659,6 @@ button#btn-signup {
     width:100%;
 }
 
-.some-books{
-    display:block;
-}
-
 .product-details{
     display:block;
 }
@@ -3674,4 +3670,13 @@ button#btn-signup {
 .navbar-header:hover {
     background-color: #1b84e0;
     border-radius:4px;
+}
+
+#books-carousel {
+    padding: 5px;
+}
+
+.desc {
+    color: #555;
+    white-space: pre-wrap;
 }

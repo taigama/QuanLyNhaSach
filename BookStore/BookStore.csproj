@@ -203,6 +203,7 @@
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootstrap-select.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
+    <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\override-navbar.css" />
     <Content Include="Assets\css\checkout.css" />
     <Content Include="Assets\css\font-awesome.min.css" />

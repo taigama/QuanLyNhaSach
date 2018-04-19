@@ -96,9 +96,7 @@
                             </div>*@
                             <div class="desc_single">
                                 <h5>Mô tả</h5>
-                                <p style="color:#666">
-                                    @Model.Description
-                                </p>
+                                <p class="desc">@Model.Description</p>
                             </div>
                             @*<div class="occasional">
                                 <h5>Specifications</h5>
@@ -161,11 +159,9 @@
                 @if ((Model.Books != null) && (Model.Books.Count > 0))
     {// liệt kê sách của tác giả này
 
-            <div class="some-books">
+            <div class="desc_single">
                 <!--recommended_items-->
-                <div class="desc_single" style="margin:0">
-                    <h5 style="margin:15px 15px 5px 15px">Một số sách</h5>
-                </div>
+                <h5 style="margin:15px">Các tác phẩm</h5>
                 <div @if (Model.Books.Count > 3) { <text>
                      id="books-carousel" class="carousel slide" data-ride="carousel"
                      </text> }>
