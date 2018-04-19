@@ -1862,3 +1862,7 @@ ul.single_specific li {
 }
 
 /*-- //Responsive --*/
+
+.ui-slider.ui-slider-horizontal:hover {
+    cursor:pointer;
+}

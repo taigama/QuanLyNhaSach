@@ -65,27 +65,20 @@
         </ul>
     </div>
 </div>
-<!--price range start-->
+<!-- price range -->
 <div class="range">
     <h3 class="shopf-sear-headits-sear-head">
-        <span>Tầm giá</span>
+        <span>Tầm</span> giá
     </h3>
     <ul class="dropdown-menu6">
         <li>
 
-            <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 98.0889%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 98.0889%;"></a></div>
-            <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;">
+            <div id="slider-range"></div>
+            <input type="text" id="amount" readonly style="border: 0;width:100%"/>
         </li>
     </ul>
 </div>
-<!--price range end-->
-<div class="price-range">
-    <h2 style="margin-top:20px;margin-bottom:5px;color:#34c663">Tầm giá</h2>
-    <div class="text-center">
-        <input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="2000" data-slider-step="10" data-slider-value="[0,2000]" />
-        <br /><b class="pull-left"> 0 VND</b> <b class="pull-right">2000 k</b>
-    </div>
-</div><!--/price-range-->
+<!-- //price range -->
 
 @*<link href="~/Assets/css/bootstrap.css" rel="stylesheet">*@
 <link href="~/Assets/css/bootstrap-select.min.css" rel="stylesheet">
@@ -93,8 +86,38 @@
 @*<script src="~/Assets/js/price-range.js" type="text/javascript"></script>*@
 <script src="~/Assets/js/bootstrap-select.min.js"></script>
 <script src="~/Scripts/helper.js"></script>
-@*<script src="~/Assets/js/jquery-ui.js"></script>*@
+<script src="~/Assets/js/jquery-ui.js"></script>
 <script>
+    var priceMin = 1, priceMax = 999;
+
+    //<![CDATA[ 
+    $(window).load(function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 1,
+            max: 999,
+            values: [1, 999],
+            slide: function (event, ui) {
+                $("#amount").val(ui.values[0] + ".000đ - " + ui.values[1] + ".000đ");
+            }
+        });
+        $("#amount").val($("#slider-range").slider("values", 0) + ".000đ - " + $("#slider-range").slider("values", 1) + ".000đ");
+
+        // xem gia tien cua slider
+        $("#slider-range").slider({
+            stop: function (event, ui) {
+                // lay gia tri cua slider
+                var values = $("#slider-range").slider("values");
+
+                priceMin = values[0];
+                priceMax = values[1];
+
+                onSearch();
+            }
+        });
+    }); //]]>
+
+
     // bind event search theo giá tiền
     //$("#ex2").slider({}).on("slideStop", function (e) {
     //    onSearch()
@@ -138,5 +161,5 @@
         $('#ddl_author').selectpicker('refresh');
         onSearch();
     });
-    
+
 </script>

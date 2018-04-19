@@ -10,15 +10,15 @@ body {
     background: #fff;
 }
 
-    body a {
-        transition: 0.25s all;
-        -webkit-transition: 0.25s all;
-        -moz-transition: 0.25s all;
-        -o-transition: 0.25s all;
-        -ms-transition: 0.25s all;
-        text-decoration: none;
-        outline: none;
-    }
+body a {
+    transition: 0.25s all;
+    -webkit-transition: 0.25s all;
+    -moz-transition: 0.25s all;
+    -o-transition: 0.25s all;
+    -ms-transition: 0.25s all;
+    text-decoration: none;
+    outline: none;
+}
 
 h1,
 h2,
@@ -3677,4 +3677,12 @@ button#btn-signup {
     background-color:#eee;
     padding-top:10px;
     margin-bottom:25px;
+}
+
+.ui-slider-handle {
+    transition: 0s all;
+    -webkit-transition: 0s all;
+    -moz-transition: 0s all;
+    -o-transition: 0s all;
+    -ms-transition: 0s all;
 }

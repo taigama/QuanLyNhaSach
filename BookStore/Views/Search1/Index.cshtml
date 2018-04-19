@@ -41,8 +41,8 @@
         var text = $('#search_box').val();
         var author = $('#ddl_author').val();
         var category = $('#ddl_category').val();
-        var costBegin = 0;//$('#ex2').val().split(',')[0];
-        var costEnd = 2000000; //$('#ex2').val().split(',')[1]; //$('#cost_end').val()
+        //var costBegin = 0;//$('#ex2').val().split(',')[0];
+        //var costEnd = 2000000; //$('#ex2').val().split(',')[1]; //$('#cost_end').val()
 
 
         var strUrl = "";
@@ -61,8 +61,8 @@
                 "key": text,
                 "authorId": author,
                 "categoryId": category,
-                "costBegin": costBegin,
-                "costEnd": costEnd,
+                "costBegin": window.priceMin,
+                "costEnd": window.priceMax,
             },
             success: function (data) {// lấy dữ liệu thành công
                 if (data == null) {
@@ -73,7 +73,7 @@
                 // đổ dữ liệu ra page
                 $('#search_result').html("");
                 $('#search_result').append(data);
-                
+                $('.product-chr-info .caption h4').ellipsis();
             },
             error: function (err) {// lỗi
                 if (err.responseText)
