@@ -3673,10 +3673,13 @@ button#btn-signup {
     white-space: pre-wrap;
 }
 
-.side-menu{
-    background-color:#eee;
-    padding-top:10px;
+.side-menu-holder{
     margin-bottom:25px;
+    background-color:#eee;
+}
+
+.side-menu {
+    padding-top: 10px;
 }
 
 .ui-slider-handle {
@@ -3685,4 +3688,61 @@ button#btn-signup {
     -moz-transition: 0s all;
     -o-transition: 0s all;
     -ms-transition: 0s all;
+}
+
+.home-carousel-control {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 80px;
+    opacity:.7;
+}
+.home-carousel-control:hover {
+    transition: 0.25s all;
+    -webkit-transition: 0s all;
+    -moz-transition: 0.25s all;
+    -o-transition: 0.25s all;
+    -ms-transition: 0.25s all;
+}
+
+.home-carousel-control > i{
+    position:absolute;
+    top:40%;
+    font-size:5em;
+    color: white;
+    text-shadow:
+    -2px -2px 0 #1B95E0,
+    2px -2px 0 #1B95E0,
+    -2px 2px 0 #1B95E0,
+    2px 2px 0 #1B95E0;  
+}
+
+.home-carousel-control.left {
+    left: 0;
+}
+.home-carousel-control.left > i{
+    left: 10px;
+}
+.home-carousel-control.left:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .0001) 100%);
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .5)), to(rgba(0, 0, 0, .0001)));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .2) 0%, rgba(0, 0, 0, .0001) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+    background-repeat: repeat-x;
+}
+
+.home-carousel-control.right {
+    right: 0;
+}
+.home-carousel-control.right > i {
+    right: 10px;
+}
+.home-carousel-control.right:hover {
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .2) 100%);
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .2) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .0001)), to(rgba(0, 0, 0, .5)));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .2) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+    background-repeat: repeat-x;
 }

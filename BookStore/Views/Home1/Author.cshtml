@@ -20,7 +20,7 @@
 <section>
     <div class="container" style="margin-top:150px">
         <div class="row">
-            <div class="col-lg-3" style="background-color: #eee;padding-top:10px">
+            <div class="col-lg-3 side-menu-holder">
                 <div class="left-sidebar side-menu">
                     @Html.Partial("SideMenu")
                 </div>
@@ -37,7 +37,7 @@
                                     <div class="clearfix"></div>
                                     <div class="flex-viewport" style="overflow: hidden; position: relative;">
                                         <ul class="slides">
-                                            <li >
+                                            <li>
                                                 <div class="thumb-image">
                                                     <img src="@src" data-imagezoom="true" alt=" " class="img-responsive"
                                                          onerror="if (this.src != '/Assets/images/staff/avatar.png') this.src = '/Assets/images/staff/avatar.png';">
@@ -56,100 +56,100 @@
                                 @*<span>addition-title here</span>*@
                             </h3>
                             @*<p>
-                                by
-                                <a href="#">Name of author of this products</a>
-                            </p>*@
+                                    by
+                                    <a href="#">Name of author of this products</a>
+                                </p>*@
                             @*<div class="caption">
-                                RATING HERE
-                                <ul class="rating-single">
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="fa fa-star yellow-star" aria-hidden="true"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"> </div>
-                                COST HERE
-                                <h6>
-                                    $100.00
-                                </h6>
-                            </div>*@
+                                    RATING HERE
+                                    <ul class="rating-single">
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="fa fa-star yellow-star" aria-hidden="true"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"> </div>
+                                    COST HERE
+                                    <h6>
+                                        $100.00
+                                    </h6>
+                                </div>*@
                             <div class="desc_single">
                                 <h5>Mô tả</h5>
                                 <p class="desc">@Model.Description</p>
                             </div>
                             @*<div class="occasional">
-                                <h5>Specifications</h5>
-                                <ul class="single_specific">
-                                    <li>
-                                        <span>language :</span> english
-                                    </li>
-                                    <li>
-                                        <span>format :</span> Hardcover
-                                    </li>
-                                    <li>
-                                        <span>publisher :</span> Lorempipsum
-                                    </li>
-                                    <li>
-                                        <span>edition :</span> february 2018
-                                    </li>
-                                    <li>
-                                        <span>pages :</span> 765
-                                    </li>
-                                </ul>
+                                    <h5>Specifications</h5>
+                                    <ul class="single_specific">
+                                        <li>
+                                            <span>language :</span> english
+                                        </li>
+                                        <li>
+                                            <span>format :</span> Hardcover
+                                        </li>
+                                        <li>
+                                            <span>publisher :</span> Lorempipsum
+                                        </li>
+                                        <li>
+                                            <span>edition :</span> february 2018
+                                        </li>
+                                        <li>
+                                            <span>pages :</span> 765
+                                        </li>
+                                    </ul>
 
-                            </div>*@
+                                </div>*@
                             @*<div class="color-quality">
-                                <div class="color-quality-right">
-                                    <h5>Also Formats avaiable in:</h5>
-                                    <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-                                        <option value="null">paper back &nbsp;$90.00</option>
-                                        <option value="null">Audio Book &nbsp;$200.00</option>
-                                    </select>
-                                </div>
-                            </div>*@
+                                    <div class="color-quality-right">
+                                        <h5>Also Formats avaiable in:</h5>
+                                        <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+                                            <option value="null">paper back &nbsp;$90.00</option>
+                                            <option value="null">Audio Book &nbsp;$200.00</option>
+                                        </select>
+                                    </div>
+                                </div>*@
                             @*<div class="clearfix"></div>
-                            <div class="description">
-                                <h5>Check delivery, payment options and charges at your location</h5>
-                                <form action="#" method="post">
-                                    <input type="text" value="Enter pincode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
-                                    <input type="submit" value="Check">
-                                </form>
-                            </div>*@
-                            @*<div class="occasion-cart">
-                                <div class="chr single-item single_page_b">
+                                <div class="description">
+                                    <h5>Check delivery, payment options and charges at your location</h5>
                                     <form action="#" method="post">
-                                        <input type="hidden" name="cmd" value="_cart">
-                                        <input type="hidden" name="add" value="1">
-                                        <input type="hidden" name="chr_item" value="Single book">
-                                        <input type="hidden" name="amount" value="100.00">
-                                        <button type="submit" class="chr-cart pchr-cart">
-                                            <i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart
-                                        </button>
-                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                        <input type="text" value="Enter pincode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}" required="">
+                                        <input type="submit" value="Check">
                                     </form>
-                                </div>
-                            </div>*@
+                                </div>*@
+                            @*<div class="occasion-cart">
+                                    <div class="chr single-item single_page_b">
+                                        <form action="#" method="post">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="chr_item" value="Single book">
+                                            <input type="hidden" name="amount" value="100.00">
+                                            <button type="submit" class="chr-cart pchr-cart">
+                                                <i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart
+                                            </button>
+                                            <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                        </form>
+                                    </div>
+                                </div>*@
                         </div>
                         <div class="clearfix"> </div>
                     </div>
@@ -157,145 +157,145 @@
 
 
                 @if ((Model.Books != null) && (Model.Books.Count > 0))
-    {// liệt kê sách của tác giả này
+                {// liệt kê sách của tác giả này
 
-            <div class="desc_single">
-                <!--recommended_items-->
-                <h5 style="margin:15px">Các tác phẩm</h5>
-                <div @if (Model.Books.Count > 3) { <text>
-                     id="books-carousel" class="carousel slide" data-ride="carousel"
-                     </text> }>
-                    <div @if (Model.Books.Count > 3) { <text>
-                         class="carousel-inner"
-                         </text> }>
-                        <div class="item active">
-                            @{BookStore.Models.Product product;}
-                            @for (int i = 0; i < ((Model.Books.Count < 4) ? Model.Books.Count : 4); i++)
-                {
-                    product = Model.Books.ElementAt(i).Product;
-                    <div class="col-md-3 product-men">
-                        <div class="product-chr-info chr">
-                            <div class="thumbnail">
-                                @if (string.IsNullOrEmpty(product.AvatarImage))
-                    {
-                        <img style="height:150px;width:100%;object-fit:contain"
-                             src="/Assets/images/home/default-image.png" />
-        }
-        else
-        {
-            <img style="height:150px;width:100%;object-fit:contain"
-                 src="@Url.Content(product.AvatarImage)"
-                 onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
-}
+                    <div class="desc_single">
+                        <!--recommended_items-->
+                        <h5 style="margin:15px">Các tác phẩm</h5>
+                        <div @if (Model.Books.Count > 3) { <text>
+                             id="books-carousel" class="carousel slide" data-ride="carousel"
+                             </text> }>
+                            <div @if (Model.Books.Count > 3) { <text>
+                                 class="carousel-inner"
+                                 </text> }>
+                                <div class="item active">
+                                    @{BookStore.Models.Product product;}
+                                    @for (int i = 0; i < ((Model.Books.Count < 4) ? Model.Books.Count : 4); i++)
+                                    {
+                                        product = Model.Books.ElementAt(i).Product;
+                                        <div class="col-md-3 product-men">
+                                            <div class="product-chr-info chr">
+                                                <div class="thumbnail">
+                                                    @if (string.IsNullOrEmpty(product.AvatarImage))
+                                                    {
+                                                        <img style="height:150px;width:100%;object-fit:contain"
+                                                             src="/Assets/images/home/default-image.png" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img style="height:150px;width:100%;object-fit:contain"
+                                                             src="@Url.Content(product.AvatarImage)"
+                                                             onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+                                                    }
 
-                            </div>
-                            <hr style="margin:0px;border-color:#DDD" />
-                            <div class="caption">
-                                <div class="title-caption">
-                                    <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
-                                    <span class="tooltiptext">@product.Name</span>
+                                                </div>
+                                                <hr style="margin:0px;border-color:#DDD" />
+                                                <div class="caption">
+                                                    <div class="title-caption">
+                                                        <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
+                                                        <span class="tooltiptext">@product.Name</span>
+                                                    </div>
+
+                                                    <div class="matrlf-mid">
+                                                        <ul class="price-list">
+                                                            <li>
+                                                                @(product.Price.ToString("0,0.###", ci)) đ
+                                                            </li>
+                                                        </ul>
+
+                                                        <div class="clearfix"> </div>
+                                                    </div>
+                                                    <form action="#" method="post">
+                                                        <input type="hidden" name="cmd" value="_cart">
+                                                        <input type="hidden" name="add" value="1">
+                                                        <input type="hidden" name="chr_item" value="@product.Name">
+                                                        <input type="hidden" name="amount" value="@product.Price">
+                                                        <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
+                                                            <p hidden>@product.ID</p>
+                                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                            Thêm vào giỏ
+                                                        </a>
+                                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
+                                @if (Model.Books.Count > 4)
+                                {
+                                    for (int i = 4; i < Model.Books.Count; i += 4)
+                                    {
+                                        <div class="item">
+                                            @for (int j = i; j < ((Model.Books.Count < (i + 4)) ? Model.Books.Count : (i + 4)); j++)
+                                            {
+                                                product = Model.Books.ElementAt(j).Product;
+                                                <div class="col-md-3 product-men">
+                                                    <div class="product-chr-info chr">
+                                                        <div class="thumbnail">
+                                                            @if (string.IsNullOrEmpty(product.AvatarImage))
+                                                            {
+                                                                <img style="height:150px;width:100%;object-fit:contain"
+                                                                     src="/Assets/images/home/default-image.png" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <img style="height:150px;width:100%;object-fit:contain"
+                                                                     src="@Url.Content(product.AvatarImage)"
+                                                                     onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+                                                            }
 
-                                <div class="matrlf-mid">
-                                    <ul class="price-list">
-                                        <li>
-                                            @(product.Price.ToString("0,0.###", ci)) đ
-                                        </li>
-                                    </ul>
+                                                        </div>
+                                                        <hr style="margin:0px;border-color:#DDD" />
+                                                        <div class="caption">
+                                                            <div class="title-caption">
+                                                                <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
+                                                                <span class="tooltiptext">@product.Name</span>
+                                                            </div>
 
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="chr_item" value="@product.Name">
-                                    <input type="hidden" name="amount" value="@product.Price">
-                                    <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
-                                        <p hidden>@product.ID</p>
-                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                        Thêm vào giỏ
-                                    </a>
-                                    <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                                </form>
+                                                            <div class="matrlf-mid">
+                                                                <ul class="price-list">
+                                                                    <li>
+                                                                        @(product.Price.ToString("0,0.###", ci)) đ
+                                                                    </li>
+                                                                </ul>
+
+                                                                <div class="clearfix"> </div>
+                                                            </div>
+                                                            <form action="#" method="post">
+                                                                <input type="hidden" name="cmd" value="_cart">
+                                                                <input type="hidden" name="add" value="1">
+                                                                <input type="hidden" name="chr_item" value="@product.Name">
+                                                                <input type="hidden" name="amount" value="@product.Price">
+                                                                <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
+                                                                    <p hidden>@product.ID</p>
+                                                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                                                    Thêm vào giỏ
+                                                                </a>
+                                                                <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    }
+                                }
                             </div>
-                        </div>
-                    </div>
-    }
-                        </div>
-                        @if (Model.Books.Count > 4)
-            {
-                for (int i = 4; i < Model.Books.Count; i += 4)
-                {
-                    <div class="item">
-                        @for (int j = i; j < ((Model.Books.Count < (i + 4)) ? Model.Books.Count : (i + 4)); j++)
-            {
-                product = Model.Books.ElementAt(j).Product;
-                <div class="col-md-3 product-men">
-                    <div class="product-chr-info chr">
-                        <div class="thumbnail">
-                            @if (string.IsNullOrEmpty(product.AvatarImage))
-                {
-                    <img style="height:150px;width:100%;object-fit:contain"
-                         src="/Assets/images/home/default-image.png" />
-    }
-    else
-    {
-            <img style="height:150px;width:100%;object-fit:contain"
-                 src="@Url.Content(product.AvatarImage)"
-                 onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
-}
 
-                        </div>
-                        <hr style="margin:0px;border-color:#DDD" />
-                        <div class="caption">
-                            <div class="title-caption">
-                                <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@product.Name</b></h4>
-                                <span class="tooltiptext">@product.Name</span>
-                            </div>
-
-                            <div class="matrlf-mid">
-                                <ul class="price-list">
-                                    <li>
-                                        @(product.Price.ToString("0,0.###", ci)) đ
-                                    </li>
-                                </ul>
-
-                                <div class="clearfix"> </div>
-                            </div>
-                            <form action="#" method="post">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="chr_item" value="@product.Name">
-                                <input type="hidden" name="amount" value="@product.Price">
-                                <a href="" class="chr-cart" onclick="updateCart('add',@product.ID, event)">
-                                    <p hidden>@product.ID</p>
-                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                                    Thêm vào giỏ
+                            @if ((Model.Books != null) && (Model.Books.Count > 3))
+                            {
+                                <a class="left carousel-control" href="#books-carousel" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
                                 </a>
-                                <a href="#" data-toggle="modal" data-target="#myModal1"></a>
-                            </form>
+                                <a class="right carousel-control" href="#books-carousel" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            }
                         </div>
-                    </div>
-                </div>
-}
-
-                    </div>
-    }
-}
-                    </div>
-
-                    @if ((Model.Books != null) && (Model.Books.Count > 3))
-        {
-            <a class="left carousel-control" href="#books-carousel" data-slide="prev">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a class="right carousel-control" href="#books-carousel" data-slide="next">
-                <i class="fa fa-angle-right"></i>
-            </a>
-}
-                </div>
-            </div><!--/recommended_items-->
-}
+                    </div><!--/recommended_items-->
+                }
 
             </div>
         </div>
