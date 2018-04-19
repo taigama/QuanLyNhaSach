@@ -1,78 +1,64 @@
 ﻿@{
-    //IList<BookStore.Models.Publisher> Publishers = ViewData["Publishers"] as IList<BookStore.Models.Publisher>;
     IEnumerable<BookStore.Models.Category> Categories =
-        (ViewData["Categories"] as IList<BookStore.Models.Category>).OrderByDescending(cate => cate.NumberOfProducts).Take(10);
+        (ViewData["Categories"] as IList<BookStore.Models.Category>);
     IEnumerable<BookStore.Models.Author> Authors =
-        (ViewData["Authors"] as IList<BookStore.Models.Author>).OrderByDescending(a => a.NumberOfBooks).Take(10);
+        (ViewData["Authors"] as IList<BookStore.Models.Author>);
 }
 
-<div class="col-lg-3">
-    
-    <div class="left-sidebar">
-        <h2 style="margin-top:10px;margin-bottom:0px">Tác giả</h2>
-        <div class="brands-name">
-            <!--category-productsr-->
-            <div id="list-author">
-                <ul class="nav nav-pills nav-stacked">
-                    @foreach (var item in Authors)
-                    {
-                        <li>
-                            <a href="/Home/Author?id=@item.ID">
-                                <span class="pull-right">(@item.NumberOfBooks)</span>
-                                <b>@item.Name</b>
-                                <p hidden>@item.ID</p>
-                            </a>
-                        </li>
-                    }
-                </ul>
 
-            </div>
-        </div><!--/category-products-->
 
-        <div class="brands_products">
-            <!--brands_products-->
-            <h2 style="margin-top:10px;margin-bottom:0px">Danh mục</h2>
-            <div class="brands-name">
-                <div id="list-category">
-                    <ul class="nav nav-pills nav-stacked">
-                        @foreach (var item in Categories)
-                        {
-                            <li>
-                                <a href="/Products/Category?id=@item.ID">
-                                    <span class="pull-right">(@item.NumberOfProducts)</span>
-                                    <b>@item.Name</b>
-                                    <p hidden>@item.ID</p>
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div><!--/brands_products-->
-
-        <div class="shipping text-center" style="background:#fff">
-            <!--shipping-->
-            <img src="~/Assets/images/shop/product12.jpg" />
-        </div><!--/shipping-->
+<!-- author -->
+<h3 class="shopf-sear-headits-sear-head">top Tác giả</h3>
+<div class="brands-name" style="height:100%;">
+    <div id="list-author">
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var item in Authors)
+            {
+                <li>
+                    <a href="/Home/Author/@item.ID">
+                        <span class="pull-right">(@item.NumberOfBooks)</span>
+                        <b>@item.Name</b>
+                        <p hidden>@item.ID</p>
+                    </a>
+                </li>
+            }
+        </ul>
 
     </div>
-
 </div>
 
-@*<script>
-    $("#list-category").on("click", "li>a", function (e) {
-        event.preventDefault();
-        var selected_cate = $(this).children('p').text();
+<!-- category -->
+<h3 class="shopf-sear-headits-sear-head">top Danh mục</h3>
+<div class="brands-name" style="height:100%">
+    <div id="list-category">
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var item in Categories)
+            {
+                <li>
+                    <a href="/Products/Category/@item.ID">
+                        <span class="pull-right">(@item.NumberOfProducts)</span>
+                        <b>@item.Name</b>
+                        <p hidden>@item.ID</p>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
 
-        window.location = '/Products/Category?id=' + selected_cate;
-    });
-
-    $("#list-author").on("click", "li>a", function (e) {
-        event.preventDefault();
-        var selected_cate = $(this).children('p').text();
-
-        window.location = '/Home/Author?id=' + selected_cate;
-    });
-</script>*@
+@*<link href="~/Assets/css/bootstrap.css" rel="stylesheet">*@
+<link href="~/Assets/css/bootstrap-select.min.css" rel="stylesheet">
 <script src="~/Assets/js/jquery.js" type="text/javascript"></script>
-<script src="~/Assets/js/price-range.js" type="text/javascript"></script>
+@*<script src="~/Assets/js/price-range.js" type="text/javascript"></script>*@
+<script src="~/Assets/js/bootstrap-select.min.js"></script>
+<script src="~/Scripts/helper.js"></script>
+@*<script src="~/Assets/js/jquery-ui.js"></script>*@
+<script>
+    // search từ searchbox trên header
+    function onSearch() {
+        if ($("#search_box").val())
+            window.location = '/Search/Index?key=' + $("#search_box").val();
+        else
+            alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
+    }
+</script>

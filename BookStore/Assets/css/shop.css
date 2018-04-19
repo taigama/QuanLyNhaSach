@@ -1455,8 +1455,22 @@ input.button.add {
 	font-weight: 600;
 }
 
+
 .desc_single {
 	margin: 2em 0;
+}
+
+.desc_single h3 {
+   text-align: center; 
+   border-bottom: 2px solid #1B95E0; 
+   line-height: 0.1em;
+   margin: 10px 10px 20px;
+}
+
+.desc_single h3>span {
+    background-color:#fff; 
+    padding:0 10px;
+    color:#1B95E0;
 }
 
 .desc_single h5 {

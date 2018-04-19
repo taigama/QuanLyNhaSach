@@ -47,9 +47,9 @@ namespace BookStore.Controllers
             ViewData["CategoryName"] = category.Name;
             ViewData["Products"] = category.Products.ToList();
 
-            // dữ liệu cho side menu
-            ViewData["Categories"] = db.Categories.ToList();
-            ViewData["Authors"] = db.Authors.ToList();
+            //The side menu data
+            ViewData["Categories"] = db.Categories.OrderByDescending(cate => cate.NumberOfProducts).Take(5).ToList();
+            ViewData["Authors"] = db.Authors.OrderByDescending(au => au.NumberOfBooks).Take(5).ToList();
             return View();
         }
 
@@ -76,9 +76,9 @@ namespace BookStore.Controllers
                 });
             }
 
-            // dữ liệu cho side menu
-            ViewData["Categories"] = db.Categories.ToList();
-            ViewData["Authors"] = db.Authors.ToList();
+            //The side menu data
+            ViewData["Categories"] = db.Categories.OrderByDescending(cate => cate.NumberOfProducts).Take(5).ToList();
+            ViewData["Authors"] = db.Authors.OrderByDescending(au => au.NumberOfBooks).Take(5).ToList();
 
             // dữ liệu cho trang
             return View(product);
