@@ -28,23 +28,26 @@
             <div id="search_result" class="col-md-9">
                 @foreach (var item in Products)
                 {
-                    <div class="col-md-3 product-men" style="margin-bottom:20px">
-                        <div class="product-chr-info chr">
+                <div class="col-md-3 product-men">
+                    <div class="product-chr-info chr">
+                        <a href="/Products/Single/@item.ID">
                             <div class="thumbnail">
                                 @if (string.IsNullOrEmpty(item.AvatarImage))
-                                {
-                                    <img style="height:150px;width:100%;object-fit:contain"
-                                         src="/Assets/images/home/default-image.png" />
-                                }
-                                else
-                                {
-                                    <img style="height:150px;width:100%;object-fit:contain"
-                                         src="@Url.Content(item.AvatarImage)"
-                                         onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
-                                }
+                {
+                    <img style="height:150px;width:100%;object-fit:contain"
+                         src="/Assets/images/home/default-image.png" />
+}
+else
+{
+                <img style="height:150px;width:100%;object-fit:contain"
+                     src="@Url.Content(item.AvatarImage)"
+                     onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+}
 
                             </div>
-                            <hr style="margin:0px;border-color:#DDD" />
+                        </a>
+                        <hr style="margin:0px;border-color:#DDD" />
+                        <a href="/Products/Single/@item.ID">
                             <div class="caption">
                                 <div class="title-caption">
                                     <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@item.Name</b></h4>
@@ -73,8 +76,9 @@
                                     <a href="#" data-toggle="modal" data-target="#myModal1"></a>
                                 </form>
                             </div>
-                        </div>
+                        </a>
                     </div>
+                </div>
                 }
             </div>
         </div>

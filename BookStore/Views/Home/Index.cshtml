@@ -5,20 +5,15 @@
 @using System.Globalization;
 @{
     ViewBag.Title = "Trang chủ | Nhà sách AC";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    Layout = "~/Views/MyShared/MainLayout.cshtml";
     CultureInfo ci = new CultureInfo("vi-VN");
 }
-<section id="slider">
-    <!--slider-->
+
+<section id="slider" style="margin-top:100px">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                    @*<ol class="carousel-indicators">
-                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#slider-carousel" data-slide-to="1"></li>
-                        <li data-target="#slider-carousel" data-slide-to="2"></li>
-                    </ol>*@
+                <div id="home-carousel" style="position:relative" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="item active" style="padding-left:0">
                             <img src="~/Assets/images/home/slider1.png" />
@@ -30,80 +25,92 @@
                             <img src="~/Assets/images/home/slider3.jpg" />
                         </div>
                     </div>
-                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                    <a class="left home-carousel-control" href="#home-carousel" data-slide="prev">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                    <a class="right home-carousel-control" href="#home-carousel" data-slide="next">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</section><!--/slider-->
+</section>
 
-<section>
+<section style="margin-top:32px">
     <div class="container">
         <div class="row">
-            @Html.Partial("SideMenu", new ViewDataDictionary { { "Categories", ViewData["Categories"] }, { "Authors", ViewData["Authors"] } })
-
-            <div class="col-lg-9 padding-right">
-                <div class="features_items">
-                    <!--features_items-->
-                    <h2 class="title text-center" style="margin-top:10px">Các sản phẩm nổi bật</h2>
-                    <div id="feature-items">
-                        @foreach (var item in Products.Take(12))
-                        {
-                            <div class="col-lg-3">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            @if (string.IsNullOrEmpty(item.AvatarImage))
-                                            {
-                                                <img src="~/Assets/images/home/default-image.png"
-                                                     style="height:100px;width:auto;object-fit:contain" />
-                                            }
-                                            else
-                                            {
-                                                <img style="max-height:100px;width:auto;object-fit:contain"
-                                                     src="@Url.Content(item.AvatarImage)" 
-                                                     onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';"/>
-                                            }
-                                            <h2>@(item.Price.ToString("#,0.###", ci)) đ</h2>
-                                            <p class="shorten-name">@item.Name</p>
-                                            <a href="#" class="btn btn-default add-to-cart">
-                                                <p hidden>@item.ID</p>
-                                                <i class="fa fa-shopping-cart"></i>
-                                                Thêm vào giỏ
-                                            </a>
-                                        </div>
-                                        <div class="product-overlay">
-                                            <div class="overlay-content">
-                                                <h2>@(item.Price.ToString("#,0.###", ci)) đ</h2>
-                                                <p><a href="/Products/Single?id=@item.ID">@item.Name</a></p>
-                                                <a href="#" class="btn btn-default add-to-cart">
-                                                    <p hidden>@item.ID</p>
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    Thêm vào giỏ
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
+            <div class="col-lg-3 side-menu-holder">
+                <div class="left-sidebar side-menu">
+                    @Html.Partial("SideMenu")
                 </div>
+            </div>
 
+            <div id="search_result" class="left-ads-display col-md-9">
+                @foreach (var item in Products)
+                {
+                    <div class="col-md-3 product-men">
+                        <div class="product-chr-info chr">
+                            <a href="/Products/Single/@item.ID">
+                                <div class="thumbnail">
+                                    @if (string.IsNullOrEmpty(item.AvatarImage))
+                                    {
+                                        <img style="height:150px;width:100%;object-fit:contain"
+                                             src="/Assets/images/home/default-image.png" />
+                                    }
+                                    else
+                                    {
+                                        <img style="height:150px;width:100%;object-fit:contain"
+                                             src="@Url.Content(item.AvatarImage)"
+                                             onerror="if (this.src != '/Assets/images/home/default-image.png') this.src = '/Assets/images/home/default-image.png';" />
+                                    }
+
+                                </div>
+                            </a>
+                            <hr style="margin:0px;border-color:#DDD" />
+                            <a href="/Products/Single/@item.ID">
+                                <div class="caption">
+                                    <div class="title-caption">
+                                        <h4 @*style="text-overflow: ellipsis;white-space:nowrap;overflow:hidden"*@><b>@item.Name</b></h4>
+                                        <span class="tooltiptext">@item.Name</span>
+                                    </div>
+
+                                    <div class="matrlf-mid">
+                                        <ul class="price-list">
+                                            <li>
+                                                @(item.Price.ToString("0,0.###", ci)) đ
+                                            </li>
+                                        </ul>
+
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <form action="#" method="post">
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="add" value="1">
+                                        <input type="hidden" name="chr_item" value="@item.Name">
+                                        <input type="hidden" name="amount" value="@item.Price">
+                                        <a href="" class="chr-cart" onclick="updateCart('add',@item.ID, event)">
+                                            <p hidden>@item.ID</p>
+                                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                            Thêm vào giỏ
+                                        </a>
+                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                    </form>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </section>
 
-<script src="~/Assets/js/jquery.js" type="text/javascript"></script>
+@*<link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">*@
+@*<script src="~/Assets/js/jquery.js" type="text/javascript"></script>
 <script src="~/Assets/js/moment.js" type="text/javascript"></script>
-<script src="~/Scripts/helper.js" type="text/javascript"></script>
-<script>
+<script src="~/Scripts/helper.js" type="text/javascript"></script>*@
+@*<script>
     $(document).ready(function () {
         showPopUp();
     })
@@ -157,4 +164,4 @@
         else
             alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
     }
-</script>
+</script>*@

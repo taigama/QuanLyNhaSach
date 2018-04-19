@@ -1,20 +1,12 @@
 ﻿using BookStore.Data;
-using BookStore.Models;
-using BookStore.ViewModels;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace BookStore.Controllers
 {
-    /// <summary>
-    /// Homepage | 
-    /// </summary>
     public class HomeController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
@@ -25,8 +17,8 @@ namespace BookStore.Controllers
         public ActionResult Index()
         {
             //The side menu data
-            ViewData["Categories"] = db.Categories.ToList();
-            ViewData["Authors"] = db.Authors.ToList();
+            ViewData["Categories"] = db.Categories.OrderByDescending(cate => cate.NumberOfProducts).Take(5).ToList();
+            ViewData["Authors"] = db.Authors.OrderByDescending(au => au.NumberOfBooks).Take(5).ToList();
 
             // main page data
             ViewData["Products"] = db.Products.ToList();
@@ -57,8 +49,8 @@ namespace BookStore.Controllers
             }
 
             //The side menu data
-            ViewData["Categories"] = db.Categories.ToList();
-            ViewData["Authors"] = db.Authors.ToList();
+            ViewData["Categories"] = db.Categories.OrderByDescending(cate => cate.NumberOfProducts).Take(5).ToList();
+            ViewData["Authors"] = db.Authors.OrderByDescending(au => au.NumberOfBooks).Take(5).ToList();
 
             // main page data
             return View(author);
