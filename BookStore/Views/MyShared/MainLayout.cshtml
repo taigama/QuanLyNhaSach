@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>@(ViewBag.Title??"Nhà sách AC")</title>
+    <title>@(ViewBag.Title ?? "Nhà sách AC")</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="keywords" content="Chronicle Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -21,6 +21,9 @@
     <link href="~/Assets/css/shop.css" type="text/css" rel="stylesheet" media="all">
     <!-- checkout css -->
     <link href="~/Assets/css/checkout.css" type="text/css" rel="stylesheet" media="all">
+
+    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
+
     <!-- Range-slider-css -->
     <link rel="stylesheet" type="text/css" href="~/Assets/css/jquery-ui1.css">
     <!-- common-css -->
@@ -32,7 +35,7 @@
     @*<link href="~/Assets/css/bootstrap.min.css" rel="stylesheet">*@
     <link href="~/Assets/css/override-navbar.css" rel="stylesheet" media="all">
 
-    
+
 
     <!-- //Custom Theme files -->
     <!-- online-fonts -->
@@ -62,7 +65,6 @@
     <div id="staplesbmincart" class="minicart" hidden="hidden">
         @Html.Action("CartPartial", "Cart")
     </div>
-    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
     <script src="~/Assets/js/main1.js"></script>
     <script src="~/Assets/js/scrolling-nav.js"></script>
     <script src="~/Assets/js/bootstrap.js"></script>
