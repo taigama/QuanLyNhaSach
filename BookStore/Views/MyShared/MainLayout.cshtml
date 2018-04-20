@@ -97,9 +97,12 @@
     </script>
 
     <script>
+
         // Mở mini cart
-        function onClickedCart() {
-            $("#staplesbmincart").show();
+        if (!onClickedCart) {
+            onClickedCart = function () {
+                $("#staplesbmincart").show();
+            }
         }
 
         //Đóng mini cart

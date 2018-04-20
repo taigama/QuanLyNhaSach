@@ -19,24 +19,8 @@
 <section id="cart_items">
     <div class="container">
         <div class="row" style="margin-top:30px">
-            <div class="col-lg-7">
-                <div class="table-responsive cart_info">
-                    <table class="table table-condensed table-fixed">
-                        <thead>
-                            <tr class="cart_menu">
-                                <td class="image col-lg-2">Sản phẩm</td>
-                                <td class="description col-lg-3"></td>
-                                <td class="price col-lg-2">Đơn giá</td>
-                                <td class="quantity col-lg-2">Số lượng</td>
-                                <td class="total col-lg-2">Tổng cộng</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody class="cart-body"></tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-lg-5">
+            
+            <div class="col-lg-6">
                 <div class="chose_area">
                     <div class="shopper-informations">
                         <div class="col-lg-12">
@@ -106,12 +90,21 @@
     function showMap() {
         setTimeout(function () { google.maps.event.trigger(map, 'resize'); }, 1000);
     }
-    
+
+    onClickedCart = function () {
+        $('.sbmincart-closer').remove();
+        $('.sbmincart-subtotal').remove();
+        $('.sbmincart-submit').remove();
+        $("#staplesbmincart").show();
+    }
+   
+
 
     $(document).ready(function () {
         // hàm này ở header, gọi để populate cart ở nửa page bên trái
         //getCart("main");
-
+        onClickedCart();
+        
         // populate dữ liệu khách hàng, trong trường hợp khách hàng đã nhập thông tin trước đó rồi
         populateCheckoutInfo();
     })// p/s: giỏ hàng và khách hàng được xử lý hoàn toàn theo cookie
@@ -237,13 +230,7 @@
         updateCart("delete", productID, event)
     });
 
-    // hàm tìm kiếm, navigate sang trang tìm kiếm
-    function onSearch() {
-        if ($("#search_box").val())
-            window.location = '/Search/Index?key=' + $("#search_box").val();
-        else
-            alert('Bạn vui lòng nhập từ khoá để tìm kiếm');
-    }
+
 
 </script>
 @* --- load bản đồ --- *@
