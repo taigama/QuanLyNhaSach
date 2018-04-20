@@ -156,7 +156,7 @@ div#my-cart-modal .close:hover,
 	/*display: none;*/
 	position: fixed;
 	left: 68%;
-	top: 16.9%;
+	top: 12%;
 	width: 420px;
 }
 
@@ -1545,7 +1545,7 @@ ul.single_specific li {
 	}
 	#staplesbmincart {
 		left: 52%;
-		top: 16.9%;
+		top: 12%;
 		width: 420px;
 	}
 }
@@ -1621,7 +1621,7 @@ ul.single_specific li {
 	}
 	#staplesbmincart {
 		left: 52%;
-		top: 16.9%;
+		top: 12%;
 		width: 343px;
 	}
 }
@@ -1638,7 +1638,7 @@ ul.single_specific li {
     }
 	#staplesbmincart {
 		left: 52%;
-		top: 16.9%;
+		top: 12%;
 		width: 322px;
 	}
 	#staplesbmincart .sbmincart-footer {
