@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using BookStore.Models;
 using BookStore.Data;
 using Newtonsoft.Json;
+using BookStore.ViewModels;
+using System.Data.Entity;
 
 namespace BookStore.Controllers
 {
@@ -19,10 +21,44 @@ namespace BookStore.Controllers
         /// <summary>
         /// Checkout order [view]
         /// </summary>
+        [HttpGet]
         public ActionResult Index()
         {
             //CheckCustomerId();
-            return View();
+            var viewModel = new UserViewModel();
+            var cookie = Request.Cookies["customer_id"];
+            var user = db.AnonymousUsers.Find(Int32.Parse(cookie.Value));
+            if(user != null)
+            {
+                viewModel.FirstName = user.FirstName;
+                viewModel.LastName = user.LastName;
+                viewModel.PhoneNumber = user.PhoneNumber;
+                viewModel.Email = user.Email;
+                viewModel.Address = user.Address;
+            }
+            return View(viewModel);
+        }
+        [HttpPost]
+        public ActionResult Index(UserViewModel user)
+        {
+            var userObj = new AnonymousUser
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Address = user.Address,
+                PhoneNumber = user.PhoneNumber
+            };
+            
+            if (ModelState.IsValid)
+            {
+                var cookie = Request.Cookies["customer_id"];
+                userObj.ID = Int32.Parse(cookie.Value);
+                db.Entry(userObj).State = EntityState.Modified;
+                db.SaveChanges();
+                TempData["msg"] = "<script>alert('Cập nhật thông tin thành công');</script>";
+            }
+            return View(user);
         }
         public ActionResult CartPartial()
         {

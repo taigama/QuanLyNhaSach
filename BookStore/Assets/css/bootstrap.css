@@ -114,10 +114,18 @@ input,
 optgroup,
 select,
 textarea {
-  margin: 0;
-  font: inherit;
-  color: inherit;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    background: #F0F0E9;
+    border: 0 none;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    font-weight: 300;
+    
 }
+
 button {
   overflow: visible;
 }
@@ -6583,3 +6591,7 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.validate {
+    color: #ee4f4f
+}
