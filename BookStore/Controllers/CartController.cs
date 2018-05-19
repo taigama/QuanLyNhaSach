@@ -56,7 +56,8 @@ namespace BookStore.Controllers
                 userObj.ID = Int32.Parse(cookie.Value);
                 db.Entry(userObj).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["msg"] = "<script>alert('Cập nhật thông tin thành công');</script>";
+                TempData["update-msg"] = "<script>alert('Cập nhật thông tin thành công');</script>";
+                Checkout();
             }
             return View(user);
         }
@@ -72,9 +73,18 @@ namespace BookStore.Controllers
             ViewBag.Subtotal = cart.TotalAmount;
             return PartialView(details.ToList());
         }
-        
+        public ActionResult OrderPartial()
+        {
+            Order cart = CheckOrderId();
+            var details = cart.OrderDetails;
+            if (details == null)
+            {
+                details = new List<OrderDetail>();
+            }
+            return PartialView(details.ToList());
+        }
         /// <summary>
-        /// Get an order by id [json]
+        /// Get order price by id [json]
         /// </summary>
         [HttpGet]
         public ActionResult GetCart(int? id, int? depth)
@@ -246,7 +256,7 @@ namespace BookStore.Controllers
                 db.SaveChanges();
             }
             RecalculateOrderCost(cart);
-            //return PartialView("CartPartial", details.ToList());
+
             result.Type = ResultWeb.ResultType.OK;
             return Json(new
             {
@@ -436,17 +446,18 @@ namespace BookStore.Controllers
             if (Request.Cookies["cart_id"] == null)
             {
                 //result.Type = ResultWeb.ResultType.FIELD_INVALID;
-                return Json(new { success = false, text = "Dữ liệu không hợp lệ | Không có giỏ hàng để thanh toán" }, JsonRequestBehavior.AllowGet);
+                TempData["checkout-msg"] = "<script>alert('Dữ liệu không hợp lệ | Không có giỏ hàng để thanh toán');</script>";
+                return View();
+                //return Json(new { success = false, text = "Dữ liệu không hợp lệ | Không có giỏ hàng để thanh toán" }, JsonRequestBehavior.AllowGet);
             }
-
-
-
             Order cart = CheckOrderId();
             // có khuyến mãi 0đ thì vui
             if(cart.TotalAmount == 0)
             {
                 //result.Type = ResultWeb.ResultType.FIELD_INVALID;
-                return Json(new { success = false, text = "Bạn không thể không mua gì cả" }, JsonRequestBehavior.AllowGet);
+                //return Json(new { success = false, text = "Bạn không thể không mua gì cả" }, JsonRequestBehavior.AllowGet);
+                TempData["checkout-msg"] = "<script>alert('Bạn không thể không mua gì cả');</script>";
+                return View();
             }
 
 
@@ -455,7 +466,9 @@ namespace BookStore.Controllers
             {
                 RecalculateOrderCost(cart);
                 //result.Type = ResultWeb.ResultType.OUT_OF_STOCK;
-                return Json(new { success = false, text = "Chúng tôi rất tiếc, tình trạng kho không đủ đáp ứng, chúng tôi đã cập nhật lại thông tin giỏ hàng" }, JsonRequestBehavior.AllowGet);
+                //return Json(new { success = false, text = "Chúng tôi rất tiếc, tình trạng kho không đủ đáp ứng, chúng tôi đã cập nhật lại thông tin giỏ hàng" }, JsonRequestBehavior.AllowGet);
+                TempData["checkout-msg"] = "<script>alert('Chúng tôi rất tiếc, tình trạng kho không đủ đáp ứng, chúng tôi đã cập nhật lại thông tin giỏ hàng');</script>";
+                return View();
             }
             
             //SureCheckOut(cart);
@@ -467,7 +480,9 @@ namespace BookStore.Controllers
             Response.Cookies["cart_id"].Expires = DateTime.Today.AddDays(-1);
 
             //result.Type = ResultWeb.ResultType.OK;
-            return Json(new { success = true, text = "Đặt hàng thành công" }, JsonRequestBehavior.AllowGet);
+            TempData["checkout-msg"] = "<script>alert('Đặt hàng thành công');</script>";
+            //return Json(new { success = true, text = "Đặt hàng thành công" }, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", "Home");
         }
 
 

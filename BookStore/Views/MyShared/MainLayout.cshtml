@@ -145,6 +145,7 @@
                     break;
             }
             //reloadCart(productID);
+           
             $.ajax({
                 url: actionurl,
                 type: 'POST',
@@ -155,11 +156,19 @@
                         alert(data.text);
                     }
                     reloadCart();
+                    $.ajax({
+                        url: '/Cart/OrderPartial',
+                        type: 'GET',
+                        success: function (result) {
+                            $('.cart-body').html(result);
+                        }
+                    });
                 },
                 error: function (err) {
                     document.write(err.responseText);
                 }
             })
+            
         }
         function reloadCart() {
             $.ajax({
