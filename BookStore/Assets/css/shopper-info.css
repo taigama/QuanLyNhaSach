@@ -14,3 +14,7 @@ fieldset>input {
 .validate {
     color: #ee4f4f
 }
+
+.btn-my:focus {
+    color: white;
+}
