@@ -39,7 +39,7 @@ namespace BookStore.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Index(UserViewModel user)
+        public ActionResult Index(UserViewModel user, string submit)
         {
             var userObj = new AnonymousUser
             {
@@ -57,6 +57,9 @@ namespace BookStore.Controllers
                 db.Entry(userObj).State = EntityState.Modified;
                 db.SaveChanges();
                 TempData["update-msg"] = "<script>alert('Cập nhật thông tin thành công');</script>";
+            }
+            if(submit.Equals("Cập nhật và mua hàng"))
+            {
                 Checkout();
             }
             return View(user);
@@ -439,16 +442,14 @@ namespace BookStore.Controllers
 
 
         /// <summary>
-        /// checkout a cart [json]
         /// </summary>
-        [HttpPost]
-        public ActionResult Checkout()
+        public void Checkout()
         {
             if (Request.Cookies["cart_id"] == null)
             {
                 //result.Type = ResultWeb.ResultType.FIELD_INVALID;
                 TempData["checkout-msg"] = "<script>alert('Dữ liệu không hợp lệ | Không có giỏ hàng để thanh toán');</script>";
-                return View();
+                return;
                 //return Json(new { success = false, text = "Dữ liệu không hợp lệ | Không có giỏ hàng để thanh toán" }, JsonRequestBehavior.AllowGet);
             }
             Order cart = CheckOrderId();
@@ -458,7 +459,7 @@ namespace BookStore.Controllers
                 //result.Type = ResultWeb.ResultType.FIELD_INVALID;
                 //return Json(new { success = false, text = "Bạn không thể không mua gì cả" }, JsonRequestBehavior.AllowGet);
                 TempData["checkout-msg"] = "<script>alert('Bạn không thể không mua gì cả');</script>";
-                return View();
+                return;
             }
 
 
@@ -469,7 +470,7 @@ namespace BookStore.Controllers
                 //result.Type = ResultWeb.ResultType.OUT_OF_STOCK;
                 //return Json(new { success = false, text = "Chúng tôi rất tiếc, tình trạng kho không đủ đáp ứng, chúng tôi đã cập nhật lại thông tin giỏ hàng" }, JsonRequestBehavior.AllowGet);
                 TempData["checkout-msg"] = "<script>alert('Chúng tôi rất tiếc, tình trạng kho không đủ đáp ứng, chúng tôi đã cập nhật lại thông tin giỏ hàng');</script>";
-                return View();
+                return;
             }
             
             //SureCheckOut(cart);
@@ -483,7 +484,8 @@ namespace BookStore.Controllers
             //result.Type = ResultWeb.ResultType.OK;
             TempData["checkout-msg"] = "<script>alert('Đặt hàng thành công');</script>";
             //return Json(new { success = true, text = "Đặt hàng thành công" }, JsonRequestBehavior.AllowGet);
-            return RedirectToAction("Index", "Home");
+            TempData["isRedirect"] = "true";
+            return;
         }
 
 

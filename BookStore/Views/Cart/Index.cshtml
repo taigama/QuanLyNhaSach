@@ -80,9 +80,9 @@
                                             <li class="hidden">Tổng <span id="total">0 đ</span></li>
                                         </ul>
                                     </div>
-                                    <input type="submit" class="btn btn-my btn-wrap-text" style=" width: 22%" value="Cập nhật">
+                                    <input name="submit" type="submit" class="btn btn-my btn-wrap-text" style=" width: 22%" value="Cập nhật">
                                         <input type="button" class="btn btn-my" style="margin-left:20px; width: 25%" data-toggle="modal" data-target="#mapModal" onclick="showMap()" value="Mở bản đồ">
-                                        <input type="submit" class="btn btn-my" style="margin-left:20px; width: 40%" value="Cập nhật và mua hàng">
+                                        <input name="submit" type="submit" class="btn btn-my" style="margin-left:20px; width: 40%" value="Cập nhật và mua hàng">
                                     
                                 }
                                 @Html.Raw(TempData["update-msg"])
@@ -143,6 +143,11 @@
     //}
    
 
+
+    
+    if (@(TempData["isRedirect"]??"false")) {
+        window.location = '/Home/Index';
+    }
 
     $(document).ready(function () {
         // hàm này ở header, gọi để populate cart ở nửa page bên phải
@@ -218,90 +223,90 @@
         });
     }
     
-    // mua hàng
-    function checkout() {
-        //updateCustomer();
+    //// mua hàng
+    //function checkout() {
+    //    //updateCustomer();
 
-        $.ajax({
-            url: '/Cart/Checkout',
-            type: 'POST',
-            dataType: 'json',
-            success: function (response) {
-                if (response.success == true) {
-                    alert(response.text);
-                    window.location = '/Home/';// mua hàng thành công => về trang chủ
-                }
-                else {
-                    alert(response.text);
-                }
-            },
-            error: function (err) {
-                document.write(err.responseText);
-            }
-        }); 
-    }
+    //    $.ajax({
+    //        url: '/Cart/Checkout',
+    //        type: 'POST',
+    //        dataType: 'json',
+    //        success: function (response) {
+    //            if (response.success == true) {
+    //                alert(response.text);
+    //                window.location = '/Home/';// mua hàng thành công => về trang chủ
+    //            }
+    //            else {
+    //                alert(response.text);
+    //            }
+    //        },
+    //        error: function (err) {
+    //            document.write(err.responseText);
+    //        }
+    //    }); 
+    //}
 
-    // cập nhật thông tin khách hàng vào hệ thống
-    function updateCustomer() {
+    //// cập nhật thông tin khách hàng vào hệ thống
+    //function updateCustomer() {
 
-        var firstName = $('#first_name').val();
-        var lastName = $('#last_name').val();
-        var phone = $('#telephone').val();
-        var email = $('#email').val();
-        var address = $('#address').val();
+    //    var firstName = $('#first_name').val();
+    //    var lastName = $('#last_name').val();
+    //    var phone = $('#telephone').val();
+    //    var email = $('#email').val();
+    //    var address = $('#address').val();
 
-        if (firstName == "") {
-            if (!$(".warning_first_name").length)
-                $('#first_name').before("<p class=\"warning_first_name\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Tên<p>")
-        } else {
-            $('.warning_first_name').replaceWith("")
-        }
-        if (lastName == "") {
-            if (!$(".warning_last_name").length)
-                $('#last_name').before("<p class=\"warning_last_name\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Họ<p>")
-        } else {
-            $('.warning_last_name').replaceWith("")
-        }
-        if (phone == "") {
-            if (!$(".warning_phone").length)
-                $('#telephone').before("<p class=\"warning_phone\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Số điện thoại<p>")
-        } else {
-            $('.warning_phone').replaceWith("")
-        }
-        if (email == "") {
-            if (!$(".warning_email").length)
-                $('#email').before("<p class=\"warning_email\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Email<p>")
-        } else {
-            $('.warning_email').replaceWith("")
-        }
-        if (address == "") {
-            if (!$(".warning_address").length)
-                $('#address').before("<p class=\"warning_address\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Địa chỉ<p>")
-        } else {
-            $('.warning_address').replaceWith("")
-        }
-        if (firstName != "" && lastName != "" && phone != "" && email != "" && address != "") {
-            $.ajax({
-                url: '/Cart/UpdateCurrentCustomer',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "telephone": phone,
-                    "email": email,
-                    "address": address
-                },
-                success: function (response) {
-                    alert(response.text);
-                },
-                error: function (err) {
-                    document.write(err.responseText);
-                }
-            }); 
-        }
+    //    if (firstName == "") {
+    //        if (!$(".warning_first_name").length)
+    //            $('#first_name').before("<p class=\"warning_first_name\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Tên<p>")
+    //    } else {
+    //        $('.warning_first_name').replaceWith("")
+    //    }
+    //    if (lastName == "") {
+    //        if (!$(".warning_last_name").length)
+    //            $('#last_name').before("<p class=\"warning_last_name\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Họ<p>")
+    //    } else {
+    //        $('.warning_last_name').replaceWith("")
+    //    }
+    //    if (phone == "") {
+    //        if (!$(".warning_phone").length)
+    //            $('#telephone').before("<p class=\"warning_phone\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Số điện thoại<p>")
+    //    } else {
+    //        $('.warning_phone').replaceWith("")
+    //    }
+    //    if (email == "") {
+    //        if (!$(".warning_email").length)
+    //            $('#email').before("<p class=\"warning_email\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Email<p>")
+    //    } else {
+    //        $('.warning_email').replaceWith("")
+    //    }
+    //    if (address == "") {
+    //        if (!$(".warning_address").length)
+    //            $('#address').before("<p class=\"warning_address\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Địa chỉ<p>")
+    //    } else {
+    //        $('.warning_address').replaceWith("")
+    //    }
+    //    if (firstName != "" && lastName != "" && phone != "" && email != "" && address != "") {
+    //        $.ajax({
+    //            url: '/Cart/UpdateCurrentCustomer',
+    //            type: 'POST',
+    //            dataType: 'json',
+    //            data: {
+    //                "firstName": firstName,
+    //                "lastName": lastName,
+    //                "telephone": phone,
+    //                "email": email,
+    //                "address": address
+    //            },
+    //            success: function (response) {
+    //                alert(response.text);
+    //            },
+    //            error: function (err) {
+    //                document.write(err.responseText);
+    //            }
+    //        }); 
+    //    }
         
-    }
+    //}
   
 
     // ------------------------------------------------------------------------
