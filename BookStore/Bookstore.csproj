@@ -571,6 +571,7 @@
     <Content Include="Views\Home\Author.cshtml" />
     <Content Include="Views\Contact\Index - Copy.cshtml" />
     <Content Include="Views\Cart\Index - Copy.cshtml" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

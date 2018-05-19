@@ -1,4 +1,5 @@
 ﻿@using System.Globalization;
+@model BookStore.ViewModels.UserViewModel
 @{
     ViewBag.Title = "Đặt hàng | Nhà sách AC";
     Layout = "~/Views/MyShared/MainLayout.cshtml";
@@ -48,25 +49,44 @@
                         <div class="col-lg-12">
                             <div class="shopper-info">
                                 <p>Thông tin khách hàng</p>
-                                <form>
+                                @*<form>
                                     <input id="first_name" type="text" placeholder="Tên">
                                     <input id="last_name" type="text" placeholder="Họ">
                                     <input id="telephone" type="text" placeholder="Số điện thoại">
                                     <input id="email" type="text" placeholder="Email">
                                     <input id="address" type="text" placeholder="Địa chỉ">
-                                </form>
-                            </div>
-                            <div class="total_area">
-                                <ul style="padding-left:0">
-                                    <li>Tổng giá trị đơn hàng <span id="cost">Đang tải...</span></li>
-                                    <li>Phí vận chuyển <span id="shipping_fee">Đang tải...</span></li>
-                                    <li class="hidden">Tổng <span id="total">0 đ</span></li>
-                                </ul>
-                            </div>
+                                </form>*@
+                                @using (Html.BeginForm()){
+                                    @Html.ValidationSummary(true)
+                                <fieldset>
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "validate" })
+                                    @Html.TextBoxFor(model => model.FirstName, new { @id = "first_name", placeholder = "Tên" })
+                                    @Html.ValidationMessageFor(model => model.LastName,"", new { @class = "validate"})
+                                    @Html.TextBoxFor(model => model.LastName, new { @id = "last_name", placeholder = "Họ" })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "validate" })
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @id = "telephone", placeholder = "Số điện thoại" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validate" })
+                                    @Html.TextBoxFor(model => model.Email, new { @id = "email", placeholder = "Email" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "validate" })
+                                    @Html.TextBoxFor(model => model.Address, new { @id = "address", placeholder = "Địa chỉ" })
+                                    
+                                </fieldset>   
+                                
+                                    <div class="total_area">
+                                        <ul style="padding-left:0">
+                                            <li>Tổng giá trị đơn hàng <span id="cost">Đang tải...</span></li>
+                                            <li>Phí vận chuyển <span id="shipping_fee">Đang tải...</span></li>
+                                            <li class="hidden">Tổng <span id="total">0 đ</span></li>
+                                        </ul>
+                                    </div>
+                                    <input type="submit" class="btn btn-my btn-wrap-text" style=" width: 22%" value="Cập nhật">
+                                        <input type="button" class="btn btn-my" style="margin-left:20px; width: 25%" data-toggle="modal" data-target="#mapModal" onclick="showMap()" value="Mở bản đồ">
+                                        <input type="submit" class="btn btn-my" style="margin-left:20px; width: 40%" onclick="checkout()" value="Cập nhật và mua hàng">
+                                    
+                                }
+                                @Html.Raw(TempData["msg"])
                         </div>
-                        <a class="btn btn-my" style="margin-left:40px" onclick="updateCustomer()">Cập nhật</a>
-                        <a class="btn btn-my" style="margin-left:20px" data-toggle="modal" data-target="#mapModal" onclick="showMap()" >Mở bản đồ</a>
-                        <a class="btn btn-my" style="margin-left:20px" onclick="checkout()">Cập nhật và mua hàng</a>
+                       
                         <div id="map-modal">
                             <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -143,24 +163,28 @@
 
     // populate dữ liệu khách hàng, trong trường hợp thông tin khách hàng đã nằm trong hệ thống
     function populateCheckoutInfo() {
-
         $.ajax({
             url: '/Cart/GetCustomer',
             type: 'GET',
             dataType: 'json',
             data: { "id": null },
             success: function (customer) {
-                $('#first_name').val(customer.FirstName);
-                $('#last_name').val(customer.LastName);
-                $('#telephone').val(customer.PhoneNumber);
-                $('#email').val(customer.Email);
-                $('#address').val(customer.Address);
+                if ($('#first_name').val() == null)
+                    $('#first_name').val(customer.FirstName);
+                if ($('#last_name').val() == null)
+                    $('#last_name').val(customer.LastName);
+                if($('#telephone').val() == null)
+                    $('#telephone').val(customer.PhoneNumber);
+                if($('#email').val() == null)
+                    $('#email').val(customer.Email);
+                if($('#address').val() == null)
+                    $('#address').val(customer.Address);
             },
             error: function (err) {
                 document.write(err.responseText);
             }
         });
-
+        
         $.ajax({
             url: '/Cart/GetCart',
             type: 'GET',
@@ -212,25 +236,59 @@
         var email = $('#email').val();
         var address = $('#address').val();
 
-        $.ajax({
-            url: '/Cart/UpdateCurrentCustomer',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                "firstName": firstName,
-                "lastName": lastName,
-                "telephone": phone,
-                "email": email,
-                "address": address
-            },
-            success: function (response) {
-                alert(response.text);
-            },
-            error: function (err) {
-                document.write(err.responseText);
-            }
-        }); 
+        if (firstName == "") {
+            if (!$(".warning_first_name").length)
+                $('#first_name').before("<p class=\"warning_first_name\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Tên<p>")
+        } else {
+            $('.warning_first_name').replaceWith("")
+        }
+        if (lastName == "") {
+            if (!$(".warning_last_name").length)
+                $('#last_name').before("<p class=\"warning_last_name\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Họ<p>")
+        } else {
+            $('.warning_last_name').replaceWith("")
+        }
+        if (phone == "") {
+            if (!$(".warning_phone").length)
+                $('#telephone').before("<p class=\"warning_phone\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Số điện thoại<p>")
+        } else {
+            $('.warning_phone').replaceWith("")
+        }
+        if (email == "") {
+            if (!$(".warning_email").length)
+                $('#email').before("<p class=\"warning_email\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Email<p>")
+        } else {
+            $('.warning_email').replaceWith("")
+        }
+        if (address == "") {
+            if (!$(".warning_address").length)
+                $('#address').before("<p class=\"warning_address\" style=\"color : #ee4f4f; font-size: 12px\">Vui lòng nhập Địa chỉ<p>")
+        } else {
+            $('.warning_address').replaceWith("")
+        }
+        if (firstName != "" && lastName != "" && phone != "" && email != "" && address != "") {
+            $.ajax({
+                url: '/Cart/UpdateCurrentCustomer',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    "firstName": firstName,
+                    "lastName": lastName,
+                    "telephone": phone,
+                    "email": email,
+                    "address": address
+                },
+                success: function (response) {
+                    alert(response.text);
+                },
+                error: function (err) {
+                    document.write(err.responseText);
+                }
+            }); 
+        }
+        
     }
+  
 
     // ------------------------------------------------------------------------
     // bind các event thêm, bớt, bỏ sản phẩm trong giỏ hàng
@@ -251,8 +309,6 @@
         var productID = $(this).parent().children('p').text();
         updateCart("delete", productID, event)
     });
-
-
 
 </script>
 @* --- load bản đồ --- *@

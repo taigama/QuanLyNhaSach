@@ -1594,6 +1594,7 @@ h2.title {
     -moz-transition: 0.25s all;
     -o-transition: 0.25s all;
     -ms-transition: 0.25s all;
+    white-space:normal
 }
 
 .btn-my:hover {
@@ -1604,6 +1605,7 @@ h2.title {
     -moz-transition: 0.25s all;
     -o-transition: 0.25s all;
     -ms-transition: 0.25s all;
+    white-space:normal
 }
 
 
@@ -1715,7 +1717,7 @@ h2.title {
 }
 
 
-    .shopper-info > form > input,
+    /*.shopper-info > form > input,
     .form-two > form > select,
     .form-two > form > input,
     .form-one > form > input {
@@ -1724,8 +1726,17 @@ h2.title {
         margin-bottom: 10px;
         padding: 10px;
         width: 100%;
+   
         font-weight: 300;
-    }
+    }*/
+.shopper-info > fieldset {
+    background: #F0F0E9;
+    border: 0 none;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    font-weight: 300;
+}
 
     .form-two > form > select {
         padding: 10px 5px;
