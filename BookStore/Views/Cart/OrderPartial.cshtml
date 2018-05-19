@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BookStore.Models.OrderDetail>
+@using System.Globalization;
+@{
+    CultureInfo ci = new CultureInfo("vi-VN");
+}
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="image col-lg-3">@item.Product.Name</td>
+        <td class="price col-lg-2" style="text-align:center">@item.Product.Price</td>
+        <td class="quantity col-lg-2" style="text-align:center">@item.Quantity</td>
+        <td class="total col-lg-2" style="text-align:center">@item.TotalAmount</td>
+        <td></td>
+    </tr>
+}
+

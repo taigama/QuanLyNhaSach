@@ -417,8 +417,8 @@
     <Content Include="Views\MyShared\Navbar.cshtml" />
     <Content Include="Views\Home\Author.cshtml" />
     <Content Include="Views\Contact\Index - Copy.cshtml" />
-    <Content Include="Views\Cart\Index - Copy.cshtml" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Content Include="Views\Cart\OrderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

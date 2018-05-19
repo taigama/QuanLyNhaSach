@@ -208,6 +208,7 @@ div#my-cart-modal .close:hover,
 	cursor: pointer;
 	font-weight: bold;
 	outline: none;
+    width:50px;
 }
 
 #staplesbmincart .sbmincart-item {

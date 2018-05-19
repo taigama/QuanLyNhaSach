@@ -27,17 +27,17 @@
                     <table class="table table-condensed table-fixed">
                         <thead>
                             <tr class="cart_menu">
-                                <td class="image col-lg-2">Sản phẩm</td>
-                                <td class="description col-lg-3"></td>
-                                <td class="price col-lg-2">Đơn giá</td>
-                                <td class="quantity col-lg-2">Số lượng</td>
-                                <td class="total col-lg-2">Tổng cộng</td>
+                                <td class="image col-lg-3" style="font-weight:600">Sản phẩm</td>
+                                <td class="price col-lg-2" style="font-weight: 600">Đơn giá</td>
+                                <td class="quantity col-lg-2"  style="font-weight:600">Số lượng</td>
+                                <td class="total col-lg-2"  style="font-weight:600">Tổng cộng</td>
                                 <td></td>
                             </tr>
                         </thead>
                         <tbody class="cart-body">
                             <tr>
-                                <td>Khoan sửa cái này nhe<br /> làm cái Validate bên form thông tin khách hàng trước đi</td>
+                                @*<td>Khoan sửa cái này nhe<br /> làm cái Validate bên form thông tin khách hàng trước đi</td>*@
+                               
                             </tr>
                         </tbody>
                     </table>
@@ -82,10 +82,11 @@
                                     </div>
                                     <input type="submit" class="btn btn-my btn-wrap-text" style=" width: 22%" value="Cập nhật">
                                         <input type="button" class="btn btn-my" style="margin-left:20px; width: 25%" data-toggle="modal" data-target="#mapModal" onclick="showMap()" value="Mở bản đồ">
-                                        <input type="submit" class="btn btn-my" style="margin-left:20px; width: 40%" onclick="checkout()" value="Cập nhật và mua hàng">
+                                        <input type="submit" class="btn btn-my" style="margin-left:20px; width: 40%" value="Cập nhật và mua hàng">
                                     
                                 }
-                                @Html.Raw(TempData["msg"])
+                                @Html.Raw(TempData["update-msg"])
+                                @Html.Raw(TempData["checkout-msg"])
                         </div>
                        
                         <div id="map-modal">
@@ -164,27 +165,27 @@
 
     // populate dữ liệu khách hàng, trong trường hợp thông tin khách hàng đã nằm trong hệ thống
     function populateCheckoutInfo() {
-        $.ajax({
-            url: '/Cart/GetCustomer',
-            type: 'GET',
-            dataType: 'json',
-            data: { "id": null },
-            success: function (customer) {
-                if ($('#first_name').val() == null)
-                    $('#first_name').val(customer.FirstName);
-                if ($('#last_name').val() == null)
-                    $('#last_name').val(customer.LastName);
-                if($('#telephone').val() == null)
-                    $('#telephone').val(customer.PhoneNumber);
-                if($('#email').val() == null)
-                    $('#email').val(customer.Email);
-                if($('#address').val() == null)
-                    $('#address').val(customer.Address);
-            },
-            error: function (err) {
-                document.write(err.responseText);
-            }
-        });
+        //$.ajax({
+        //    url: '/Cart/GetCustomer',
+        //    type: 'GET',
+        //    dataType: 'json',
+        //    data: { "id": null },
+        //    success: function (customer) {
+        //        if ($('#first_name').val() == null)
+        //            $('#first_name').val(customer.FirstName);
+        //        if ($('#last_name').val() == null)
+        //            $('#last_name').val(customer.LastName);
+        //        if($('#telephone').val() == null)
+        //            $('#telephone').val(customer.PhoneNumber);
+        //        if($('#email').val() == null)
+        //            $('#email').val(customer.Email);
+        //        if($('#address').val() == null)
+        //            $('#address').val(customer.Address);
+        //    },
+        //    error: function (err) {
+        //        document.write(err.responseText);
+        //    }
+        //});
         
         $.ajax({
             url: '/Cart/GetCart',
@@ -201,13 +202,25 @@
             error: function (err) {
                 document.write(err.responseText);
             }
-        });        
+        });   
+
+        showCart();
     }
 
+    //hiện chi tiết giỏ hàng
+    function showCart() {
+        $.ajax({
+            url: '/Cart/OrderPartial',
+            type: 'GET',
+            success: function (result) {
+                $('.cart-body').html(result);
+            }
+        });
+    }
     
     // mua hàng
     function checkout() {
-        updateCustomer();
+        //updateCustomer();
 
         $.ajax({
             url: '/Cart/Checkout',
