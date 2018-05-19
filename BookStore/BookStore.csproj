@@ -156,7 +156,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
-    <Compile Include="Controllers\Cart1Controller.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -202,6 +201,7 @@
     <Content Include="Assets\css\bootstrap-select.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\shopper-info.css" />
     <Content Include="Assets\css\override-navbar.css" />
     <Content Include="Assets\css\checkout.css" />
     <Content Include="Assets\css\font-awesome.min.css" />
@@ -571,6 +571,7 @@
     <Content Include="Views\Home\Author.cshtml" />
     <Content Include="Views\Contact\Index - Copy.cshtml" />
     <Content Include="Views\Cart\Index - Copy.cshtml" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

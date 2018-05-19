@@ -118,37 +118,38 @@ namespace BookStore.Controllers
 
         #region Customer
 
-        /// <summary>
-        /// Get a customer by id [json]
-        /// </summary>
-        [HttpGet]
-        public ActionResult GetCustomer(int? id)
-        {
-            AnonymousUser customer;
-            if (id != null)
-            {
-                customer = db.AnonymousUsers.Find(id);
-                if (customer == null)
-                {
-                    return null;
-                }
+    // Lấy thông tin 1 khách hàng bằng id, trả về JSON
+    [HttpGet]
+    public ActionResult GetCustomer(int? id)
+    {
+        AnonymousUser customer;
+        if (id != null)
+        {   // nếu có id, tìm trong cơ sở dữ liệu về khách hàng này
+            customer = db.AnonymousUsers.Find(id);
+            if (customer == null)
+            {   // không tìm thấy? trả về rỗng
+                return null;
             }
-            else
-            {
-                customer = CheckCustomerId();
-            }
-
-            var result = new JsonNetResult
-            {
-                Data = customer,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Settings = {
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            MaxDepth = 1// customer
-                }
-            };
-            return result;
         }
+        else
+        {   // nếu không truyền vào id, sẽ lấy id khách hàng hiện tại
+            customer = CheckCustomerId();
+        }
+        // trả về thông tin khách hàng
+        var result = new JsonNetResult
+        {
+            Data = customer,// dữ liệu để tự động parse ra JSON
+            JsonRequestBehavior = JsonRequestBehavior.AllowGet,// cho phép truyền json này
+            Settings = {
+        // do LazyLoading, khi customer chứa giỏ hàng thì tự động query lấy giỏ hàng
+        //   rồi trong giỏ hàng lại chứa customer, thì lại tự động query lấy customer
+        //     như vậy không nên. Setting này sẽ không query nữa nếu thấy query dữ liệu lặp lại
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+        MaxDepth = 1// số tầng của json
+            }
+        };
+        return result;// trả về JSON thông tin khách hàng
+    }
 
         /// <summary>
         ///  [json]
