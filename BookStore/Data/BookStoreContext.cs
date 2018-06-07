@@ -6,7 +6,7 @@ namespace BookStore.Data
 {
     public class BookStoreContext : DbContext
     {
-        public BookStoreContext() : base("BookStoreContext")
+        public BookStoreContext() : base("name=BookStore")
         {
         }
         public DbSet<Role> Roles { get; set; }
