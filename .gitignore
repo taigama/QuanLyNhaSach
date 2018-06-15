@@ -217,8 +217,6 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 
 # SQL Server files
-*.mdf
-*.ldf
 *.ndf
 
 # Business Intelligence projects
@@ -287,3 +285,8 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /BookStore/ConnectionStrings.config
+/BookStore/App_Data/BookStoreCopy.mdf
+/BookStore/App_Data/BookStore - Copy - Copy.mdf
+/BookStore/App_Data/BookStore - Copy_log.ldf
+/BookStore/App_Data/BookStore_log - Copy - Copy.ldf
+/BookStore/App_Data/BookStoreCopy_log.ldf
